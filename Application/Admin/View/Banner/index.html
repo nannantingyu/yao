@@ -1,0 +1,105 @@
+<extend name="Public/base"/>
+
+<!-- 子导航 -->
+<block name="sidebar">
+    <include file="sidemenu" />
+</block>
+
+<block name="body">
+
+    <script>
+        function setOnSale(obj, id, state, field, onText, offText){
+            $.ajax({
+                url: "{:U('goods/setState')}",
+                data: {id: id, state: state, field: field},
+                dataType: 'json',
+                type: 'post',
+                success: function(data){
+                    if(data.status == 1){
+                        alert('修改成功！');
+                        var sttxt = state == 1?onText:offText;
+
+                        $(obj).html(sttxt);
+                        $(obj).attr('onclick', "setOnSale(this," + id + ", " + (1-state) + ",'" + field + "','" + onText + "','" + offText + "')");
+                    }
+                }
+            });
+        }
+
+        function delGoods(obj, id){
+            if(confirm('确定要删除吗？')){
+                $.ajax({
+                    url: "{:U('goods/delGoods')}",
+                    data: {id: id},
+                    dataType: 'json',
+                    type: 'post',
+                    success: function(data){
+                        if(data.status == 1){
+                            alert('删除成功！');
+                            $(obj).parent().parent().remove();
+                        }
+                    }
+                });
+            }
+        }
+    </script>
+    <!-- 标题 -->
+    <div class="main-title">
+        <h2>
+            广告列表
+        </h2>
+    </div>
+
+    <div class="cf">
+        <div class="fl">
+            <a class="btn" href="{:U("banner/editBanner")}">添 加</a>
+        </div>
+    </div>
+
+    <div class="data-table">
+        <table class="">
+            <thead>
+            <tr>
+                <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                <th class="">编号</th>
+                <th class="">名称</th>
+                <th class="">图片</th>
+                <th class="">链接</th>
+                <th class="">状态</th>
+                <th class="">是否推荐</th>
+                <th class="">添加时间</th>
+                <th class="">点击量</th>
+                <th class="">排序</th>
+                <th class="">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="allBanners" id="vo">
+                <tr>
+                    <td><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td>
+                    <td>{$vo.id} </td>
+                    <td>{$vo.name}</td>
+                    <td><img width="50" height="50" src="{$vo.image}"/></td>
+                    <td>{$vo.link}</td>
+                    <td>{$vo.brand}</td>
+                    <td><eq name="vo.state" value="1"><a href="javascript:void(0);" onclick="setState(this, {$vo.id}, 0, 'state', '发布', '下线')">发布</a><else/><a href="javascript:void(0);" onclick="setState(this, {$vo.id}, 1, 'state', '发布', '下线')">下线</a></eq></td>
+                    <td>{$vo.create_time|strtotime|date='Y-m-d H:i:s', ###}</td>
+                    <td>{$vo.hits}</td>
+                    <td>{$vo.order}</td>
+                    <td><a href="{:U('Banner/editBanner?id='.$vo['id'])}">编辑</a>
+                        <a href="javascript:void(0);" onclick="delGoods(this, {$vo.goods_id})">删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 分页 -->
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+</block>

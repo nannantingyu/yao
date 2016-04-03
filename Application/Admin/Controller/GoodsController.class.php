@@ -12,8 +12,7 @@ use Think\Db;
 use OT\Database;
 
 /**
- * 数据库备份还原控制器
- * @author 麦当苗儿 <zuojiazi@vip.qq.com>
+ * 商品控制器
  */
 class GoodsController extends AdminController{
 
