@@ -73,6 +73,9 @@ class FileController extends AdminController {
         ); //TODO:上传到远程服务器
 
         /* 记录图片信息 */
+        foreach($info as $key=>$val){
+            \Think\Log::write($key."__________".$val, 'WARN');
+        }
         if($info){
             $return['status'] = 1;
             $return = array_merge($info['download'], $return);

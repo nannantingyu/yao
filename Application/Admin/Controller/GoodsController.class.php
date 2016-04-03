@@ -42,29 +42,43 @@ class GoodsController extends AdminController{
 
     public function editgoods()
     {
-        $id = I('get.id');
-        $goods = M('goods')->where(array('goods_id'=>$id))->find();
-        $goodsTypes = M('category')->field('cat_id, parent_id, cat_name')->select();
-
-        //商品类型
-        $types = array();
-        foreach($goodsTypes as $key=>$val)
-        {
-            if(!$types[$val['parent_id']]){
-                $types[$val['cat_id']]['detail'] = $val;
+        $goodsModel = M('goods');
+        if(!IS_POST) {
+            if($id = I('get.id')) {
+                $goods = $goodsModel->where(array('goods_id' => $id))->find();
+                $this->assign('goods', $goods);
             }
+
+            $goodsTypes = M('category')->field('cat_id, parent_id, cat_name')->select();
+
+            //商品类型
+            $types = array();
+            foreach ($goodsTypes as $key => $val) {
+                if (!$types[$val['parent_id']]) {
+                    $types[$val['cat_id']]['detail'] = $val;
+                } else {
+                    $types[$val['parent_id']]['data'][] = $val;
+                }
+            }
+
+            //商品品牌
+            $brand = M('brand')->field('brand_id, brand_name')->select();
+
+            $this->assign('goodstypes', $types);
+            $this->assign('brand', $brand);
+            $this->display();
+        }
+        else {
+            if ($goodsModel->create())
+                if ($id = I('post.goods_id')) {
+                    $goodsModel->save();
+                }
             else
             {
-                $types[$val['parent_id']]['data'][] = $val;
+                $goodsModel->add();
             }
+
+            $this->success('修改成功！', U('goods/index'));
         }
-
-        //商品品牌
-        $brand = M('brand')->field('brand_id, brand_name')->select();
-
-        $this->assign('goodstypes', $types);
-        $this->assign('goods', $goods);
-        $this->assign('brand', $brand);
-        $this->display();
     }
 }

@@ -6,6 +6,20 @@
 </block>
 
 <block name="body">
+
+    <!-- 标题 -->
+    <div class="main-title">
+        <h2>
+            商品列表
+        </h2>
+    </div>
+
+    <div class="cf">
+        <div class="fl">
+            <a class="btn" href="{:U("goods/editgoods")}">添 加</a>
+        </div>
+    </div>
+
     <div class="data-table">
         <table class="">
             <thead>
@@ -30,7 +44,7 @@
                     <td>{$vo.goods_id} </td>
                     <td>{$vo.cat_id}</td>
                     <td>{$vo.goods_name}</td>
-                    <td><img width="50" height="50" src="/uploads/{$vo.goods_img}"/></td>
+                    <td><img width="50" height="50" src="{$vo.goods_img}"/></td>
                     <td>{$vo.brand_id}</td>
                     <td>{$vo.shop_price}</td>
                     <td>{$vo.is_promote}</td>
