@@ -7,6 +7,42 @@
 
 <block name="body">
 
+    <script>
+        function setOnSale(obj, id, state, field, onText, offText){
+            $.ajax({
+                url: "{:U('goods/setState')}",
+                data: {id: id, state: state, field: field},
+                dataType: 'json',
+                type: 'post',
+                success: function(data){
+                    if(data.status == 1){
+                        alert('修改成功！');
+                        var sttxt = state == 1?onText:offText;
+
+                        $(obj).html(sttxt);
+                        $(obj).attr('onclick', "setOnSale(this," + id + ", " + (1-state) + ",'" + field + "','" + onText + "','" + offText + "')");
+                    }
+                }
+            });
+        }
+
+        function delGoods(obj, id){
+            if(confirm('确定要删除吗？')){
+                $.ajax({
+                    url: "{:U('goods/delGoods')}",
+                    data: {id: id},
+                    dataType: 'json',
+                    type: 'post',
+                    success: function(data){
+                        if(data.status == 1){
+                            alert('删除成功！');
+                            $(obj).parent().parent().remove();
+                        }
+                    }
+                });
+            }
+        }
+    </script>
     <!-- 标题 -->
     <div class="main-title">
         <h2>
@@ -45,14 +81,13 @@
                     <td>{$vo.cat_id}</td>
                     <td>{$vo.goods_name}</td>
                     <td><img width="50" height="50" src="{$vo.goods_img}"/></td>
-                    <td>{$vo.brand_id}</td>
+                    <td>{$vo.brand}</td>
                     <td>{$vo.shop_price}</td>
-                    <td>{$vo.is_promote}</td>
-                    <td>{$vo.is_on_sale}</td>
-                    <td>{$vo.add_time}</td>
+                    <td><eq name="vo.is_promote" value="1"><a href="javascript:void(0);" onclick="setOnSale(this, {$vo.goods_id}, 0, 'is_promote', '是', '否')">是</a><else/><a href="javascript:void(0);" onclick="setOnSale(this, {$vo.goods_id}, 1, 'is_promote', '是', '否')">否</a></eq></td>
+                    <td><eq name="vo.is_on_sale" value="1"><a href="javascript:void(0);" onclick="setOnSale(this, {$vo.goods_id}, 0, 'is_on_sale', '在售', '下架')">在售</a><else/><a href="javascript:void(0);" onclick="setOnSale(this, {$vo.goods_id}, 1, 'is_on_sale', '在售', '下架')">下架</a></eq></td>
+                    <td>{$vo.add_time|strtotime|date='Y-m-d H:i:s', ###}</td>
                     <td><a href="{:U('Goods/editgoods?id='.$vo['goods_id'].'&catid='.$vo['cat_id'])}">编辑</a>
-                        <a href="{:U('Article/setStatus?ids='.$vo['id'].'&status='.abs(1-$vo['status']))}" class="ajax-get">{$vo.status|show_status_op}</a>
-                        <a href="{:U('Article/setStatus?status=-1&ids='.$vo['id'])}" class="confirm ajax-get">删除</a>
+                        <a href="javascript:void(0);" onclick="delGoods(this, {$vo.goods_id})">删除</a>
                     </td>
                 </tr>
             </volist>

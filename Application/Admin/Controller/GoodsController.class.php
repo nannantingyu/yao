@@ -19,7 +19,16 @@ class GoodsController extends AdminController{
 
     public function index()
     {
+        //全部商品
         $allGoods = $this->lists('goods');
+
+        //品牌
+        $allBrand = M('brand')->getField('brand_id, brand_name', true);
+
+        foreach($allGoods as $key=>$val){
+            $allGoods[$key]['brand'] = $allBrand[$val['brand_id']];
+        }
+
         $this->assign('allGoods', $allGoods);
         $this->display();
     }
@@ -81,4 +90,29 @@ class GoodsController extends AdminController{
             $this->success('修改成功！', U('goods/index'));
         }
     }
+
+    //设置状态
+    public function setState(){
+        $id = I('post.id');
+        $state = I('post.state');
+        $field = I('post.field');
+
+        M('goods')->save(array('goods_id'=>$id, $field=>$state));
+        $this->ajaxReturn(array('status'=>1, 'sql'=>M('goods')->getLastSql()));
+    }
+
+    //删除商品
+    public function delGoods()
+    {
+        $id = I('post.id');
+        if(M('goods')->delete($id))
+        {
+            $this->ajaxReturn(array('status'=>1, 'sql'=>M('goods')->getLastSql()));
+        }
+        else
+        {
+            $this->ajaxReturn(array('status'=>0, 'sql'=>M('goods')->getLastSql()));
+        }
+    }
+
 }
