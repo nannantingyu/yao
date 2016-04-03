@@ -1,0 +1,56 @@
+<extend name="Public/base"/>
+
+<!-- 子导航 -->
+<block name="sidebar">
+    <include file="sidemenu" />
+</block>
+
+<block name="body">
+    <div class="data-table">
+        <table class="">
+            <thead>
+            <tr>
+                <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
+                <th class="">编号</th>
+                <th class="">分类</th>
+                <th class="">名称</th>
+                <th class="">图片</th>
+                <th class="">品牌</th>
+                <th class="">价格</th>
+                <th class="">推荐</th>
+                <th class="">是否上架</th>
+                <th class="">添加时间</th>
+                <th class="">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <volist name="allGoods" id="vo">
+                <tr>
+                    <td><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td>
+                    <td>{$vo.goods_id} </td>
+                    <td>{$vo.cat_id}</td>
+                    <td>{$vo.goods_name}</td>
+                    <td><img width="50" height="50" src="/uploads/{$vo.goods_img}"/></td>
+                    <td>{$vo.brand_id}</td>
+                    <td>{$vo.shop_price}</td>
+                    <td>{$vo.is_promote}</td>
+                    <td>{$vo.is_on_sale}</td>
+                    <td>{$vo.add_time}</td>
+                    <td><a href="{:U('Goods/editgoods?id='.$vo['goods_id'].'&catid='.$vo['cat_id'])}">编辑</a>
+                        <a href="{:U('Article/setStatus?ids='.$vo['id'].'&status='.abs(1-$vo['status']))}" class="ajax-get">{$vo.status|show_status_op}</a>
+                        <a href="{:U('Article/setStatus?status=-1&ids='.$vo['id'])}" class="confirm ajax-get">删除</a>
+                    </td>
+                </tr>
+            </volist>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 分页 -->
+    <div class="page">
+        {$_page}
+    </div>
+</block>
+
+<block name="script">
+</block>

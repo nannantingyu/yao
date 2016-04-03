@@ -18,7 +18,7 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 -- Table structure for `ecs_goods_cat`
 -- ----------------------------
-DROP TABLE IF EXISTS `ecs_goods_cat`;
+DROP TABLE IF EXISTS `zc_goods_cat`;
 CREATE TABLE `ecs_goods_cat` (
   `goods_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `cat_id` smallint(5) unsigned NOT NULL DEFAULT '0',
