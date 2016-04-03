@@ -26,14 +26,14 @@
 		<div class="form-item cf">
 			<label class="item-label">广告名称</label>
 			<div class="controls">
-				<input type="text" value="{$banner.name}" name="name" class="text input-large">
+				<input type="text" value="{$banner.title}" name="title" class="text input-large">
 			</div>
 		</div>
 
 		<div class="form-item cf">
 			<label class="item-label">广告链接</label>
 			<div class="controls">
-				<input type="text" value="{$goods.shop_price}" name="shop_price" class="text input-large">
+				<input type="text" value="{$banner.link}" name="link" class="text input-large">
 			</div>
 		</div>
 
@@ -67,7 +67,7 @@
 				function uploadFilegoods_img(file, data){
 					var data = $.parseJSON(data);
 					if(data.status){
-						var name = "banner_img";
+						var name = "image";
 						$("input[name="+name+"]").val(data.path);
 						$("input[name="+name+"]").parent().find('.upload-img-box').html(
 								"<div class=\"upload-pre-file\"><span class=\"upload_icon_all\"></span>" + data.info + "</div>"
@@ -87,7 +87,7 @@
 		<div class="form-item cf">
 			<label class="item-label">添加时间</label>
 			<div class="controls">
-				<input type="text" value="{$goods.add_time}" name="add_time" class="text input-large">
+				<input type="text" value="{$banner.created_time|default=date('Y-m-d H:i:s')}" name="created_time" class="text input-large">
 			</div>
 		</div>
 
@@ -101,7 +101,7 @@
 			</div>
 		</div>
 
-		<input type="hidden" name="goods_id" value="{$goods.goods_id}">
+		<input type="hidden" name="id" value="{$banner.id}">
 		<button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
 		<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
 	</form>

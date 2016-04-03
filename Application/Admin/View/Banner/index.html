@@ -8,9 +8,9 @@
 <block name="body">
 
     <script>
-        function setOnSale(obj, id, state, field, onText, offText){
+        function setState(obj, id, state, field, onText, offText){
             $.ajax({
-                url: "{:U('goods/setState')}",
+                url: "{:U('banner/setState')}",
                 data: {id: id, state: state, field: field},
                 dataType: 'json',
                 type: 'post',
@@ -26,10 +26,10 @@
             });
         }
 
-        function delGoods(obj, id){
+        function delBanner(obj, id){
             if(confirm('确定要删除吗？')){
                 $.ajax({
-                    url: "{:U('goods/delGoods')}",
+                    url: "{:U('banner/delBanner')}",
                     data: {id: id},
                     dataType: 'json',
                     type: 'post',
@@ -74,20 +74,20 @@
             </tr>
             </thead>
             <tbody>
-            <volist name="allBanners" id="vo">
+            <volist name="allbanners" id="vo">
                 <tr>
                     <td><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td>
                     <td>{$vo.id} </td>
-                    <td>{$vo.name}</td>
+                    <td>{$vo.title}</td>
                     <td><img width="50" height="50" src="{$vo.image}"/></td>
                     <td>{$vo.link}</td>
-                    <td>{$vo.brand}</td>
                     <td><eq name="vo.state" value="1"><a href="javascript:void(0);" onclick="setState(this, {$vo.id}, 0, 'state', '发布', '下线')">发布</a><else/><a href="javascript:void(0);" onclick="setState(this, {$vo.id}, 1, 'state', '发布', '下线')">下线</a></eq></td>
-                    <td>{$vo.create_time|strtotime|date='Y-m-d H:i:s', ###}</td>
+                    <td><eq name="vo.featured" value="1"><a href="javascript:void(0);" onclick="setState(this, {$vo.id}, 0, 'featured', '是', '否')">是</a><else/><a href="javascript:void(0);" onclick="setState(this, {$vo.id}, 1, 'featured', '是', '否')">否</a></eq></td>
+                    <td>{$vo.created_time|strtotime|date='Y-m-d H:i:s', ###}</td>
                     <td>{$vo.hits}</td>
                     <td>{$vo.order}</td>
                     <td><a href="{:U('Banner/editBanner?id='.$vo['id'])}">编辑</a>
-                        <a href="javascript:void(0);" onclick="delGoods(this, {$vo.goods_id})">删除</a>
+                        <a href="javascript:void(0);" onclick="delBanner(this, {$vo.id})">删除</a>
                     </td>
                 </tr>
             </volist>

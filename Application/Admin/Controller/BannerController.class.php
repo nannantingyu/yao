@@ -38,7 +38,7 @@ class BannerController extends AdminController{
         }
         else {
             if ($bannerModel->create())
-                if ($id = I('post.goods_id')) {
+                if ($id = I('post.id')) {
                     $bannerModel->save();
                 }
             else
