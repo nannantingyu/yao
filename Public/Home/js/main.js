@@ -10,6 +10,7 @@ jQuery(document).ready(function($){
         nav:true,
         margin:20,
         responsiveClass:true,
+        navText: ['向前', '向后'],
         responsive:{
             0:{
                 items:1,
