@@ -41,7 +41,7 @@ return array(
 		'exts'     => 'jpg,gif,png,jpeg', //允许上传的文件后缀
 		'autoSub'  => true, //自动子目录保存文件
 		'subName'  => array('date', 'Ymd'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
-		'rootPath' => './Uploads/images/', //保存根路径
+		'rootPath' => './Uploads/Images/', //保存根路径
 		'savePath' => '', //保存路径
 		'saveName' => array('uniqid', ''), //上传文件命名规则，[0]-函数名，[1]-参数，多个参数使用数组
 		'saveExt'  => '', //文件保存后缀，空则使用原后缀
@@ -57,7 +57,7 @@ return array(
         'exts'     => 'jpg,gif,png,jpeg', //允许上传的文件后缀
         'autoSub'  => true, //自动子目录保存文件
         'subName'  => array('date', 'Ymd'), //子目录创建方式，[0]-函数名，[1]-参数，多个参数使用数组
-        'rootPath' => './Uploads/banner/', //保存根路径
+        'rootPath' => './Uploads/Banner/', //保存根路径
         'savePath' => '', //保存路径
         'saveName' => array('uniqid', ''), //上传文件命名规则，[0]-函数名，[1]-参数，多个参数使用数组
         'saveExt'  => '', //文件保存后缀，空则使用原后缀
