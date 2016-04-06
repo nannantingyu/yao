@@ -17,15 +17,20 @@
         </notempty>
         <!-- /子导航 -->
     </volist>
- <h3>
- 	<i class="icon <notin name="Think.ACTION_NAME"  value="mydocument,draftbox,examine">icon-fold</notin>"></i>
- 	商品管理
- </h3>
- 	<ul class="side-sub-menu <notin name="Think.ACTION_NAME"  value="index">subnav-on</notin>">
+    <h3>
+        <i class="icon <notin name="Think.ACTION_NAME"  value="index,gtype,gattr">icon-fold</notin>"></i>商品管理
+    </h3>
+ 	<ul class="side-sub-menu <notin name="Think.ACTION_NAME"  value="index,gtype,gattr">subnav-on</notin>">
         <li <eq name="Think.ACTION_NAME" value="index">class="current"</eq>><a class="item" href="{:U('goods/index')}">全部商品</a></li>
  		<li <eq name="Think.ACTION_NAME" value="gtype">class="current"</eq>><a class="item" href="{:U('goods/gtype')}">商品类型</a></li>
         <li <eq name="Think.ACTION_NAME" value="gattr">class="current"</eq>><a class="item" href="{:U('goods/gattr')}">商品属性</a></li>
  	</ul>
+    <h3>
+        <i class="icon <notin name="Think.ACTION_NAME"  value="brand">icon-fold</notin>"></i>品牌管理
+    </h3>
+    <ul class="side-sub-menu <notin name="Think.ACTION_NAME"  value="brand">subnav-on</notin>">
+        <li <eq name="Think.ACTION_NAME" value="brand">class="current"</eq>><a class="item" href="{:U('goods/brand')}">品牌管理</a></li>
+    </ul>
 
     <volist name="nodes" id="sub_menu">
         <!-- 子导航 -->

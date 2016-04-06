@@ -114,4 +114,10 @@ class GoodsController extends AdminController{
         }
     }
 
+    //品牌管理
+    public function brand()
+    {
+        $this->display();
+    }
+
 }
