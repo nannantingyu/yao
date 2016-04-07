@@ -64,6 +64,14 @@ class FileController extends AdminController
     }
 
     /**
+     * 上传品牌logo
+     */
+    public function uploadBrand()
+    {
+        $this->uploadFile('BRAND_UPLOAD');
+    }
+
+    /**
      * 上传图片
      */
     public function uploadPicture()
