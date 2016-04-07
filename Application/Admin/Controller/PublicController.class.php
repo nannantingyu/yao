@@ -29,8 +29,8 @@ class PublicController extends \Think\Controller {
 
             /* 调用UC登录接口登录 */
             $User = new UserApi;
-//            $uid = $User->login($username, $password);
-            $uid = 1;
+            $uid = $User->login($username, $password);
+//            $uid = 1;
             if(0 < $uid){ //UC登录成功
                 /* 登录用户 */
                 $Member = D('Member');
