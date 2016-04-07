@@ -8,10 +8,10 @@
 <block name="body">
 <script>
     var org = 0;
-    function setsort(obj,id){
+    function setsort(obj,brand_id){
         var val = obj.value;
             if(!isNaN(val)){
-                $.post('__APP__/admin/goods/setorder',{val:val,id:id},function(d){
+                $.post('__APP__/admin/goods/setorder',{val:val,id:brand_id},function(d){
                 window.location.href=window.location.href;
                 });
             }else{
@@ -21,6 +21,18 @@
     }
     function setfocus(val){
         org = val;
+    }
+    function dopub(brand_id, is_show) {
+        $.ajax({
+            url: "{:U('Goods/isShow')}",
+            data: {brand_id: brand_id, is_show: (3 - is_show)},
+            type: "get",
+            success: function(data){
+                if(data == 1){
+                    window.location.reload();
+                }
+            }
+        });
     }
 </script>
     
@@ -33,7 +45,7 @@
     
     <div class="cf">
         <div class="fl">
-            <a class="btn" href="{:U("goods/editbrand")}">添 加</a>
+            <a class="btn" href='{:U("goods/editbrand")}'>添 加</a>
         </div>
     </div>
 
@@ -44,11 +56,11 @@
                 <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
                 <th class="">编号</th>
                 <th class="">品牌名称</th>
-                <th class="">图片</th>
+                <th class="">Logo</th>
                 <th class="">官方咨询电话</th>
                 <th class=''>售后网点</th>
                 <th class="">排序</th>
-                <th class="">是否显示</th>
+                <th class="">状态</th>
                 <th class="">操作</th>
             </tr>
             </thead>
@@ -61,8 +73,13 @@
                     <td><img width="60" height="50" src="__ROOT__/Uploads/Picture/Brand/{$vo.brand_logo}"/></td>
                     <td>{$vo.brand_desc|msubstr=7,10,'utf-8',false}</td>
                     <td><a href='javascript:void(0);'>{$vo.brand_desc|msubstr=23,25,'utf-8',true}</a></td>
-                    <td><input type="text" size='3' name="sort_order" value="{$vo.sort_order}" onfocus="setfocus(this.value)" onblur="setsort(this,'{$vo.id}')"></td>
-                    <td><eq name="vo.is_show" value="1"><a href="javascript:void(0);" onclick="setOnSale(this, {$vo.brand_id}, 0, 'is_show', '是', '否')">是</a><else/><a href="javascript:void(0);" onclick="setOnSale(this, {$vo.goods_id}, 1, 'is_promote', '是', '否')">否</a></eq></td>
+                    <td><input type="text" size='3' name="sort_order" value="{$vo.sort_order}" onfocus="setfocus(this.value)" onblur="setsort(this,'{$vo.brand_id}')"></td>
+                    <!--<td><eq name="vo.is_show" value="1"><a href="javascript:void(0);" onclick="setOnSale(this, {$vo.brand_id}, 0, 'is_show', '是', '否')">是</a><else/><a href="javascript:void(0);" onclick="setOnSale(this, {$vo.goods_id}, 1, 'is_promote', '是', '否')">否</a></eq></td>-->
+                    <td><a href="javascript: void(0);" onclick="dopub({$vo.brand_id}, {$vo.is_show})">
+                        <if condition="$vo.is_show eq 1">√</if>                           
+                        <if condition="$vo.is_show eq 2"><font color="red">x</font></if>
+                        </a>
+                    </td> 
                     <td><a href="{:U('Goods/editbrand?id='.$vo['brand_id'])}">编辑</a>
                         <a href="{:U('Goods/delbrand',['id'=>$vo['brand_id']])}">删除</a>
                     </td>

@@ -134,9 +134,42 @@ class GoodsController extends AdminController{
     public function setorder(){
         $val = I('post.val');
         $id = I('post.id');
-        D('Goods')->where(array('id'=>$id))->save(array('sort_order'=>$val));
+        D('Brand')->where(array('brand_id'=>$id))->save(array('sort_order'=>$val));
 //            echo "<script>alert('排序已生效！');</script>";
         
     }
+    //发布，取消发布操作
+    function isShow(){
+        $id = I('get.brand_id/d');
+        $is_show = I('get.is_show/d');
+        if($id){
+            if(D('Brand')->isShow($id, $is_show)){
+                echo 1;
+            }else{
+                echo 2;
+            }
+        }else{
+            echo 2;
+        }
+    }
     
+     public function editbrand(){
+        $brandModel = M('brand');
+        if (!IS_POST) {
+            if ($brand_id = I('get.brand_id')) {
+                $data = $brandModel->where('brand='.$brand_id)->find();
+                $this->assign('data', $data);
+            }
+            $this->display();
+        } else {
+            if ($brandModel->create()) {
+                if ($brand_id = I('post.brand_id')) {
+                    $brandModel->save();
+                } else {
+                    $brand_id = $brandModel->add();
+                }
+                $this->url('goods/brand');
+            }
+        }
+    }
 }
