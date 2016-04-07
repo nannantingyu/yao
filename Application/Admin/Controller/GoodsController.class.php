@@ -101,8 +101,7 @@ class GoodsController extends AdminController{
     }
 
     //删除商品
-    public function delGoods()
-    {
+    public function delGoods(){
         $id = I('post.id');
         if(M('goods')->delete($id))
         {
@@ -115,9 +114,29 @@ class GoodsController extends AdminController{
     }
 
     //品牌管理
-    public function brand()
-    {
-        $this->display();
+    public function brand(){
+       $brand = D("Brand")->select();
+       $this ->assign('brand',$brand);
+       $this->display();
     }
-
+    public function delbrand(){
+        $id = I('get.id');
+        if($id != ''){
+           $result = D('brand')->delete($id);
+           if($result){
+//           echo "<script>alert('铲除成功!');</script>";
+               return $this->success('删除成功啦！',U('Goods/brand'));
+           } else{
+               return $this->error('哦^删除失败~');
+           }
+        }
+    }
+    public function setorder(){
+        $val = I('post.val');
+        $id = I('post.id');
+        D('Goods')->where(array('id'=>$id))->save(array('sort_order'=>$val));
+//            echo "<script>alert('排序已生效！');</script>";
+        
+    }
+    
 }
