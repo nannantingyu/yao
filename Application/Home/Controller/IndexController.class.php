@@ -3,7 +3,7 @@
 namespace Home\Controller;
 use Think\Controller;
 
-class IndexController extends Controller {
+class IndexController extends HomeController {
     public function index(){
 
         //轮播广告
@@ -26,6 +26,15 @@ class IndexController extends Controller {
     }
 
     public function shop(){
+        $page = I('get.p');
+        if(!preg_match('/\d+/', $page)){
+            $page = 0;
+        }
+
+        $this->assign('p', $page);
+
+        $allGoods = D('public')->lists('goods', $page, 0, array('is_on_sale'=>1), 'goods_id, goods_name, brand_id, shop_price, goods_img', 'add_time desc, sort_order asc, click_count desc');
+        $this->assign('allGoods', $allGoods);
         $this->display();
     }
 
