@@ -7,9 +7,9 @@
     <title>ZC商城</title>
 
     <!-- Google Fonts -->
-    <link href='__CSS__/font-titillium.css' rel='stylesheet' type='text/css'>
-    <link href='__CSS__/font-roboto.css' rel='stylesheet' type='text/css'>
-    <link href='__CSS__/font-raleway.css' rel='stylesheet' type='text/css'>
+    <!--<link href='__CSS__/font-titillium.css' rel='stylesheet' type='text/css'>-->
+    <!--<link href='__CSS__/font-roboto.css' rel='stylesheet' type='text/css'>-->
+    <!--<link href='__CSS__/font-raleway.css' rel='stylesheet' type='text/css'>-->
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="__CSS__/bootstrap.min.css">
@@ -108,10 +108,10 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li <if condition="strtoupper(ACTION_NAME) eq 'INDEX'">class="active"</if>><a href="index.html">首页</a></li>
-                    <li <if condition="ACTION_NAME eq 'shop'">class="active"</if>><a href="shop.html">商店</a></li>
-                    <li <if condition="ACTION_NAME eq 'cart'">class="active"</if>><a href="cart.html">购物车</a></li>
-                    <li <if condition="ACTION_NAME eq 'checkout'">class="active"</if>><a href="checkout.html">结算</a></li>
+                    <li <if condition="strtoupper(ACTION_NAME) eq 'INDEX'">class="active"</if>><a href="/">首页</a></li>
+                    <li <if condition="ACTION_NAME eq 'shop'">class="active"</if>><a href="/home/index/shop.html">商店</a></li>
+                    <li <if condition="ACTION_NAME eq 'cart'">class="active"</if>><a href="/home/index/cart.html">购物车</a></li>
+                    <li <if condition="ACTION_NAME eq 'checkout'">class="active"</if>><a href="/home/index/checkout.html">结算</a></li>
                 </ul>
             </div>
         </div>
