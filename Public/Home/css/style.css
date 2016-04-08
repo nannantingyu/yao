@@ -24,7 +24,7 @@ h3,
 h4,
 h5,
 h6 {
-    margin: 0 0 15px;
+    margin: 0 0 5px;
 }
 body { font-family:Arial, Helvetica, sans-serif; }
 
@@ -548,7 +548,7 @@ z-index: 999;}
 .footer-top-area .zigzag-bottom{background: #f4f4f4}
 .footer-top-area {background: none repeat scroll 0 0 #333;
 color: #999;
-padding: 35px 0 180px;}
+padding: 35px 0 60px;}
 
 
 .footer-bottom-area {background: #000;color: #fff}
@@ -557,7 +557,7 @@ padding: 35px 0 180px;}
 }
 .footer-wid-title {
   font-family: raleway;
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 100;color: #fff
 }
 
