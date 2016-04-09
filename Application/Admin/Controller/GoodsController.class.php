@@ -42,14 +42,177 @@ class GoodsController extends AdminController
         $this->display();
     }
 
-    //商品属性
+    //编辑商品分类
+    public function edittype()
+    {
+        $typeModel = M('goods_type');
+        if (!IS_POST) {
+            if ($cat_id = I('get.cat_id')) {
+                $cat = $typeModel->where(array('cat_id'=>$cat_id))->find();
+                $this->assign('cat', $cat);
+            }
+            $this->display();
+        } else {
+            if ($typeModel->create()) {
+                if ($cat_id = I('post.cat_id')) {
+                    $typeModel->save();
+                } else {
+                    $cat_id = $typeModel->add();
+                }
+                $this->success('修改成功！', U('goods/gtype', array('p'=>I('post.p', 1))));
+            }
+        }
+    }
+
+    //删除类型
+    public function delType()
+    {
+        $id = I('post.cat_id');
+        if (M('goods_type')->delete($id)) {
+            $this->ajaxReturn(array('status' => 1));
+        } else {
+            $this->ajaxReturn(array('status' => 0));
+        }
+    }
+
+    //全部属性
     public function gattr()
     {
-        $allGattrs = $this->lists('goods_attribute');
+        $gwhere = array();
+        if($keyword = I('get.key')){
+            $where['goods_name'] = array('like', "%$keyword%");
+            $goods_id = M('goods')->where($where)->getField('goods_id', true);
+
+            $gwhere['goods_id'] = array('in', $goods_id);
+        }
+
+        $allGattrs = $this->lists('goods_attr', $gwhere);
+
+        $allGoodsIds = array();
+        $allAttrIds = array();
+        foreach($allGattrs as $key=>$val){
+            if(!in_array($val['attr_id'], $allAttrIds)){
+                $allAttrIds[] = $val['attr_id'];
+            }
+
+            if(!in_array($val['goods_id'], $allGoodsIds)){
+                $allGoodsIds[] = $val['goods_id'];
+            }
+        }
+
+        if(count($allAttrIds) > 0){
+            $allAttr = M('goods_attribute')->where(array('attr_id' => array('in', $allAttrIds)))->getField('attr_id, attr_name', true);
+        }
+
+        if(count($allGoodsIds) > 0){
+            $allGoods = M('goods')->where(array('goods_id' => array('in', $allGoodsIds)))->getField('goods_id, goods_name', true);
+        }
+
+        foreach($allGattrs as $key=>$val){
+            $allGattrs[$key]['attr_name'] = $allAttr[$allGattrs[$key]['attr_id']];
+            $allGattrs[$key]['goods_name'] = $allGoods[$allGattrs[$key]['goods_id']];
+        }
+
+        //商品分类
+        $cats = M('goods_type')->field('cat_id, cat_name')->select();
+
+        $this->assign('cats', $cats);
         $this->assign('allGattrs', $allGattrs);
         $this->display();
     }
 
+    //编辑属性
+    public function editgattr()
+    {
+        $attrModel = M('goods_attr');
+        if (!IS_POST) {
+            if ($goods_attr_id = I('get.goods_attr_id')) {
+                $goods_attr = $attrModel->where(array('goods_attr_id'=>$goods_attr_id))->find();
+                $goods = M('goods')->where(array('goods_id'=>$goods_attr['goods_id']))->field('goods_id, goods_name, cat_id')->find();
+                $allAttr = M('goods_attribute')->where(array('cat_id'=>$goods['cat_id']))->field('attr_id, attr_name')->select();
+                $this->assign('goods', $goods);
+                $this->assign('goods_attr', $goods_attr);
+                $this->assign('allAttr', $allAttr);
+            }
+            $this->display();
+        } else {
+            if ($attrModel->create()) {
+                $p = I('post.p');
+                if ($cat_id = I('post.goods_attr_id')) {
+                    $attrModel->save();
+                } else {
+                    $cat_id = $attrModel->add();
+                }
+                $this->success('修改成功！', U('goods/gattr', array('p'=>$p)));
+            }
+        }
+    }
+
+    //删除商品属性
+    public function delGattr()
+    {
+        $id = I('post.id');
+        if (M('goods_attr')->delete($id)) {
+            $this->ajaxReturn(array('status' => 1));
+        } else {
+            $this->ajaxReturn(array('status' => 0));
+        }
+    }
+
+    //删除属性
+    public function delAttr()
+    {
+        $id = I('post.id');
+        if (M('goods_attribute')->delete($id)) {
+            $this->ajaxReturn(array('status' => 1));
+        } else {
+            $this->ajaxReturn(array('status' => 0));
+        }
+    }
+
+    //全部属性
+    public function attr()
+    {
+        $cat_id = I('get.cat_id');
+
+        $where = array();
+        if($cat_id && $cat_id != 0){
+            $where['cat_id'] = $cat_id;
+            $this->assign('cat_id', $cat_id);
+        }
+        $allAttrs = $this->lists('goods_attribute', $where);
+        //商品分类
+        $cats = M('goods_type')->field('cat_id, cat_name')->select();
+
+        $this->assign('cats', $cats);
+        $this->assign('allGattrs', $allAttrs);
+        $this->display();
+    }
+
+    //编辑属性
+    public function editattr()
+    {
+        $attrModel = M('goods_attribute');
+        if (!IS_POST) {
+            if ($attr_id = I('get.attr_id')) {
+                $attr = $attrModel->where(array('attr_id'=>$attr_id))->find();
+                $this->assign('attr', $attr);
+            }
+            $this->display();
+        } else {
+            if ($attrModel->create()) {
+                $p = I('post.p');
+                if ($cat_id = I('post.attr_id')) {
+                    $attrModel->save();
+                } else {
+                    $cat_id = $attrModel->add();
+                }
+                $this->success('修改成功！', U('goods/attr', array('p'=>$p)));
+            }
+        }
+    }
+
+    //编辑商品
     public function editgoods()
     {
         $goodsModel = M('goods');
@@ -85,7 +248,7 @@ class GoodsController extends AdminController
                     $goodsModel->add();
                 }
 
-            $this->success('修改成功！', U('goods/index'));
+            $this->success('修改成功！', U('goods/index', array('p'=>I('post.p', 1))));
         }
     }
 

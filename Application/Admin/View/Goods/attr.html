@@ -10,7 +10,7 @@
         function delAttr(obj, id){
             if(confirm('确定要删除吗？')){
                 $.ajax({
-                    url: "{:U('goods/delGattr')}",
+                    url: "{:U('goods/delAttr')}",
                     data: {id: id},
                     dataType: 'json',
                     type: 'post',
@@ -27,14 +27,18 @@
     <!-- 标题 -->
     <div class="main-title">
         <h2>
-            商品属性管理
+            全部属性管理
         </h2>
     </div>
 
     <div class="cf">
         <div class="fl">
-            <input type="text" id="search" placeholder="请输入产品名称" value="{:I('get.key')}" class="text input-mid">
-            <button class="btn" id="btn-search">查 找</button>
+            <select id="cat_id">
+                <option value="0">全部</option>
+                <volist name="cats" id="vo">
+                    <option value="{$vo.cat_id}" <if condition="$cat_id eq $vo['cat_id']">selected</if>>{$vo.cat_name}</option>
+                </volist>
+            </select>
         </div>
     </div>
 
@@ -44,10 +48,13 @@
             <tr>
                 <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
                 <th class="">编号</th>
-                <th class="">商品名</th>
+                <th class="">商品类型</th>
                 <th class="">属性名</th>
-                <th class="">属性值</th>
-                <th class="" width="30%">属性价格</th>
+                <th class="">属性类型</th>
+                <th class="" width="30%">属性值</th>
+                <th class="">排序</th>
+                <th class="">是否链接</th>
+                <th class="">属性组</th>
                 <th class="">操作</th>
             </tr>
             </thead>
@@ -55,16 +62,19 @@
             <volist name="allGattrs" id="vo">
                 <tr>
                     <td><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td>
-                    <td>{$vo.goods_attr_id} </td>
-                    <td>{$vo.goods_name}</td>
+                    <td>{$vo.attr_id} </td>
+                    <td>{$vo.cat_id}</td>
                     <td>{$vo.attr_name}</td>
-                    <td>{$vo.attr_value}</td>
-                    <td><span>{$vo.attr_price}</span></td>
+                    <td>{$vo.attr_type}</td>
+                    <td><span>{$vo.attr_values}</span></td>
+                    <td><span>{$vo.sort_order}</span></td>
+                    <td><span>{$vo.is_linked}</span></td>
+                    <td><span>{$vo.attr_group}</span></td>
                     <php>
                         $p = I('get.p', 1);
                     </php>
-                    <td><a href="{:U('goods/editgattr?goods_attr_id='.$vo['goods_attr_id'].'&p='.$p)}">编辑</a>
-                        <a href="javascript:void(0);" onclick="delAttr(this, {$vo.goods_attr_id})">删除</a>
+                    <td><a href="{:U('goods/editattr?attr_id='.$vo['attr_id'].'&p='.$p)}">编辑</a>
+                        <a href="javascript:void(0);" onclick="delAttr(this, {$vo.attr_id})">删除</a>
                     </td>
                 </tr>
             </volist>
@@ -80,19 +90,12 @@
 
 <block name="script">
     <script>
-        var url = "/index.php?s=/Admin/goods/gattr";
+        var url = "/index.php?s=/Admin/goods/attr";
         $(function(){
-            $('#btn-search').click(function(){
-                var srtxt = $('#search').val();
-                if(!srtxt){
-                    alert('请输入要查找的产品名称！');
-                    return false;
-                }
-
-                var cat_id = $('#cat_id').val();
-                window.location.href = url + '/key/' + srtxt + '.html';
-            });
+           $('#cat_id').change(function(){
+               var catid = $(this).val();
+               window.location.href=url+'/cat_id/'+catid+'.html';
+           });
         });
-
     </script>
 </block>
