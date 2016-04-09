@@ -43,6 +43,12 @@ class IndexController extends HomeController {
     }
 
     public function detail(){
+        $id = I('get.id');
+        $goods = M('goods')->join('zc_goods_type on zc_goods.cat_id = zc_goods_type.cat_id')->find($id);
+        $attrs = M('goods_attr')->join('zc_goods_attribute on zc_goods_attr.attr_id = zc_goods_attribute.attr_id')->where(array('goods_id'=>$id))->field('goods_attr_id, attr_name, attr_value, attr_price')->select();
+
+        $this->assign('goods', $goods);
+        $this->assign('attrs', $attrs);
         $this->display();
     }
 }
