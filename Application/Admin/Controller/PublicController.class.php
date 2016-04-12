@@ -36,7 +36,7 @@ class PublicController extends \Think\Controller {
                 $Member = D('Member');
                 if($Member->login($uid)){ //登录用户
                     //TODO:跳转到登录前页面
-                    $this->success('登录成功！', U('Index/index'));
+                    $this->success('登录成功！', U('Goods/index'));
                 } else {
                     $this->error($Member->getError());
                 }
@@ -51,7 +51,7 @@ class PublicController extends \Think\Controller {
             }
         } else {
             if(is_login()){
-                $this->redirect('Index/index');
+                $this->redirect('Goods/index');
             }else{
                 /* 读取数据库中的配置 */
                 $config	=	S('DB_CONFIG_DATA');
