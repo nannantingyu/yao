@@ -11,13 +11,26 @@ class IndexController extends HomeController {
         $this->assign('banners', $banners);
 
         //新品
-        $latest = M('goods')->field('goods_id, goods_name, shop_price, goods_img')->order('add_time desc, goods_id desc')->limit(5)->select();
+        $latest = M('goods')->field('goods_id, goods_name, shop_price, goods_img')->order('add_time desc, goods_id desc')->limit(4)->select();
         $this->assign('latest', $latest);
 
         //品牌
         $brands = M('brand')->field("brand_id, brand_name, brand_logo")->where(array("is_show"=>1))->order('sort_order asc')->limit(6)->select();
         $this->assign('brands', $brands);
 
+        //菜单
+        $menus = M('menus')->order('pid asc, orders asc')->select();
+        $allMenus = array();
+        foreach($menus as $key=>$val){
+            if($val['pid'] == 0){
+                $allMenus[$val['id']]['info'] = $val;
+            }
+            else{
+                $allMenus[$val['pid']]['child'][] = $val;
+            }
+        }
+
+        $this->assign('menus', $allMenus);
         $this->display();
     }
 

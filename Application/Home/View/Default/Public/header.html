@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Mobile Shop</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="__CSS__/bootstrap.min.css"  type="text/css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="__CSS__/style.css">
+
+
+    <!-- Custom Fonts -->
+    <link rel="stylesheet" href="__CSS__/font-awesome/css/font-awesome.min.css"  type="text/css">
+    <link rel="stylesheet" href="__CSS__/fonts/font-slider.css" type="text/css">
+
+    <!-- jQuery and Modernizr-->
+    <script src="__JS__/jquery-2.1.1.js"></script>
+
+    <!-- Core JavaScript Files -->
+    <script src="__JS__/bootstrap.min.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="__JS__/html5shiv.js"></script>
+    <script src="__JS__/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<!--Top-->
+<nav id="top">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-6">
+                <select class="语言">
+                    <option value="Chinese" selected>中文</option>
+                    <option value="English">英语</option>
+                    <option value="Germany">德语</option>
+                </select>
+                <select class="货币">
+                    <option value="RMB" selected>人民币</option>
+                    <option value="USD">USD</option>
+                </select>
+            </div>
+            <div class="col-xs-6">
+                <ul class="top-link">
+                    <li><a href="account.html"><span class="glyphicon glyphicon-user"></span> 我的账户</a></li>
+                    <li><a href="contact.html"><span class="glyphicon glyphicon-envelope"></span> 联系我们</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<!--Header-->
+<header class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div id="logo"><img src="__IMG__/logo.png" /></div>
+        </div>
+        <div class="col-md-4">
+            <form class="form-search">
+                <input type="text" class="input-medium search-query">
+                <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <div id="cart"><a class="btn btn-1" href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span>购物车 : 0 件</a></div>
+        </div>
+    </div>
+</header>
+<!--Navigation-->
+<nav id="menu" class="navbar">
+    <div class="container">
+        <div class="navbar-header"><span id="heading" class="visible-xs">Categories</span>
+            <button type="button" class="btn btn-navbar navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><i class="fa fa-bars"></i></button>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                <volist name="menus" id="vo">
+                    <li class="dropdown">
+                        <a href="{$vo['info']['path']}" class="dropdown-toggle" data-toggle="dropdown">{$vo['info']['title']}</a>
+                        <php>
+                            if(!is_null($vo['child']) && count($vo['child'] > 0))
+                            {
+                        </php>
+                            <div class="dropdown-menu">
+                                <div class="dropdown-inner">
+                                    <php>
+                                        $uls = ceil(count($vo['child'])/5);
+                                        for($index = 0; $index < $uls; $index ++){
+                                    </php>
+                                        <ul class="list-unstyled">
+                                            <volist name="vo.child" id="child" offset="$index*5" length="5">
+                                                <li><a href="{$child['path']}">{$child.title}</a></li>
+                                            </volist>
+                                        </ul>
+                                    <php>
+                                        }
+                                    </php>
+                                </div>
+                            </div>
+                        <php>
+                            }
+                        </php>
+                    </li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+</nav>

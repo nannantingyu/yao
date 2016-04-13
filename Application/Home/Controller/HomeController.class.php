@@ -30,6 +30,20 @@ class HomeController extends Controller {
         if(!C('WEB_SITE_CLOSE')){
             $this->error('站点已经关闭，请稍后访问~');
         }
+
+		//菜单
+		$menus = M('menus')->order('pid asc, orders asc')->select();
+		$allMenus = array();
+		foreach($menus as $key=>$val){
+			if($val['pid'] == 0){
+				$allMenus[$val['id']]['info'] = $val;
+			}
+			else{
+				$allMenus[$val['pid']]['child'][] = $val;
+			}
+		}
+
+		$this->assign('menus', $allMenus);
     }
 
 	/* 用户登录检测 */

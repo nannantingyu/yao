@@ -29,6 +29,7 @@
 			<th class="">父菜单</th>
 			<th class="">路径</th>
 			<th class="">状态</th>
+			<th class="">排序</th>
 			<th class="">操作</th>
 		</tr>
     </thead>
@@ -42,6 +43,7 @@
 			<td>{$vo.pid}</td>
 			<td>{$vo.path}</td>
 			<td>{$vo.state}</td>
+			<td>{$vo.order}</td>
 			<td>
 				<a href="{:U('Menus/editmenus?id='.$vo['id'])}">编辑</a>
 				<a href="{:U('AuthManager/group?uid='.$vo['uid'])}" class="confirm ajax-get">删除</a>
