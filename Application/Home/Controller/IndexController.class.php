@@ -18,19 +18,6 @@ class IndexController extends HomeController {
         $brands = M('brand')->field("brand_id, brand_name, brand_logo")->where(array("is_show"=>1))->order('sort_order asc')->limit(6)->select();
         $this->assign('brands', $brands);
 
-        //菜单
-        $menus = M('menus')->order('pid asc, orders asc')->select();
-        $allMenus = array();
-        foreach($menus as $key=>$val){
-            if($val['pid'] == 0){
-                $allMenus[$val['id']]['info'] = $val;
-            }
-            else{
-                $allMenus[$val['pid']]['child'][] = $val;
-            }
-        }
-
-        $this->assign('menus', $allMenus);
         $this->display();
     }
 
@@ -62,6 +49,20 @@ class IndexController extends HomeController {
 
         $this->assign('goods', $goods);
         $this->assign('attrs', $attrs);
+        $this->display();
+    }
+
+    public function category()
+    {
+        $cid = I('get.cid', 0);
+
+        $where = array();
+        if($cid){
+            $where['cat_id'] = $cid;
+        }
+
+        $typeGoods = $this->lists('goods', $where, 'add_time desc');
+        $this->assign('typeGoods', $typeGoods);
         $this->display();
     }
 }

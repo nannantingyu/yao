@@ -32,27 +32,4 @@ class PublicModel extends Model
     protected $_map = array(
         'type' => 'mime',
     );
-
-    /**
-     * @param $model    模型
-     * @param int $pageCount    每页显示数
-     * @param array $where  条件
-     * @param string $order 排序
-     */
-    public function lists($model, $page, $pageCount, $where = array(), $field = '', $order = '')
-    {
-        if(!$pageCount || $pageCount <= 0){
-            $pageCount = C('PAGE_ITEM_COUNT')?C('PAGE_ITEM_COUNT'): 12;
-        }
-
-        $page = $page? $page : 0;
-        $limitStart = $page * $pageCount;
-
-        $data['data'] = M($model)->where($where)->order($order)->limit("$limitStart, $pageCount")->field($field)->select();
-
-        $allCount = M($model)->where($where)->count();
-        $data['pages'] = ceil($allCount / $pageCount);
-
-        return $data;
-    }
 }

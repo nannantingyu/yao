@@ -96,6 +96,7 @@ return array(
     ), //附件上传配置（文件上传类配置）
 
     'PAGE_ITEM_COUNT' => 12,
+    'LIST_ROWS' => 12,
 
     'URL_ROUTER_ON'   => true,
     'URL_ROUTE_RULES'=>array(

@@ -86,7 +86,13 @@
             <ul class="nav navbar-nav">
                 <volist name="menus" id="vo">
                     <li class="dropdown">
-                        <a href="{$vo['info']['path']}" class="dropdown-toggle" data-toggle="dropdown">{$vo['info']['title']}</a>
+                        <php>
+                            $url = '';
+                            if($vo['info']['menu_type'] == 'cid'){
+                                $url = '/home/index/category/cid/'.$vo['info']['menu_value'];
+                            }
+                        </php>
+                        <a href="{$url}" class="dropdown-toggle">{$vo['info']['title']}</a>
                         <php>
                             if(!is_null($vo['child']) && count($vo['child'] > 0))
                             {
@@ -99,7 +105,7 @@
                                     </php>
                                         <ul class="list-unstyled">
                                             <volist name="vo.child" id="child" offset="$index*5" length="5">
-                                                <li><a href="{$child['path']}">{$child.title}</a></li>
+                                                <li><a href="/home/index/category">{$child.title}</a></li>
                                             </volist>
                                         </ul>
                                     <php>
