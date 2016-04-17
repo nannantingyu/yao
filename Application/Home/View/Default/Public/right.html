@@ -1,0 +1,37 @@
+<div id="sidebar" class="col-md-4">
+    <div class="widget wid-categories">
+        <div class="heading"><h4>分类</h4></div>
+        <div class="content">
+            <ul>
+                <volist name="categories" id="vo">
+                    <li><a href="/home/index/category/cid/{$vo.cat_id}">{$vo.cat_name}</a></li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+    <div class="widget wid-categories">
+        <div class="heading"><h4>品牌</h4></div>
+        <div class="content">
+            <ul>
+                <volist name="brands" id="vo">
+                    <li><a href="/home/index/category/cid/{$vo.brand_id}">{$vo.brand_name}</a></li>
+                </volist>
+            </ul>
+        </div>
+    </div>
+    <div class="widget wid-product">
+        <div class="heading"><h4>新品推荐</h4></div>
+        <div class="content">
+            <volist name="latest" id="vo">
+                <div class="product">
+                    <a href="/home/index/product/id/{$vo.goods_id}"><img src="{$vo.goods_img}" /></a>
+                    <div class="wrapper">
+                        <h5><a href="/home/index/product/id/{$vo.goods_id}">{$vo.goods_name}</a></h5>
+                        <div class="price">{$vo.promote_price}</div>
+                        <div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
+                    </div>
+                </div>
+            </volist>
+        </div>
+    </div>
+</div>

@@ -249,4 +249,11 @@ class UserController extends AdminController {
         return $error;
     }
 
+    /**
+     *  商城用户
+     */
+    public function customer(){
+
+        $this->display();
+    }
 }

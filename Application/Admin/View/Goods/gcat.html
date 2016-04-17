@@ -10,7 +10,7 @@
         function delType(obj, id){
             if(confirm('确定要删除吗？')){
                 $.ajax({
-                    url: "{:U('goods/delType')}",
+                    url: "{:U('goods/delcat')}",
                     data: {cat_id: id},
                     dataType: 'json',
                     type: 'post',
@@ -31,6 +31,12 @@
         </h2>
     </div>
 
+    <div class="cf">
+        <div class="fl">
+            <a class="btn" href="{:U("goods/editcat")}">添 加</a>
+        </div>
+    </div>
+
     <div class="data-table">
         <table class="">
             <thead>
@@ -38,20 +44,22 @@
                 <th class="row-selected row-selected"><input class="check-all" type="checkbox"/></th>
                 <th class="">编号</th>
                 <th class="">名称</th>
+                <th class="">单位</th>
                 <th class="">状态</th>
-                <th class="">组</th>
+                <th class="">排序</th>
                 <th class="">操作</th>
             </tr>
             </thead>
             <tbody>
-            <volist name="allGtypes" id="vo">
+            <volist name="allCategory" id="vo">
                 <tr>
                     <td><input class="ids" type="checkbox" name="ids[]" value="{$vo.id}" /></td>
                     <td>{$vo.cat_id} </td>
                     <td>{$vo.cat_name}</td>
-                    <td><span>{$vo.enabled}</span></td>
-                    <td><span>{$vo.attr_group}</span></td>
-                    <td><a href="{:U('goods/edittype?cat_id='.$vo['cat_id'])}">编辑</a>
+                    <td><span>{$vo.measure_unit}</span></td>
+                    <td><span>{$vo.is_show}</span></td>
+                    <td><span>{$vo.sort_order}</span></td>
+                    <td><a href="{:U('goods/editcat?cat_id='.$vo['cat_id'])}">编辑</a>
                         <a href="javascript:void(0);" onclick="delType(this, {$vo.cat_id})" class="ajax-get">删除</a>
                     </td>
                 </tr>

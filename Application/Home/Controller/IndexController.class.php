@@ -22,19 +22,12 @@ class IndexController extends HomeController {
     }
 
     public function cart(){
+        $cartGoods = M('goods')->limit(5)->order('rand()')->select();
+        $this->assign('cartGoods', $cartGoods);
         $this->display();
     }
 
-    public function shop(){
-        $page = I('get.p');
-        if(!preg_match('/\d+/', $page)){
-            $page = 0;
-        }
-
-        $this->assign('p', $page);
-
-        $allGoods = D('public')->lists('goods', $page, 0, array('is_on_sale'=>1), 'goods_id, goods_name, brand_id, shop_price, goods_img', 'add_time desc, sort_order asc, click_count desc');
-        $this->assign('allGoods', $allGoods);
+    public function account(){
         $this->display();
     }
 
@@ -42,24 +35,63 @@ class IndexController extends HomeController {
         $this->display();
     }
 
-    public function detail(){
-        $id = I('get.id');
-        $goods = M('goods')->join('zc_goods_type on zc_goods.cat_id = zc_goods_type.cat_id')->find($id);
-        $attrs = M('goods_attr')->join('zc_goods_attribute on zc_goods_attr.attr_id = zc_goods_attribute.attr_id')->where(array('goods_id'=>$id))->field('goods_attr_id, attr_name, attr_value, attr_price')->select();
+    public function contact(){
+        $this->display();
+    }
 
+    public function product(){
+        $id = I('get.id');
+
+        $goods = M('goods')->join('zc_category on zc_goods.cat_id = zc_category.cat_id')->find($id);
+
+        $whereRelate = array('cat_id'=>$goods['cat_id'], 'id'=>array('neq', $id));
+        $relatedGoods = M('goods')->where($whereRelate)->limit(3)->select();
+
+        $categories = M('category')->limit(4)->select();
+        $brands = M('brand')->limit(6)->select();
+        $latest = M('goods')->limit(3)->order('add_time desc')->select();
+
+        $this->assign('latest', $latest);
+        $this->assign('categories', $categories);
+        $this->assign('brands', $brands);
+        $this->assign('related', $relatedGoods);
         $this->assign('goods', $goods);
-        $this->assign('attrs', $attrs);
         $this->display();
     }
 
     public function category()
     {
         $cid = I('get.cid', 0);
+        $catname = M('category')->field('cat_name, cat_id, parent_id')->find($cid);
+
+        if($catname){
+            if($catname['parent_id'] != 0){
+                $parent = M('category')->field('cat_name, cat_id')->find($catname['parent_id']);
+                $this->assign('parent', $parent);
+            }
+            $catname = $catname['cat_name'];
+        }
+        else
+        {
+            $catname = '商品';
+        }
+
+        $this->assign('cname', $catname);
 
         $where = array();
         if($cid){
-            $where['cat_id'] = $cid;
+            $allcatids = M('category')->where(array('parent_id'=>$cid))->getField('cat_id', true);
+            $allcatids[] = $cid;
+            $where['cat_id'] = array('in', $allcatids);
         }
+
+        $categories = M('category')->limit(4)->select();
+        $brands = M('brand')->limit(6)->select();
+        $latest = M('goods')->limit(3)->order('add_time desc')->select();
+
+        $this->assign('latest', $latest);
+        $this->assign('categories', $categories);
+        $this->assign('brands', $brands);
 
         $typeGoods = $this->lists('goods', $where, 'add_time desc');
         $this->assign('typeGoods', $typeGoods);

@@ -35,40 +35,44 @@ class GoodsController extends AdminController
     }
 
     //商品分类
-    public function gtype()
+    public function gcat()
     {
-        $allGtypes = $this->lists('goods_type');
-        $this->assign('allGtypes', $allGtypes);
+        $allCategory = $this->lists('category');
+        $this->assign('allCategory', $allCategory);
         $this->display();
     }
 
     //编辑商品分类
-    public function edittype()
+    public function editcat()
     {
-        $typeModel = M('goods_type');
+        $catModel = M('category');
         if (!IS_POST) {
+
+            $topcats = M('category')->where(array('parent_id'=>0))->select();
+            $this->assign('topcats', $topcats);
+
             if ($cat_id = I('get.cat_id')) {
-                $cat = $typeModel->where(array('cat_id'=>$cat_id))->find();
+                $cat = $catModel->where(array('cat_id'=>$cat_id))->find();
                 $this->assign('cat', $cat);
             }
             $this->display();
         } else {
-            if ($typeModel->create()) {
+            if ($catModel->create()) {
                 if ($cat_id = I('post.cat_id')) {
-                    $typeModel->save();
+                    $catModel->save();
                 } else {
-                    $cat_id = $typeModel->add();
+                    $cat_id = $catModel->add();
                 }
-                $this->success('修改成功！', U('goods/gtype', array('p'=>I('post.p', 1))));
+                $this->success('修改成功！', U('goods/gcat', array('p'=>I('post.p', 1))));
             }
         }
     }
 
     //删除类型
-    public function delType()
+    public function delCat()
     {
         $id = I('post.cat_id');
-        if (M('goods_type')->delete($id)) {
+        if (M('category')->delete($id)) {
             $this->ajaxReturn(array('status' => 1));
         } else {
             $this->ajaxReturn(array('status' => 0));

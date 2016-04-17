@@ -52,8 +52,8 @@
             </div>
             <div class="col-xs-6">
                 <ul class="top-link">
-                    <li><a href="account.html"><span class="glyphicon glyphicon-user"></span> 我的账户</a></li>
-                    <li><a href="contact.html"><span class="glyphicon glyphicon-envelope"></span> 联系我们</a></li>
+                    <li><a href="/home/index/account.html"><span class="glyphicon glyphicon-user"></span> 我的账户</a></li>
+                    <li><a href="/home/index/contact.html"><span class="glyphicon glyphicon-envelope"></span> 联系我们</a></li>
                 </ul>
             </div>
         </div>
@@ -72,7 +72,7 @@
             </form>
         </div>
         <div class="col-md-4">
-            <div id="cart"><a class="btn btn-1" href="cart.html"><span class="glyphicon glyphicon-shopping-cart"></span>购物车 : 0 件</a></div>
+            <div id="cart"><a class="btn btn-1" href="/home/index/cart.html"><span class="glyphicon glyphicon-shopping-cart"></span>购物车 : 4 件</a></div>
         </div>
     </div>
 </header>
@@ -87,7 +87,7 @@
                 <volist name="menus" id="vo">
                     <li class="dropdown">
                         <php>
-                            $url = '';
+                            $url = $vo['info']['path'];
                             if($vo['info']['menu_type'] == 'cid'){
                                 $url = '/home/index/category/cid/'.$vo['info']['menu_value'];
                             }
@@ -105,7 +105,13 @@
                                     </php>
                                         <ul class="list-unstyled">
                                             <volist name="vo.child" id="child" offset="$index*5" length="5">
-                                                <li><a href="/home/index/category">{$child.title}</a></li>
+                                                <php>
+                                                    $suburl = $child['path'];
+                                                    if($child['menu_type'] == 'cid'){
+                                                        $suburl = '/home/index/category/cid/'.$child['menu_value'];
+                                                    }
+                                                </php>
+                                                <li><a href="{$suburl}">{$child.title}</a></li>
                                             </volist>
                                         </ul>
                                     <php>
