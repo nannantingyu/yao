@@ -31,26 +31,15 @@ class GoodsController extends HomeController
     public function cart(){
         $cart = session('cart');
         if(is_null($cart)){
-            $this->error('购物车还没有东西，马上去添加吧！');
+            $this->error('购物车还没有东西，马上去添加吧！', '/');
         }
 
-        $cartids = array();
-        foreach($cart as $key=>$val){
-            $cartids[] = $key;
-        }
+        $data = $this->countPrice($cart);
 
-        $cartGoods = M('goods')->where(array('goods_id'=>array('in', $cartids)))->select();
-        $goodsShopPrice = 0;
-        $goodsPromotedPrice = 0;
-        foreach($cartGoods as $key=>$val){
-            $cartGoods[$key]['count'] = $cart[$cartGoods[$key]['goods_id']];
-            $goodsShopPrice += $cartGoods[$key]['shop_price'];
-            $goodsPromotedPrice += $cartGoods[$key]['promote_price'];
-        }
-
-        $this->assign('gsprice', $goodsShopPrice);
-        $this->assign('gpprice', $goodsShopPrice-$goodsPromotedPrice);
-        $this->assign('cartGoods', $cartGoods);
+        $this->assign('gsprice', $data['gsprice']);
+        $this->assign('gpprice', $data['gpprice']);
+        $this->assign('cartGoods', $data['allCart']);
+        $this->assign('allCount', $data['allCount']);
         $this->display();
     }
 
@@ -91,5 +80,35 @@ class GoodsController extends HomeController
         $typeGoods = $this->lists('goods', $where, 'add_time desc');
         $this->assign('typeGoods', $typeGoods);
         $this->display();
+    }
+
+    public function updateCount(){
+        $allCart = session('cart');
+        $gid = I('post.gid');
+        $allCart[$gid] = I('post.cou');
+
+        session('cart', $allCart);
+
+        $data = $this->countPrice($allCart);
+
+        $this->ajaxReturn(array('state'=>1, 'gsprice'=>$data['gsprice'], 'gpprice'=>$data['gpprice'], 'allCount'=>$data['allCount']));
+    }
+
+    protected function countPrice($cart){
+        $cartids = array();
+        foreach($cart as $key=>$val){
+            $cartids[] = $key;
+        }
+
+        $cartGoods = M('goods')->where(array('goods_id'=>array('in', $cartids)))->select();
+        $goodsShopPrice = 0;
+        $goodsPromotedPrice = 0;
+        foreach($cartGoods as $key=>$val){
+            $cartGoods[$key]['count'] = $cart[$cartGoods[$key]['goods_id']];
+            $goodsShopPrice += $cartGoods[$key]['shop_price']*$cartGoods[$key]['count'];
+            $goodsPromotedPrice += $cartGoods[$key]['promote_price']*$cartGoods[$key]['count'];
+        }
+
+        return $data = array('gsprice'=>$goodsShopPrice, 'gpprice'=>$goodsShopPrice-$goodsPromotedPrice, 'allCart'=>$cartGoods, 'allCount'=>$goodsPromotedPrice);
     }
 }

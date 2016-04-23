@@ -30,7 +30,9 @@
 									</ul>
 								</div>
 								<div class="price">{$goods.promote_price}<span>{$goods.shop_price}</span></div>
-								<label>数量: </label> <input class="form-inline quantity" type="text" value="{$goods.count}"><a href="#" class="btn btn-2 ">更新</a>
+								<label>数量: </label>
+								<input class="form-inline quantity" type="text" value="{$goods.count}">
+								<a href="javascript:void(0);" onclick="updateCount(this, {$goods.goods_id})" class="btn btn-2 ">更新</a>
 								<hr>
 								<a href="#" class="btn btn-default pull-right">删除</a>
 							</div>
@@ -55,7 +57,7 @@
 							</tr>
 							<tr>
 								<td>优惠</td>
-								<td>{$gpprice}</td>
+								<td id="goods_yh">{$gpprice}</td>
 							</tr>
 							<tr>
 								<td>运费</td>
@@ -63,7 +65,7 @@
 							</tr>
 							<tr style="border-top: 1px solid #333">
 								<td><h5>总计</h5></td>
-								<td id="all_count">400.00</td>
+								<td id="all_count">{$allCount}</td>
 							</tr>
 						</table>
 						<center><a href="#" class="btn btn-1">结账</a></center>
@@ -74,9 +76,30 @@
 	</div>	
 	<include file="Public/footer"/>
 <script>
-	$(function(){
+	function updateCount(obj, gid){
+		var cou = $(obj).prev('input').val();
+		if(isNaN(cou) || cou < 1){
+			alert("请输入大于0的整数！");
+			return;
+		}
 
-	});
+		$.ajax({
+			url: '/home/goods/updateCount',
+			data: {gid: gid, cou: cou},
+			type: 'post',
+			dataType: 'json',
+			success: function(data){
+				if(data.state == 1)
+				{
+					$('#goods_count').text(data.gsprice);
+					$('#goods_yh').text(data.gpprice);
+					$('#all_count').text(data.allCount);
+
+					alert('更新成功！');
+				}
+			}
+		});
+	}
 </script>
 </body>
 </html>
