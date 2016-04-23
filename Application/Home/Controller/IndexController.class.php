@@ -21,12 +21,6 @@ class IndexController extends HomeController {
         $this->display();
     }
 
-    public function cart(){
-        $cartGoods = M('goods')->limit(5)->order('rand()')->select();
-        $this->assign('cartGoods', $cartGoods);
-        $this->display();
-    }
-
     public function account(){
         $this->display();
     }
@@ -56,45 +50,6 @@ class IndexController extends HomeController {
         $this->assign('brands', $brands);
         $this->assign('related', $relatedGoods);
         $this->assign('goods', $goods);
-        $this->display();
-    }
-
-    public function category()
-    {
-        $cid = I('get.cid', 0);
-        $catname = M('category')->field('cat_name, cat_id, parent_id')->find($cid);
-
-        if($catname){
-            if($catname['parent_id'] != 0){
-                $parent = M('category')->field('cat_name, cat_id')->find($catname['parent_id']);
-                $this->assign('parent', $parent);
-            }
-            $catname = $catname['cat_name'];
-        }
-        else
-        {
-            $catname = '商品';
-        }
-
-        $this->assign('cname', $catname);
-
-        $where = array();
-        if($cid){
-            $allcatids = M('category')->where(array('parent_id'=>$cid))->getField('cat_id', true);
-            $allcatids[] = $cid;
-            $where['cat_id'] = array('in', $allcatids);
-        }
-
-        $categories = M('category')->limit(4)->select();
-        $brands = M('brand')->limit(6)->select();
-        $latest = M('goods')->limit(3)->order('add_time desc')->select();
-
-        $this->assign('latest', $latest);
-        $this->assign('categories', $categories);
-        $this->assign('brands', $brands);
-
-        $typeGoods = $this->lists('goods', $where, 'add_time desc');
-        $this->assign('typeGoods', $typeGoods);
         $this->display();
     }
 }

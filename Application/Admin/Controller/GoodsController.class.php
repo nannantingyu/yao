@@ -25,9 +25,12 @@ class GoodsController extends AdminController
 
         //品牌
         $allBrand = M('brand')->getField('brand_id, brand_name', true);
+        //分类
+        $allCat = M('category')->getField('cat_id, cat_name', true);
 
         foreach ($allGoods as $key => $val) {
             $allGoods[$key]['brand'] = $allBrand[$val['brand_id']];
+            $allGoods[$key]['cat'] = $allCat[$val['cat_id']];
         }
 
         $this->assign('allGoods', $allGoods);

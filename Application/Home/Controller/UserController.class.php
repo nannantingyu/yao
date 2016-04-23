@@ -21,77 +21,68 @@ class UserController extends HomeController {
 		
 	}
 
-	/* 注册页面 */
-	public function register($username = '', $password = '', $repassword = '', $email = '', $verify = ''){
-        if(!C('USER_ALLOW_REGISTER')){
-            $this->error('注册已关闭');
-        }
-		if(IS_POST){ //注册用户
-			/* 检测验证码 */
-			if(!check_verify($verify)){
-				$this->error('验证码输入错误！');
-			}
+	/* 登录页面 */
+	public function account(){
+		$this->display();
+	}
 
-			/* 检测密码 */
-			if($password != $repassword){
-				$this->error('密码和重复密码不一致！');
-			}			
+	/*注册*/
+	public function register(){
+		$mUser = M('Users');
+		$username = I('post.user_name');
+		$exist = $mUser->where(array('user_name'=> $username))->select();
+		if(count($exist) > 0){
+			$this->error("用户名已存在！");
+		}
 
-			/* 调用注册接口注册用户 */
-            $User = new UserApi;
-			$uid = $User->register($username, $password, $email);
-			if(0 < $uid){ //注册成功
-				//TODO: 发送验证邮件
-				$this->success('注册成功！',U('login'));
-			} else { //注册失败，显示错误信息
-				$this->error($this->showRegError($uid));
-			}
+		$user['user_name'] = $username;
+		$user['password'] = md5(I('post.password'));
+		$user['phone'] = I('post.phone');
+		$user['email'] = I('post.email');
+		$user['sex'] = I('post.sex');
+		$user['reg_time'] = date('Y-m-d H:i:s');
 
-		} else { //显示注册表单
-			$this->display();
+		if($uid = $mUser->add($user)){
+			$this->success('注册成功！', '/home/index');
+			session('uid', $uid);
+			session('uname', $username);
+		}
+		else
+		{
+			$this->error('注册失败！'.$mUser->getLastSql());
 		}
 	}
 
 	/* 登录页面 */
-	public function login($username = '', $password = '', $verify = ''){
-		if(IS_POST){ //登录验证
-			/* 检测验证码 */
-			if(!check_verify($verify)){
-				$this->error('验证码输入错误！');
+	public function login(){
+		$username = I('post.user_name');
+		$pwd = I('post.password');
+
+		$user = M('users')->where(array('user_name'=>$username))->find();
+		if($user){
+			if(md5($pwd) == $user['password']){
+				$user['last_time'] = date('Y-m-d H:i:s');
+				$user['last_ip'] = get_client_ip(1);
+				session('uid', $user['user_id']);
+				session('uname', $username);
+
+				$this->redirect('/home/index');
 			}
-
-			/* 调用UC登录接口登录 */
-			$user = new UserApi;
-			$uid = $user->login($username, $password);
-			if(0 < $uid){ //UC登录成功
-				/* 登录用户 */
-				$Member = D('Member');
-				if($Member->login($uid)){ //登录用户
-					//TODO:跳转到登录前页面
-					$this->success('登录成功！',U('Home/Index/index'));
-				} else {
-					$this->error($Member->getError());
-				}
-
-			} else { //登录失败
-				switch($uid) {
-					case -1: $error = '用户不存在或被禁用！'; break; //系统级别禁用
-					case -2: $error = '密码错误！'; break;
-					default: $error = '未知错误！'; break; // 0-接口参数错误（调试阶段使用）
-				}
-				$this->error($error);
+			else{
+				$this->error('密码错误');
 			}
-
-		} else { //显示登录表单
-			$this->display();
+		}
+		else{
+			$this->error('用户不存在！');
 		}
 	}
 
 	/* 退出登录 */
 	public function logout(){
-		if(is_login()){
-			D('Member')->logout();
-			$this->success('退出成功！', U('User/login'));
+		if($uid = is_login()){
+			session('uname', null);
+			session('uid', null);
+			$this->success('退出成功！', U('Home/index'));
 		} else {
 			$this->redirect('User/login');
 		}

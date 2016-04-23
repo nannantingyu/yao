@@ -18,7 +18,7 @@
 						<div class="carousel-inner">
 							<volist name="banners" id="vo" key="k">
 								<div class="item <if condition='$k eq 1'>active</if>">
-									<a href="{$vo.link}"><img src="{$vo.image}" style="width: 1900px; height: 450px;" alt="First slide"></a>
+									<a href="{$vo.link}" target="_blank"><img src="{$vo.image}" style="width: 1900px; height: 450px;" alt="First slide"></a>
 									<!-- Static Header -->
 									<div class="header-text hidden-xs">
 										<div class="col-md-12 text-center">
@@ -59,13 +59,19 @@
 								<div class="product">
 									<div class="image"><a href="/home/index/product/id/{$vo.goods_id}.html"><img src="{$vo.goods_img}" style="height: 160px;" /></a></div>
 									<div class="buttons">
-										<a class="btn cart" href="/addCart/{$vo.goods_id}"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+										<a class="btn cart" href="javascript: void(0);" onclick="addCart({$vo.goods_id})"><span class="glyphicon glyphicon-shopping-cart"></span></a>
 										<a class="btn wishlist" href="/wish/{$vo.goods_id}/"><span class="glyphicon glyphicon-heart"></span></a>
 									</div>
 									<div class="caption">
 										<div class="name"><h3><a href="/home/index/product/id/{$vo.goods_id}.html">{$vo.goods_name}</a></h3></div>
 										<div class="price">¥{$vo.shop_price}<span>¥98</span></div>
-										<div class="rating"><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star-empty"></span></div>
+										<div class="rating">
+											<span class="glyphicon glyphicon-star"></span>
+											<span class="glyphicon glyphicon-star"></span>
+											<span class="glyphicon glyphicon-star"></span>
+											<span class="glyphicon glyphicon-star"></span>
+											<span class="glyphicon glyphicon-star-empty"></span>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -92,7 +98,7 @@
 								<div class="product">
 									<div class="image"><a href="/home/index/product/id/{$vo.goods_id}.html"><img src="{$vo.goods_img}" style="height: 160px;" /></a></div>
 									<div class="buttons">
-										<a class="btn cart" href="/addCart/{$vo.goods_id}"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+										<a class="btn cart" href="javascript: void(0);" onclick="addCart({$vo.goods_id})"><span class="glyphicon glyphicon-shopping-cart"></span></a>
 										<a class="btn wishlist" href="/wish/{$vo.goods_id}/"><span class="glyphicon glyphicon-heart"></span></a>
 									</div>
 									<div class="caption">
@@ -115,7 +121,7 @@
 								<div class="product">
 									<div class="image"><a href="/home/index/product/id/{$vo.goods_id}.html"><img src="{$vo.goods_img}" style="height: 160px;" /></a></div>
 									<div class="buttons">
-										<a class="btn cart" href="/addCart/{$vo.goods_id}"><span class="glyphicon glyphicon-shopping-cart"></span></a>
+										<a class="btn cart" href="javascript: void(0);" onclick="addCart({$vo.goods_id})"><span class="glyphicon glyphicon-shopping-cart"></span></a>
 										<a class="btn wishlist" href="/wish/{$vo.goods_id}/"><span class="glyphicon glyphicon-heart"></span></a>
 									</div>
 									<div class="caption">
