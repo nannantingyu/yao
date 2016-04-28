@@ -1,0 +1,74 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<div class="main-title cf">
+		<h2><if condition="ACTION_NAME eq 'addaction'">新增<else/>编辑</if>菜单</h2>
+	</div>
+	<!-- 表单 -->
+	<form id="form" action="{:U('editMenus')}" method="post" class="form-horizontal">
+		<div class="form-item cf">
+			<label class="item-label">菜单名称</label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="title" value="{$menus.title}">
+			</div>
+		</div>
+		<div class="form-item cf">
+			<label class="item-label">父菜单</label>
+			<div class="controls">
+				<select name="pid">
+					<option value="0">顶级</option>
+					<volist name="menusTree" id="vo">
+						<option value="{$vo.id}">{$vo.title_show}</option>
+					</volist>
+				</select>
+			</div>
+		</div>
+		<div class="form-item cf">
+			<label class="item-label">路径</label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="path" value="{$menus.path}">
+			</div>
+		</div>
+		<div class="form-item cf">
+			<label class="item-label">状态</label>
+			<div class="controls">
+				<select name="state">
+					<option value="1">发布</option>
+					<option value="0">未发布</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-item cf">
+			<label class="item-label">排序</label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="menu_order" value="{$menus.menu_order}">
+			</div>
+		</div>
+		<div class="form-item cf">
+			<label class="item-label">类型</label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="menu_type" value="{$menus.menu_type}">
+			</div>
+		</div>
+		<div class="form-item cf">
+			<label class="item-label">值</label>
+			<div class="controls">
+				<input type="text" class="text input-large" name="menu_value" value="{$menus.menu_value}">
+			</div>
+		</div>
+		<div class="form-item">
+			<input type="hidden" name="id" value="{$menus.id}"/>
+			<button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
+			<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+		</div>
+	</form>
+</block>
+
+<block name="script">
+<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+	Think.setValue('type',{$type|default=1});
+    //导航高亮
+    highlight_subnav('{:U('menus/index')}');
+</script>
+</block>

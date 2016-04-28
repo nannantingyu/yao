@@ -111,4 +111,12 @@ class GoodsController extends HomeController
 
         return $data = array('gsprice'=>$goodsShopPrice, 'gpprice'=>$goodsShopPrice-$goodsPromotedPrice, 'allCart'=>$cartGoods, 'allCount'=>$goodsPromotedPrice);
     }
+
+    public function changeGoods(){
+        $type = I('post.type');
+        $index = I('post.index');
+
+
+
+    }
 }

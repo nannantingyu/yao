@@ -338,3 +338,22 @@ footer .copyright ul li {display: inline-block;margin-left: 10px;}
 .page .rows {
 	border-right: 1px solid #CCCCCC;
 }
+
+.no-v-padding{
+	padding-top: 0px !important;
+	padding-bottom: 0px !important;
+}
+
+.no-v-margin{
+	margin-top: 0px !important;
+	margin-bottom: 0px !important;
+}
+
+.change-goods{
+	height: 73px;
+	line-height: 73px;
+}
+
+.change-goods a{
+	color: #aaa;
+}
