@@ -50,7 +50,7 @@
 						<div class="form-group">
 							<input name="agree" id="agree" type="checkbox" > 同意注册
 						</div>
-						<button type="submit" class="btn btn-1">创建</button>
+						<button type="submit" class="btn btn-1" onclick="agreezc()">创建</button>
 					</form>
 				</div>
 			</div>
@@ -60,3 +60,11 @@
 
 </body>
 </html>
+<script>
+       function agreezc(){
+           var vn = $('#agree').val();
+           if(vn==''){
+               alert('您还没有勾选同意注册哦！');
+           }
+       }
+</script>
