@@ -57,7 +57,7 @@
 						<volist name="latest" id="vo">
 							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 								<div class="product">
-									<div class="image"><a href="/home/index/product/id/{$vo.goods_id}.html"><img src="{$vo.goods_img}" style="height: 160px;" /></a></div>
+									<div class="image"><a href="/home/index/product/id/{$vo.goods_id}.html"><img src="{:getImgsrc($vo['goods_img'])}" style="height: 160px;" /></a></div>
 									<div class="buttons">
 										<a class="btn cart" href="javascript: void(0);" onclick="addCart({$vo.goods_id})"><span class="glyphicon glyphicon-shopping-cart"></span></a>
 										<a class="btn wishlist" href="/wish/{$vo.goods_id}/"><span class="glyphicon glyphicon-heart"></span></a>
@@ -96,7 +96,7 @@
 						<volist name="latest" id="vo">
 							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 								<div class="product">
-									<div class="image"><a href="/home/index/product/id/{$vo.goods_id}.html"><img src="{$vo.goods_img}" style="height: 160px;" /></a></div>
+									<div class="image"><a href="/home/index/product/id/{$vo.goods_id}.html"><img src="{:getImgsrc($vo['goods_img'])}" style="height: 160px;" /></a></div>
 									<div class="buttons">
 										<a class="btn cart" href="javascript: void(0);" onclick="addCart({$vo.goods_id})"><span class="glyphicon glyphicon-shopping-cart"></span></a>
 										<a class="btn wishlist" href="/wish/{$vo.goods_id}/"><span class="glyphicon glyphicon-heart"></span></a>
@@ -119,7 +119,7 @@
 						<volist name="latest" id="vo">
 							<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 								<div class="product">
-									<div class="image"><a href="/home/index/product/id/{$vo.goods_id}.html"><img src="{$vo.goods_img}" style="height: 160px;" /></a></div>
+									<div class="image"><a href="/home/index/product/id/{$vo.goods_id}.html"><img src="{:getImgsrc($vo['goods_img'])}" style="height: 160px;" /></a></div>
 									<div class="buttons">
 										<a class="btn cart" href="javascript: void(0);" onclick="addCart({$vo.goods_id})"><span class="glyphicon glyphicon-shopping-cart"></span></a>
 										<a class="btn wishlist" href="/wish/{$vo.goods_id}/"><span class="glyphicon glyphicon-heart"></span></a>
