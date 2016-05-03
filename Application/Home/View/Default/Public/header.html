@@ -32,7 +32,6 @@
     <script src="__JS__/html5shiv.js"></script>
     <script src="__JS__/respond.min.js"></script>
     <![endif]-->
-
     <script >
         function addCart(id){
             $.ajax({
@@ -57,19 +56,11 @@
 <nav class="navbar navbar-default" role="navigation">
     <div class="container">
         <div>
-            <form class="navbar-form navbar-left">
-                <div class="form-group">
-                    <select class="form-control">
-                        <option value="Chinese" selected>中文</option>
-                        <option value="English">英语</option>
-                        <option value="Germany">德语</option>
-                    </select>
-                    <select class="form-control">
-                        <option value="RMB" selected>人民币</option>
-                        <option value="USD">USD</option>
-                    </select>
-                </div>
-            </form>
+            <ul class="nav navbar-nav">
+                <li><a href="javascript:void(0);">手机版</a></li>
+                <li><a href="javascript:void(0);">服务中心</a></li>
+                <li><a href="javascript:void(0);">在线客服</a></li>
+            </ul>
         </div>
         <div id="user-div" class="pull-right">
             <ul class="nav navbar-nav">
@@ -86,6 +77,7 @@
                             <li><a href="/home/user/logout.html">退出登录</a></li>
                         </ul>
                     </li>
+                    <li><a href="javascript:void(0);">我的订单</a></li>
                 </if>
                 <li><a href="/home/index/contact.html"><span class="glyphicon glyphicon-envelope"></span> 联系我们</a></li>
             </ul>

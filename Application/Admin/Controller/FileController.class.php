@@ -113,4 +113,13 @@ class FileController extends AdminController
         /* 返回JSON数据 */
         $this->ajaxReturn($return);
     }
+
+    //将数据库中的图片字段改为数组
+    public function test(){
+        $imgs = M('goods')->select();
+        foreach($imgs as $key=>$val){
+            $imgs[$key]['goods_img'] = json_encode(array($val['goods_img']));
+            M('goods')->save($imgs[$key]);
+        }
+    }
 }

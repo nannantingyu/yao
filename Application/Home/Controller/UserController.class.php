@@ -29,10 +29,10 @@ class UserController extends HomeController {
 	/*注册*/
 	public function register(){
 		$mUser = M('Users');
-		$username = I('post.user_name');
+		$username = I('post.username');
 		$exist = $mUser->where(array('user_name'=> $username))->select();
 		if(count($exist) > 0){
-			$this->error("用户名已存在！");
+			$this->ajaxReturn(array('state'=>-1, 'msg'=>'用户名已存在！'));
 		}
 
 		$user['user_name'] = $username;
@@ -43,13 +43,13 @@ class UserController extends HomeController {
 		$user['reg_time'] = date('Y-m-d H:i:s');
 
 		if($uid = $mUser->add($user)){
-			$this->success('注册成功！', '/home/index');
 			session('uid', $uid);
 			session('uname', $username);
+			$this->ajaxReturn(array('state'=>1));
 		}
 		else
 		{
-			$this->error('注册失败！'.$mUser->getLastSql());
+			$this->ajaxReturn(array('state'=>-2));
 		}
 	}
 
@@ -79,7 +79,7 @@ class UserController extends HomeController {
 
 	/* 退出登录 */
 	public function logout(){
-		if($uid = is_login()){
+		if($uid = home_login()){
 			session('uname', null);
 			session('uid', null);
 			$this->success('退出成功！', U('Home/index'));
@@ -123,12 +123,12 @@ class UserController extends HomeController {
      * @author huajie <banhuajie@163.com>
      */
     public function profile(){
-		if ( !is_login() ) {
+		if ( !home_login() ) {
 			$this->error( '您还没有登陆',U('User/login') );
 		}
         if ( IS_POST ) {
             //获取参数
-            $uid        =   is_login();
+            $uid        =   home_login();
             $password   =   I('post.old');
             $repassword = I('post.repassword');
             $data['password'] = I('post.password');

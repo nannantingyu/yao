@@ -68,3 +68,14 @@ function get_nav_url($url){
     }
     return $url;
 }
+
+
+
+function home_login(){
+    $user = session('uid');
+    if (empty($user)) {
+        return 0;
+    } else {
+        return $user;
+    }
+}

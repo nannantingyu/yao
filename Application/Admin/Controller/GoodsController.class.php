@@ -248,11 +248,12 @@ class GoodsController extends AdminController
             $this->assign('brand', $brand);
             $this->display();
         } else {
-            if ($goodsModel->create())
+            if ($newgoods = $goodsModel->create())
+                $newgoods['goods_img'] = json_encode(I('imgs'));
                 if ($id = I('post.goods_id')) {
-                    $goodsModel->save();
+                    $goodsModel->save($newgoods);
                 } else {
-                    $goodsModel->add();
+                    $goodsModel->add($newgoods);
                 }
 
             $this->success('修改成功！', U('goods/index', array('p'=>I('post.p', 1))));

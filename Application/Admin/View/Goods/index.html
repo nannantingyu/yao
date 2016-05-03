@@ -80,7 +80,7 @@
                     <td>{$vo.goods_id} </td>
                     <td>{$vo.cat}</td>
                     <td>{$vo.goods_name}</td>
-                    <td><img width="50" height="50" src="{$vo.goods_img}"/></td>
+                    <td><img width="50" height="50" src="{:getImgsrc($vo['goods_img'])}"/></td>
                     <td>{$vo.brand}</td>
                     <td>{$vo.shop_price}</td>
                     <td><eq name="vo.is_promote" value="1"><a href="javascript:void(0);" onclick="setOnSale(this, {$vo.goods_id}, 0, 'is_promote', '是', '否')">是</a><else/><a href="javascript:void(0);" onclick="setOnSale(this, {$vo.goods_id}, 1, 'is_promote', '是', '否')">否</a></eq></td>

@@ -2,6 +2,20 @@
 	<!--//////////////////////////////////////////////////-->
 	<!--///////////////////Product Page///////////////////-->
 	<!--//////////////////////////////////////////////////-->
+<script>
+	$(function(){
+		$('#etalage').etalage({
+			thumb_image_width: 300,
+			thumb_image_height: 400,
+			source_image_width: 900,
+			source_image_height: 1200,
+			show_hint: true,
+			click_callback: function(image_anchor, instance_id){
+				alert('Callback example:\nYou clicked on an image with the anchor: "'+image_anchor+'"\n(in Etalage instance: "'+instance_id+'")');
+			}
+		});
+	});
+</script>
 	<div id="page-content" class="single-page">
 		<div class="container">
 			<div class="row">
@@ -17,24 +31,28 @@
 				<div id="main-content" class="col-md-8">
 					<div class="product">
 						<div class="col-md-6">
-							<div class="image">
-								<img src="{$goods.goods_img}" />
-								<div class="image-more">
-									 <ul class="row">
-										 <li class="col-lg-3 col-sm-3 col-xs-4">
-											<a href="#"><img class="img-responsive" src="{$goods.goods_img}"></a>
-										</li>
-										 <li class="col-lg-3 col-sm-3 col-xs-4">
-											<a href="#"><img class="img-responsive" src="{$goods.goods_img}"></a>
-										</li>
-										 <li class="col-lg-3 col-sm-3 col-xs-4">
-											<a href="#"><img class="img-responsive" src="{$goods.goods_img}"></a>
-										</li>
-										 <li class="col-lg-3 col-sm-3 col-xs-4">
-											<a href="#"><img class="img-responsive" src="{$goods.goods_img}"></a>
-										</li>
-									</ul>
-								</div>
+							<div class="grid images_3_of_2">
+								<ul id="etalage">
+									<li>
+										<a href="optionallink.html">
+											<img class="etalage_thumb_image" src="__IMG__/product-1.jpg" class="img-responsive" />
+											<img class="etalage_source_image" src="__IMG__/product-1.jpg" class="img-responsive" title="" />
+										</a>
+									</li>
+									<li>
+										<img class="etalage_thumb_image" src="__IMG__/product-1.jpg" class="img-responsive" />
+										<img class="etalage_source_image" src="__IMG__/product-1.jpg" class="img-responsive" title="" />
+									</li>
+									<li>
+										<img class="etalage_thumb_image" src="__IMG__/product-1.jpg" class="img-responsive"  />
+										<img class="etalage_source_image" src="__IMG__/product-1.jpg"class="img-responsive"  />
+									</li>
+									<li>
+										<img class="etalage_thumb_image" src="__IMG__/product-1.jpg" class="img-responsive"  />
+										<img class="etalage_source_image" src="__IMG__/product-1.jpg"class="img-responsive"  />
+									</li>
+								</ul>
+								<div class="clearfix"></div>
 							</div>
 						</div>
 						<div class="col-md-6">
@@ -100,7 +118,7 @@
 							<volist name="related" id="vo">
 								<div class="col-lg-4 col-md-4 col-xs-12">
 									<div class="product">
-										<div class="image"><a href="/home/index/product/id/{$vo.goods_id}.html"><img src="{$vo.goods_img}" /></a></div>
+										<div class="image"><a href="/home/index/product/id/{$vo.goods_id}.html"><img src="{:getImgsrc($vo['goods_img'])}" /></a></div>
 										<div class="buttons">
 											<a class="btn cart" href="#"><span class="glyphicon glyphicon-shopping-cart"></span></a>
 											<a class="btn wishlist" href="#"><span class="glyphicon glyphicon-heart"></span></a>

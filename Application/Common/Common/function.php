@@ -950,3 +950,14 @@ function get_stemma($pids,Model &$model, $field='id'){
     }
     return $collection;
 }
+
+
+function getImgsrc($img){
+    $imgs = json_decode($img);
+
+    if($imgs){
+        return $imgs[0];
+    }
+
+    return '';
+}
