@@ -65,7 +65,7 @@ hr.line { margin: 15px auto; padding: 0; max-width: 90px;border: 0; border-top: 
 	#top ul.top-link li{float: none;border: none;}
 }
 
-header {padding: 50px 0; }
+header {padding: 10px 0; }
 header #logo{margin: 5px 0 15px;}
 header #cart {float: right;}
 header .form-search input{width: 70%;height: 56px;}
@@ -106,7 +106,7 @@ header .form-search button:hover {color: #eee;}
 /* ---------------------------------------------------------------------------- */
 #page-content{}
 #page-content.home-page{margin: 50px 0;}
-#page-content.single-page {margin: 50px 0;}
+#page-content.single-page {margin: 15px 0;}
 #page-content .row{	margin-bottom: 30px;}
 
 .carousel-inner{}
@@ -116,7 +116,7 @@ header .form-search button:hover {color: #eee;}
 .heading h1, .heading h2{font-size: 30px;padding-bottom: 10px;}
 
 /* ---breadcrumb--- */
-.breadcrumb {margin-bottom: 40px;border: 1px solid #ddd;}
+.breadcrumb {margin-bottom: 10px;border: 1px solid #ddd;}
 .breadcrumb i {font-size: 15px;}
 .breadcrumb > li {text-shadow: 0 1px 0 #FFF;padding: 0 20px;position: relative;white-space: nowrap;}
 .breadcrumb > li + li:before {content: '';padding: 0;}

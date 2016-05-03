@@ -22,7 +22,25 @@ class GoodsController extends HomeController
         }
 
         session('cart', $allCart);
-        $this->ajaxReturn(array('state'=>1, 'count'=>count($allCart), 'gid'=>$goodsid));
+
+        //如果已经登录，存入数据库
+        if($uid = home_login()){
+            $mcart = M('cart');
+            $cartGoods = $mcart->where(array('goods_id'=>$goodsid))->find();
+            if($cartGoods){
+                $cartGoods['goods_number'] ++;
+            }
+            else
+            {
+                $cartGoods['user_id'] = $uid;
+                $cartGoods['goods_id'] = $goodsid;
+                $cartGoods['goods_number'] = 1;
+                $cartGoods['session_id'] = session_id();
+
+                $mcart->add($cartGoods);
+            }
+        }
+        $this->ajaxReturn(array('state'=>1, 'count'=>count($allCart), 'gid'=>$goodsid, 'uid'=>$uid));
     }
 
     /**
@@ -40,7 +58,7 @@ class GoodsController extends HomeController
         $this->assign('gpprice', $data['gpprice']);
         $this->assign('cartGoods', $data['allCart']);
         $this->assign('allCount', $data['allCount']);
-        $this->display();
+        $this->display('cart1');
     }
 
     public function category()
@@ -115,8 +133,20 @@ class GoodsController extends HomeController
     public function changeGoods(){
         $type = I('post.type');
         $index = I('post.index');
+    }
 
+    public function delCart(){
+        $goodsid = I('post.id');
+        if($uid = home_login()){
+            M('cart')->where(array('goods_id'=>$goodsid))->delete();
+            $allCart = session('cart');
+            if($allCart[$goodsid]){
+                unset($allCart[$goodsid]);
+            }
 
+            session('cart', $allCart);
+        }
 
+        $this->ajaxReturn(array('state'=>1));
     }
 }

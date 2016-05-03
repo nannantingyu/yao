@@ -66,6 +66,52 @@ class UserController extends HomeController {
 				session('uid', $user['user_id']);
 				session('uname', $username);
 
+				//登陆成功，判断购物车
+				$cartGoods = M('cart')->where(array('user_id'=>$user['user_id']))->getField('goods_id, goods_number', true);
+				//如果数据库存在，与session中的合并
+				$allCart = session('cart');
+
+				if($cartGoods){
+					if($allCart){
+						foreach($allCart as $key=>$val){
+							if($cartGoods[$key]){
+								$cartGoods[$key]['goods_number'] += $val;
+								M('cart')->save($cartGoods[$key]);
+							}
+							else
+							{
+								$cartGoods[$key]['goods_id'] = $key;
+								$cartGoods[$key]['user_id'] = $user['user_id'];
+								$cartGoods[$key]['goods_number'] = $val;
+								$cartGoods[$key]['session_id'] = session_id();
+
+								M('cart')->add($cartGoods[$key]);
+							}
+						}
+					}
+				}
+				else
+				{
+					//否则，将session中的商品加入数据库
+					$data = array();
+					foreach($allCart as $key=>$val){
+						$d['user_id'] = $user['user_id'];
+						$d['goods_id'] = $key;
+						$d['goods_number'] = $val;
+						$d['session_id'] = session_id();
+
+						$data[] = $d;
+					}
+
+					if($data && count($data) > 0)
+					{
+						M('cart')->addAll($data);
+					}
+				}
+
+				$allCartGoods = M('cart')->where(array('user_id'=>$user['user_id']))->getField('goods_id, goods_number', true);
+				session('cart', $allCartGoods);
+
 				$this->redirect('/home/index');
 			}
 			else{
