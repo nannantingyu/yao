@@ -198,4 +198,20 @@ class UserController extends HomeController {
         }
     }
 
+    public function personal(){
+        $username = session('uname');
+        $this->assign('uname',$username);
+//        $order = session('cart');
+//        $this->assign('order',$order);
+//        dump($order);
+         $allOrders = M('order_info')
+            ->join('zc_order_goods on zc_order_info.order_id = zc_order_goods.order_id')
+            ->join('zc_goods on zc_order_goods.goods_id = zc_goods.goods_id')
+            ->join('zc_users on zc_order_info.user_id = zc_users.user_id')
+            ->order('zc_order_info.add_time desc, zc_order_info.order_id desc')
+            ->select();
+//dump($allOrders);
+        $this->assign('allOrders', $allOrders);
+        $this->display();
+    }
 }
