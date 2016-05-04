@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>我的ZC---个人中心</title>
+<link href="__CSS__/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="__CSS__/style.css">
+<script src="__JS__/jquery-2.1.1.js"></script>
+<script src="__JS__/bootstrap.min.js"></script>
+<!--Top-->
+<nav class="navbar navbar-default" role="navigation">
+    <div class="container">
+        <div>
+            <ul class="nav navbar-nav">
+                <li><a href="javascript:void(0);">手机版</a></li>
+                <li><a href="javascript:void(0);">服务中心</a></li>
+                <li><a href="javascript:void(0);">在线客服</a></li>
+            </ul>
+        </div>
+        <div id="user-div" class="pull-right">
+            <ul class="nav navbar-nav">
+                <php>$uname = session('uname');</php>
+                <if condition="is_null($uname)">
+                    <li><a href="/home/user/account.html"><span class="glyphicon glyphicon-envelope"></span> 登录</a></li>
+                    <else />
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            欢迎你, {$uname} <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/home/user/myaccount.html">我的账户</a></li>
+                            <li><a href="/home/user/logout.html">退出登录</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="javascript:void(0);">我的订单</a></li>
+                </if>
+                <li><a href="/home/index/contact.html"><span class="glyphicon glyphicon-envelope"></span> 联系我们</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--Header-->
+<header class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <div id="logo"><a href="/"><img src="__IMG__/logo.png" /></a></div>
+        </div>
+        <div class="col-md-4">
+            <form class="form-search">
+                <input type="text" class="input-medium search-query">
+                <button type="submit" class="btn"><span class="glyphicon glyphicon-search"></span></button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <div id="cart"><a class="btn btn-1" href="/home/goods/cart.html"><span class="glyphicon glyphicon-shopping-cart"></span>购物车 : <span id="cart-count"><php>echo count(session('cart'));</php></span> 件</a></div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="panel panel-info">
+   <div class="panel-heading">
+      <h3 class="panel-title">填写核对订单信息</h3>
+   </div>
+   <div class="panel-body">
+        <ul class="list-group">
+            <li class="list-group-item">收货人信息&nbsp;&nbsp;&nbsp;<a href="#">[修改]</a>|<a>[新增并使用]</a></li>
+            <li class="list-group-item">支付及配送方式&nbsp;&nbsp;&nbsp;<a href="#">[修改]</a></li>
+            <li class="list-group-item">商品清单</li>
+        </ul>
+    </div>
+   </div>
+</div>
+</div>

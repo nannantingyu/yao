@@ -47,20 +47,22 @@ class GoodsController extends HomeController
      * 购物车
      */
     public function cart(){
+        $data = $this->reviewcart();
+        $this->assign('gsprice', $data['gsprice']);
+        $this->assign('gpprice', $data['gpprice']);
+        $this->assign('cartGoods', $data['allCart']);
+        $this->assign('allCount', $data['allCount']);
+        $this->display();
+    }
+    public function reviewcart(){
         $cart = session('cart');
         if(is_null($cart)){
             $this->error('购物车还没有东西，马上去添加吧！', '/');
         }
 
         $data = $this->countPrice($cart);
-
-        $this->assign('gsprice', $data['gsprice']);
-        $this->assign('gpprice', $data['gpprice']);
-        $this->assign('cartGoods', $data['allCart']);
-        $this->assign('allCount', $data['allCount']);
-        $this->display('cart1');
+        return $data;
     }
-
     public function category()
     {
         $cid = I('get.cid', 0);
@@ -148,5 +150,11 @@ class GoodsController extends HomeController
         }
 
         $this->ajaxReturn(array('state'=>1));
+    }
+    
+    public function checkodinfo(){          //提交订单
+        $data = $this->reviewcart();
+        $this->assign('data',$data);
+        $this->display();
     }
 }
