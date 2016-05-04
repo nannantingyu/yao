@@ -157,4 +157,51 @@ class GoodsController extends HomeController
         $this->assign('data',$data);
         $this->display();
     }
+
+    public function search(){
+        $keywords = I('get.keywords');
+
+        $where = "(zc_goods.goods_name like '%".$keywords."%' or zc_brand.brand_name like '%".$keywords."%' or zc_goods.keywords like '%".$keywords."%') and zc_goods.is_on_sale=1";
+        $allGoods = M('goods')
+            ->join('zc_brand on zc_goods.brand_id = zc_brand.brand_id')
+            ->where($where)
+            ->select();
+
+        $options    =   array();
+        $REQUEST    =   (array)I('request.');
+
+        if ( isset($REQUEST['_order']) && isset($REQUEST['_field']) && in_array(strtolower($REQUEST['_order']),array('desc','asc')) ) {
+            $options['order'] = '`'.$REQUEST['_field'].'` '.$REQUEST['_order'];
+        }
+        unset($REQUEST['_order'],$REQUEST['_field']);
+
+        if( empty($options['where'])){
+            unset($options['where']);
+        }
+        $total        =   count($allGoods);
+
+        if( isset($REQUEST['r']) ){
+            $listRows = (int)$REQUEST['r'];
+        }else{
+            $listRows = C('LIST_ROWS') > 0 ? C('LIST_ROWS') : 12;
+        }
+        $page = new \Think\Page($total, $listRows, $REQUEST);
+        if($total>$listRows){
+            $page->setConfig('theme','%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% %HEADER%');
+        }
+        $p =$page->show();
+        $this->assign('_page', $p? $p: '');
+        $this->assign('_total',$total);
+        $limit = $page->firstRow.','.$page->listRows;
+
+        $searchGoods = M('goods')
+            ->join('zc_brand on zc_goods.brand_id = zc_brand.brand_id')
+            ->where($where)
+            ->limit($limit)
+            ->select();
+
+        $this->assign('searchGoods', $searchGoods);
+        $this->assign('keywords', $keywords);
+        $this->show();
+    }
 }

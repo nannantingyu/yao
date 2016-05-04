@@ -66,10 +66,10 @@ hr.line { margin: 15px auto; padding: 0; max-width: 90px;border: 0; border-top: 
 }
 
 header {padding: 10px 0; }
-header #logo{margin: 5px 0 15px;}
+header #logo{margin: 0px 0 5px;}
 header #cart {float: right;}
-header .form-search input{width: 70%;height: 56px;}
-header .form-search button {background: #222; color: #fff;padding: 12px 20px;font-size: 20px;}
+header .form-search input{width: 70%;height: 40px; margin-right: -4px;}
+header .form-search button {background: #222; color: #fff;padding: 4px 20px;font-size: 20px; margin-top: -3px;}
 header .form-search button:hover {color: #eee;}
 @media(max-width:968px) {
 	header #cart {margin-top: 20px;}
@@ -239,7 +239,7 @@ footer .copyright ul li {display: inline-block;margin-left: 10px;}
 /* -----------------------------------Button----------------------------------- */
 /* ---------------------------------------------------------------------------- */
 .btn {}
-.btn.btn-1{ background-color: #222;color: #fff;font-size: 25px;padding: 10px 15px;}
+.btn.btn-1{ background-color: #222;color: #fff;font-size: 25px;padding: 4px 15px;}
 .btn.btn-2{margin-left: 5px;background: #D9534F;color: #fff;}
 
 .footer-top-area .zigzag-bottom{background: #f4f4f4}
@@ -356,4 +356,16 @@ footer .copyright ul li {display: inline-block;margin-left: 10px;}
 
 .change-goods a{
 	color: #aaa;
+}
+
+.myNav{
+	margin-bottom: 5px !important;
+}
+
+.form-search{
+	margin-top: 15px;
+}
+
+#cart{
+	margin-top: 11px;
 }
