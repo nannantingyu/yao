@@ -154,7 +154,14 @@ class GoodsController extends HomeController
     
     public function checkodinfo(){          //提交订单
         $data = $this->reviewcart();
-        $this->assign('data',$data);
+//        $this->assign('data',$data);
+        $this->assign('gsprice', $data['gsprice']);
+        $this->assign('gpprice', $data['gpprice']);
+        $this->assign('cartGoods', $data['allCart']);
+        $this->assign('allCount', $data['allCount']);
+        $adprovince = M('region')->where(array('parent_id'=>1))->order('rand()')->getfield('region_name');
+//        $adcity = M('region')->where()
+//        dump($address);
         $this->display();
     }
 

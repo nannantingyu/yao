@@ -64,8 +64,31 @@
    <div class="panel-body">
         <ul class="list-group">
             <li class="list-group-item">收货人信息&nbsp;&nbsp;&nbsp;<a href="#">[修改]</a>|<a>[新增并使用]</a></li>
-            <li class="list-group-item">支付及配送方式&nbsp;&nbsp;&nbsp;<a href="#">[修改]</a></li>
-            <li class="list-group-item">商品清单</li>
+            <li class="list-group-item">支付及配送方式&nbsp;&nbsp;&nbsp;<a href="#">[修改]</a>
+                您选择使用&nbsp;&nbsp;{}&nbsp;&nbsp;
+            </li>
+            <li class="list-group-item">商品清单<br>
+            <!--<div class="row">-->
+            <table class="table table-striped">
+                <tr>
+                    <th width="15%"></th>
+                    <th>商品</th>
+                    <th>单价（元）</th>
+                    <th>促销价</th>
+                    <th width="16%">数量</th>
+                </tr>
+                <volist name="cartGoods" id="goods">
+                    <tr>
+                        <td align="center"><img src="{:getImgsrc($goods['goods_img'])}" alt="{$goods.goods_name}" width="30"></td>
+                        <td>{$goods.goods_name}</td>
+                        <td>{$goods.shop_price}</td>
+                        <td>{$goods.promote_price}</td>
+                        <td>{$goods.count}</td>
+                    </tr>
+                </volist>
+                <tr><td colspan="4"></td><td>商品总计：{$gsprice}元<br><br><button type="button" class="btn btn-danger">去结算</button></td></tr>
+            </table>
+            </li>
         </ul>
     </div>
    </div>
