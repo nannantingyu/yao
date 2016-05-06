@@ -50,6 +50,6 @@ class IndexController extends HomeController {
         $this->assign('brands', $brands);
         $this->assign('related', $relatedGoods);
         $this->assign('goods', $goods);
-        $this->display();
+        $this->display('goods/detail');
     }
 }

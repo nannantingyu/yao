@@ -1,0 +1,225 @@
+/*--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+--*/
+ul.f_nav li a{
+    list-style-type: none;
+    color: #B3B3B3;
+    text-transform:capitalize;
+}
+.cards.text-center {
+    border-top: 1px solid #E7E7E7;
+    border-bottom: 1px solid #E7E7E7;
+    margin: 40px 0;
+    padding: 25px 0;
+}
+/*-- footer-ends-here --*/
+/*-- products-page-starts-here --*/
+.products{
+    width:20%;
+    margin-right:2%;
+    float:left;
+}
+.product-listy{
+    background:#91b900;
+}
+ul.product-list{
+    padding:0em 0 0.5em 0;
+    margin:0.5em 0;
+}
+ul.product-list li{
+    display: block;
+    margin:5px 0;
+}
+ul.product-list li a{
+    color:#FFF;
+    text-transform:uppercase;
+    text-decoration:none;
+    padding:5px 2em;
+    font-family: 'Doppio One', sans-serif;
+    font-weight:400;
+    display: block;
+}
+ul.product-list li a:hover{
+    background:#000;
+    color:#fff;
+    padding:5px 2em;
+    transition:0.5s all;
+    -webkit-transition:0.5s all;
+    -o-transition:0.5s all;
+    -moz-transition:0.5s all;
+    -ms-transition:0.5s all;
+}
+.product-listy h2{
+    color: #fff;
+    background: #816263;
+    padding: 23px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.latest-bis {
+    margin: 1.5em 0;
+    position:relative;
+}
+.offer{
+    position:absolute;
+    bottom: 13%;
+    right: 2%;
+}
+.offer p{
+    color:#fff;
+    background:rgba(129, 98, 99, 0.73);
+    padding: 15px 8px;
+    border-radius:50%;
+    -webkit-border-radius:50%;
+    -o-border-radius:50%;
+    -moz-border-radius:50%;
+    -ms-border-radius:50%;
+    font-weight:400;
+}
+.offer small{
+    color: #7C7C7C;
+}
+.tags{
+    list-style:none;
+    background:#FCFCFC;
+    margin-top:2em;
+    padding:1em;
+    font-weight:400;
+}
+h4.tag_head{
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 20px;
+    padding: 0;
+}
+ul.tags_links{
+    padding:0;
+    list-style:none;
+}
+ul.tags_links li {
+    display: inline-block;
+    margin: 8px 3px;
+}
+ul.tags_links li a {
+    color: #333;
+    background: #e9e9e9;
+    padding: 5px 10px;
+}
+ul.tags_links li a:hover{
+    text-decoration:none;
+    background:#816263;
+    color:#fff;
+}
+.link1 {
+    line-height: 18px;
+    color: #333;
+    font-weight: bold;
+    background: url(../images/tag_arrow.png) right 4px no-repeat;
+    padding-right: 20px;
+    margin-top:1.5em;
+    display: inline-block;
+}
+.link1:hover{
+    color:#fb4d01;
+    text-decoration:none;
+}
+.new-product{
+    width:78%;
+    float:right;
+    background:rgba(245, 243, 243, 0.27);
+    min-height:800px;
+    padding:2em;
+}
+.span1 {
+    margin: 18px 0;
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+
+.dress-name {
+    margin:30px 0;
+}
+.dress-name h3 {
+    float: left;
+    color: #000;
+    font-weight: 500;
+    padding: 0;
+}
+.dress-name p {
+    margin-top: 16px;
+    line-height: 23px;
+    color: #CAC9C9;
+}
+.dress-name span {
+    float: right;
+    color: #000000;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+p.left {
+    float: left;
+    color: #000;
+    letter-spacing: 2px;
+    margin-right:5%;
+    width:40%;
+}
+p.right {
+    float: left;
+    color: #000;
+    letter-spacing: 2px;
+}
+.span3 {
+    margin: 18px 0;
+    padding: 15px 0;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+}
+.span4 {
+    border-bottom: 1px solid #Eee;
+    padding-bottom: 18px;
+}
+
+.news-letter {
+    background-color: #F7F7F7;
+    padding: 35px 0;
+}
+.join h6 {
+    font-weight: 400;
+    color: #000;
+    float: left;
+    margin-right: 5%;
+    margin-top:10px;
+    letter-spacing: 1px;
+    font-family: 'Lato-Regular';
+    padding: 0;
+}
+.join input[type="text"] {
+    width: 48%;
+    color: #C3C3C3;
+    letter-spacing: 1px;
+    font-weight: 300;
+    padding: 10px 10px;
+    border: 1px solid #E4E4E4;
+    outline: none;
+    font-family: 'Lato-Regular';
+    text-align: left;
+}
+.join input[type="submit"]{
+    outline: none;
+    cursor: pointer;
+    width: 22%;
+    padding: 6px 0 10px;
+    background: #816263;
+    color: #fff;
+    font-weight: 400;
+    margin: 0px 0 0 -3px;
+    border: none;
+    -webkit-apperance: none;
+}
+.join input[type="submit"]:hover {
+    background-color:#000;
+}
