@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-05-07 23:20:59
+Date: 2016-05-07 23:29:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -613,6 +613,34 @@ INSERT INTO `zc_category` VALUES ('32', '诺基亚', '', '', '1', '3', '', '台'
 INSERT INTO `zc_category` VALUES ('33', '摩托罗拉', '', '', '1', '4', '', '台', '0', '', '1', '0', '0');
 INSERT INTO `zc_category` VALUES ('34', '其他', '', '', '0', '7', '', '个', '0', '', '1', '0', '0');
 INSERT INTO `zc_category` VALUES ('35', '充值卡', '', '', '34', '1', '', '张', '0', '', '1', '0', '0');
+
+-- ----------------------------
+-- Table structure for zc_comment
+-- ----------------------------
+DROP TABLE IF EXISTS `zc_comment`;
+CREATE TABLE `zc_comment` (
+  `comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `comment_type` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `id_value` mediumint(8) unsigned NOT NULL DEFAULT '0',
+  `email` varchar(60) NOT NULL DEFAULT '',
+  `user_name` varchar(60) NOT NULL DEFAULT '',
+  `content` text NOT NULL,
+  `comment_rank` tinyint(1) unsigned NOT NULL DEFAULT '0',
+  `add_time` int(10) unsigned NOT NULL DEFAULT '0',
+  `ip_address` varchar(15) NOT NULL DEFAULT '',
+  `status` tinyint(3) unsigned NOT NULL DEFAULT '0',
+  `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `user_id` int(10) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`comment_id`),
+  KEY `parent_id` (`parent_id`),
+  KEY `id_value` (`id_value`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of zc_comment
+-- ----------------------------
+INSERT INTO `zc_comment` VALUES ('1', '0', '12', 'ecshop@ecshop.com', 'ecshop', '很好，我很喜欢', '5', '1242107120', '0.0.0.0', '1', '0', '1');
+INSERT INTO `zc_comment` VALUES ('2', '0', '22', 'ecshop@ecshop.com', 'ecshop', '这个我不是很适合我', '5', '1242107295', '0.0.0.0', '0', '0', '1');
 
 -- ----------------------------
 -- Table structure for zc_config
