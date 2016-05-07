@@ -128,6 +128,31 @@ class GoodsController extends AdminController
         $this->display();
     }
 
+    /**
+     * 删除图片
+     */
+    public function delImg(){
+        $id = I('post.id');
+        $path = I('post.path');
+
+        $goods = M('goods')->where(array('goods_id'=>$id))->field('goods_id, goods_img')->find();
+        if($goods && $goods['goods_img']){
+            $thumb = json_decode($goods['goods_img']);
+            for($index = 0, $max = count($thumb); $index < $max; $index ++){
+                if($thumb[$index] == $path){
+                    array_splice($thumb, $index, 1);
+                    break;
+                }
+            }
+
+            $goods['goods_img'] = json_encode($thumb);
+
+            M('goods')->save($goods);
+        }
+
+        $this->ajaxReturn(array('state'=>1, 'goods_img'=>$goods['goods_img']));
+    }
+
     //编辑属性
     public function editgattr()
     {
@@ -189,7 +214,7 @@ class GoodsController extends AdminController
         }
         $allAttrs = $this->lists('goods_attribute', $where);
         //商品分类
-        $cats = M('goods_type')->field('cat_id, cat_name')->select();
+        $cats = M('category')->where(array('parent_id'=>0))->field('cat_id, cat_name')->select();
 
         $this->assign('cats', $cats);
         $this->assign('allGattrs', $allAttrs);
@@ -205,16 +230,20 @@ class GoodsController extends AdminController
                 $attr = $attrModel->where(array('attr_id'=>$attr_id))->find();
                 $this->assign('attr', $attr);
             }
+            $cats = M('category')->where(array('parent_id'=>0))->field('cat_id, cat_name')->select();
+            $this->assign('cats', $cats);
+
             $this->display();
         } else {
             if ($attrModel->create()) {
                 $p = I('post.p');
+                $cat = I('post.cat_id');
                 if ($cat_id = I('post.attr_id')) {
                     $attrModel->save();
                 } else {
                     $cat_id = $attrModel->add();
                 }
-                $this->success('修改成功！', U('goods/attr', array('p'=>$p)));
+                $this->success('修改成功！', U('goods/attr', array('p'=>$p, 'cat_id'=>$cat)));
             }
         }
     }
@@ -231,6 +260,11 @@ class GoodsController extends AdminController
 
             $goodsTypes = M('category')->field('cat_id, parent_id, cat_name')->select();
 
+            $goods_img = array();
+            if($goods['goods_img']){
+                $goods_img = json_decode($goods['goods_img']);
+            }
+            $this->assign('goods_img', $goods_img);
             //商品类型
             $types = array();
             foreach ($goodsTypes as $key => $val) {
@@ -256,7 +290,7 @@ class GoodsController extends AdminController
                     $goodsModel->add($newgoods);
                 }
 
-            $this->success('修改成功！', U('goods/index', array('p'=>I('post.p', 1))));
+            $this->ajaxReturn(array('state'=>1, 'imgs'=>I('imgs')));
         }
     }
 

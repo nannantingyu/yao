@@ -91,7 +91,7 @@
             <div id="logo"><a href="/"><img src="__IMG__/logo.png" /></a></div>
         </div>
         <div class="col-md-4">
-            <form class="form-search">
+            <form class="form-search" onsubmit="return subsearch();">
                 <input type="text" class="input-medium search-query" id="txt-search">
                 <button type="button" class="btn" id="btn-search"><span class="glyphicon glyphicon-search"></span></button>
             </form>
@@ -157,14 +157,19 @@
 <script>
     $(function(){
         $('#btn-search').click(function(){
-            var search = $('#txt-search').val();
-            if(!search){
-                alert('请输入搜索的关键词哦！');
-            }
-            else
-            {
-                window.location.href = '/home/goods/search/keywords/' + search;
-            }
+            subsearch();
         });
-    })
+    });
+
+    function subsearch(){
+        var search = $('#txt-search').val();
+        if(!search){
+            alert('请输入搜索的关键词哦！');
+            return false;
+        }
+        else {
+            window.location.href = '/home/goods/search/keywords/' + search;
+            return false;
+        }
+    }
 </script>

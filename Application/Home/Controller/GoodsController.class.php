@@ -153,6 +153,16 @@ class GoodsController extends HomeController
     }
     
     public function checkodinfo(){          //提交订单
+
+        if(!home_login()){
+            $this->error('你还没有登录，先去登录吧！', '/home/user/account.html');
+        }
+
+        $user = M('Users')->where(array('user_id'=>session('uid')))->field('province, city, county, address')->find();
+        $addresses = M('region')->where(array('region_id'=>array('in', array($user['province'], $user['city'], $user['county']))))->getField('region_type, region_id, region_name', true);
+        $address = $addresses[1]['region_name'].'&nbsp;&gt;&gt;&nbsp;'.$addresses[2]['region_name'].'&nbsp;&gt;&gt;&nbsp;'.$addresses[3]['region_name'].'&nbsp;&gt;&gt;&nbsp;'.$user['address'];
+        $this->assign('address', $address);
+
         $data = $this->reviewcart();
 //        $this->assign('data',$data);
         $this->assign('gsprice', $data['gsprice']);

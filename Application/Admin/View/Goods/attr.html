@@ -39,6 +39,8 @@
                     <option value="{$vo.cat_id}" <if condition="$cat_id eq $vo['cat_id']">selected</if>>{$vo.cat_name}</option>
                 </volist>
             </select>
+
+            <a class="btn" href="{:U("goods/editattr")}">添 加</a>
         </div>
     </div>
 
@@ -72,8 +74,13 @@
                     <td><span>{$vo.attr_group}</span></td>
                     <php>
                         $p = I('get.p', 1);
+                        $cat = I('get.cat_id');
+                        $cats = '';
+                        if($cat){
+                            $cats = '&cat_id='.$cat;
+                        }
                     </php>
-                    <td><a href="{:U('goods/editattr?attr_id='.$vo['attr_id'].'&p='.$p)}">编辑</a>
+                    <td><a href="{:U('goods/editattr?attr_id='.$vo['attr_id'].'&p='.$p.$cats)}">编辑</a>
                         <a href="javascript:void(0);" onclick="delAttr(this, {$vo.attr_id})">删除</a>
                     </td>
                 </tr>

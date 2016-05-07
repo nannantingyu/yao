@@ -369,3 +369,19 @@ footer .copyright ul li {display: inline-block;margin-left: 10px;}
 #cart{
 	margin-top: 11px;
 }
+
+.flex-control-thumbs li {
+	width: 100px !important;
+	height: 64px !important;
+	margin: 0px 1px !important;
+}
+
+.flex-control-thumbs li img{
+	width: 100px !important;
+	height: 64px !important;
+}
+
+.relate-img{
+	width: 350px !important;
+	height: 210px !important;
+}

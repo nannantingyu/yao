@@ -33,7 +33,11 @@
 		<div class="form-item cf">
 			<label class="item-label">分类名称</label>
 			<div class="controls">
-				<input type="text" value="{$attr.cat_id}" name="cat_id" class="text input-large">
+				<select name="cat_id">
+					<volist name="cats" id="vo">
+						<option value="{$vo.cat_id}" <if condition="$attr['cat_id'] eq $vo['cat_id']">selected</if>>{$vo.cat_name}</option>
+					</volist>
+				</select>
 			</div>
 		</div>
 
@@ -53,6 +57,7 @@
 
 		<input type="hidden" name="attr_id" value="{$attr.attr_id}">
 		<input type="hidden" name="p" value="{:I('get.p')}">
+		<input type="hidden" name="cat_id" value="{:I('get.cat_id')}">
 		<button type="submit" class="btn submit-btn ajax-post" target-form="form-horizontal">确 定</button>
 		<button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
 	</form>
@@ -65,7 +70,7 @@
 	<script type="text/javascript">
 		$(function(){
 			//导航高亮
-			highlight_subnav('{:U('goods/type')}');
+			highlight_subnav('{:U('goods/attr')}');
 		})
 	</script>
 </block>

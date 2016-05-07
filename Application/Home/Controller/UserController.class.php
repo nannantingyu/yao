@@ -128,6 +128,7 @@ class UserController extends HomeController {
 		if($uid = home_login()){
 			session('uname', null);
 			session('uid', null);
+			session('cart', null);
 			$this->success('退出成功！', U('Home/index'));
 		} else {
 			$this->redirect('User/login');
@@ -199,11 +200,8 @@ class UserController extends HomeController {
     }
 
     public function personal(){
-        $username = session('uname');
-        $this->assign('uname',$username);
-//        $order = session('cart');
-//        $this->assign('order',$order);
-//        dump($order);
+		$user = M('users')->where(array('user_id'=>session('uid')))->find();
+		$this->assign('user', $user);
          $allOrders = M('order_info')
             ->join('zc_order_goods on zc_order_info.order_id = zc_order_goods.order_id')
             ->join('zc_goods on zc_order_goods.goods_id = zc_goods.goods_id')
@@ -211,7 +209,38 @@ class UserController extends HomeController {
             ->order('zc_order_info.add_time desc, zc_order_info.order_id desc')
             ->select();
 //dump($allOrders);
+
+		$province = M('region')->where(array('region_type'=>1))->select();
+		$city = M('region')->where(array('parent_id'=>$province[0]['region_id']))->select();
+		$county = M('region')->where(array('parent_id'=>$city[0]['region_id']))->select();
+		$this->assign('provice', $province);
+		$this->assign('city', $city);
+		$this->assign('county', $county);
         $this->assign('allOrders', $allOrders);
         $this->display();
     }
+
+	public function changeRegion(){
+		$regionType = I('post.type');
+		$regionId = I('post.id');
+
+		$regions = M('region')->where(array('type'=>($regionType + 1), 'parent_id'=>$regionId))->select();
+
+		$this->ajaxReturn($regions);
+	}
+
+	public function address(){
+		$user['province'] = I('post.province');
+		$user['city'] = I('post.city');
+		$user['county'] = I('post.county');
+		$user['address'] = I('post.address');
+		$user['user_id'] = session('uid');
+
+		if(M('users')->save($user)){
+			$this->ajaxReturn(array('state'=>1, 'user'=>$user));
+		}else
+		{
+			$this->ajaxReturn(array('state'=>-1, 'user'=>$user, 'sql'=>M('users')->getLastSql()));
+		}
+	}
 }
