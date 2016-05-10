@@ -10,13 +10,13 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-05-07 23:29:29
+Date: 2016-05-10 11:10:42
 */
 
 SET FOREIGN_KEY_CHECKS=0;
 
 -- ----------------------------
--- Table structure for zc_addons
+-- Table structure for `zc_addons`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_addons`;
 CREATE TABLE `zc_addons` (
@@ -45,7 +45,7 @@ INSERT INTO `zc_addons` VALUES ('6', 'Attachment', '附件', '用于文档模型
 INSERT INTO `zc_addons` VALUES ('9', 'SocialComment', '通用社交化评论', '集成了各种社交化评论插件，轻松集成到系统中。', '1', '{\"comment_type\":\"1\",\"comment_uid_youyan\":\"\",\"comment_short_name_duoshuo\":\"\",\"comment_data_list_duoshuo\":\"\"}', 'thinkphp', '0.1', '1380273962', '0');
 
 -- ----------------------------
--- Table structure for zc_area_region
+-- Table structure for `zc_area_region`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_area_region`;
 CREATE TABLE `zc_area_region` (
@@ -68,7 +68,7 @@ INSERT INTO `zc_area_region` VALUES ('4', '30');
 INSERT INTO `zc_area_region` VALUES ('4', '32');
 
 -- ----------------------------
--- Table structure for zc_attachment
+-- Table structure for `zc_attachment`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_attachment`;
 CREATE TABLE `zc_attachment` (
@@ -94,7 +94,7 @@ CREATE TABLE `zc_attachment` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for zc_attribute
+-- Table structure for `zc_attribute`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_attribute`;
 CREATE TABLE `zc_attribute` (
@@ -161,7 +161,7 @@ INSERT INTO `zc_attribute` VALUES ('32', 'size', '文件大小', 'bigint(20) uns
 INSERT INTO `zc_attribute` VALUES ('33', 'name', '名称', 'varchar(255) NOT NULL', 'string', '', '', '1', '', '4', '1', '1', '1459608388', '1459608388', '', '3', '', 'regex', '', '3', 'function');
 
 -- ----------------------------
--- Table structure for zc_auth_extend
+-- Table structure for `zc_auth_extend`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_auth_extend`;
 CREATE TABLE `zc_auth_extend` (
@@ -186,7 +186,7 @@ INSERT INTO `zc_auth_extend` VALUES ('1', '4', '1');
 INSERT INTO `zc_auth_extend` VALUES ('1', '37', '1');
 
 -- ----------------------------
--- Table structure for zc_auth_group
+-- Table structure for `zc_auth_group`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_auth_group`;
 CREATE TABLE `zc_auth_group` (
@@ -207,7 +207,7 @@ INSERT INTO `zc_auth_group` VALUES ('1', 'admin', '1', '默认用户组', '', '1
 INSERT INTO `zc_auth_group` VALUES ('2', 'admin', '1', '测试用户', '测试用户', '1', '1,2,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,79,80,82,83,84,88,89,90,91,92,93,96,97,100,102,103,195');
 
 -- ----------------------------
--- Table structure for zc_auth_group_access
+-- Table structure for `zc_auth_group_access`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_auth_group_access`;
 CREATE TABLE `zc_auth_group_access` (
@@ -223,7 +223,7 @@ CREATE TABLE `zc_auth_group_access` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for zc_auth_rule
+-- Table structure for `zc_auth_rule`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_auth_rule`;
 CREATE TABLE `zc_auth_rule` (
@@ -456,7 +456,7 @@ INSERT INTO `zc_auth_rule` VALUES ('215', 'admin', '1', 'Admin/Category/operate/
 INSERT INTO `zc_auth_rule` VALUES ('216', 'admin', '1', 'Admin/Category/operate/type/merge', '合并', '1', '');
 
 -- ----------------------------
--- Table structure for zc_banner
+-- Table structure for `zc_banner`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_banner`;
 CREATE TABLE `zc_banner` (
@@ -482,7 +482,7 @@ INSERT INTO `zc_banner` VALUES ('4', '0', '熊妈妈', 'http://xiongjia.com', '/
 INSERT INTO `zc_banner` VALUES ('5', '0', '我要睡觉啦，亲耐的', 'http://www.aini.com', '/Uploads/banner/20160403/57011f2b9f009.jpg', '0', '2016-04-03 21:48:02', '0', '1', '0');
 
 -- ----------------------------
--- Table structure for zc_banner_type
+-- Table structure for `zc_banner_type`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_banner_type`;
 CREATE TABLE `zc_banner_type` (
@@ -497,7 +497,7 @@ CREATE TABLE `zc_banner_type` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for zc_brand
+-- Table structure for `zc_brand`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_brand`;
 CREATE TABLE `zc_brand` (
@@ -527,7 +527,7 @@ INSERT INTO `zc_brand` VALUES ('9', '联想', '/Uploads/Brand/20160407/570674ea6
 INSERT INTO `zc_brand` VALUES ('11', '  恒基伟业', '/Uploads/Brand/20160407/570675f219c4b.jpg', '官方咨询电话：4008899126售后网点：http://www.htwchina.com/htwt/wexiu.shtml ', 'http://www.htwchina.com', '10', '1');
 
 -- ----------------------------
--- Table structure for zc_cart
+-- Table structure for `zc_cart`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_cart`;
 CREATE TABLE `zc_cart` (
@@ -552,23 +552,16 @@ CREATE TABLE `zc_cart` (
   `goods_attr_id` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`rec_id`),
   KEY `session_id` (`session_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of zc_cart
 -- ----------------------------
 INSERT INTO `zc_cart` VALUES ('40', '0', '50267c918cd909d345dc03549b4c2718', '24', 'ECS000024', '0', 'P806', '2400.00', '2000.00', '1', '', '1', '', '0', '0', '0', '0', '0', '0');
 INSERT INTO `zc_cart` VALUES ('42', '1', 'bcbcc1492eca623e624aa93a978ee66d', '24', 'ECS000024', '0', 'P806', '2400.00', '100.00', '5', '', '1', '', '0', '1', '0', '0', '0', '0');
-INSERT INTO `zc_cart` VALUES ('43', '9', 'dsvg0irkq7ishks0as7v844ij2', '37', '', '0', '', '0.00', '0.00', '1', '', '0', '', '0', '0', '0', '0', '0', '');
-INSERT INTO `zc_cart` VALUES ('44', '9', 'dsvg0irkq7ishks0as7v844ij2', '36', '', '0', '', '0.00', '0.00', '1', '', '0', '', '0', '0', '0', '0', '0', '');
-INSERT INTO `zc_cart` VALUES ('45', '9', 'dsvg0irkq7ishks0as7v844ij2', '35', '', '0', '', '0.00', '0.00', '2', '', '0', '', '0', '0', '0', '0', '0', '');
-INSERT INTO `zc_cart` VALUES ('46', '9', 'dsvg0irkq7ishks0as7v844ij2', '32', '', '0', '', '0.00', '0.00', '1', '', '0', '', '0', '0', '0', '0', '0', '');
-INSERT INTO `zc_cart` VALUES ('47', '9', 't21qpsbldcabm1nq4mq3fr7ms2', '23', '', '0', '', '0.00', '0.00', '1', '', '0', '', '0', '0', '0', '0', '0', '');
-INSERT INTO `zc_cart` VALUES ('48', '9', '5h26t04hn1aerkoiskjqasq4v7', '42', '', '0', '', '0.00', '0.00', '1', '', '0', '', '0', '0', '0', '0', '0', '');
-INSERT INTO `zc_cart` VALUES ('49', '9', '5h26t04hn1aerkoiskjqasq4v7', '48', '', '0', '', '0.00', '0.00', '1', '', '0', '', '0', '0', '0', '0', '0', '');
 
 -- ----------------------------
--- Table structure for zc_category
+-- Table structure for `zc_category`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_category`;
 CREATE TABLE `zc_category` (
@@ -615,7 +608,7 @@ INSERT INTO `zc_category` VALUES ('34', '其他', '', '', '0', '7', '', '个', '
 INSERT INTO `zc_category` VALUES ('35', '充值卡', '', '', '34', '1', '', '张', '0', '', '1', '0', '0');
 
 -- ----------------------------
--- Table structure for zc_comment
+-- Table structure for `zc_comment`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_comment`;
 CREATE TABLE `zc_comment` (
@@ -643,7 +636,7 @@ INSERT INTO `zc_comment` VALUES ('1', '0', '12', 'ecshop@ecshop.com', 'ecshop', 
 INSERT INTO `zc_comment` VALUES ('2', '0', '22', 'ecshop@ecshop.com', 'ecshop', '这个我不是很适合我', '5', '1242107295', '0.0.0.0', '0', '0', '1');
 
 -- ----------------------------
--- Table structure for zc_config
+-- Table structure for `zc_config`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_config`;
 CREATE TABLE `zc_config` (
@@ -697,7 +690,7 @@ INSERT INTO `zc_config` VALUES ('36', 'ADMIN_ALLOW_IP', '2', '后台允许访问
 INSERT INTO `zc_config` VALUES ('37', 'SHOW_PAGE_TRACE', '4', '是否显示页面Trace', '4', '0:关闭\r\n1:开启', '是否显示页面Trace信息', '1387165685', '1387165685', '1', '0', '1');
 
 -- ----------------------------
--- Table structure for zc_goods
+-- Table structure for `zc_goods`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_goods`;
 CREATE TABLE `zc_goods` (
@@ -802,7 +795,7 @@ INSERT INTO `zc_goods` VALUES ('47', '1', '诺基亚7230', '0', '1', '', '0', '0
 INSERT INTO `zc_goods` VALUES ('48', '1', '徒徒PK 小师傅', '0', '1', '', '0', '0.000', '99999999.99', '99999999.99', '0', '0', '', '', '徒徒爱小师傅，小师傅爱徒徒', '', '[\"\\/Uploads\\/Images\\/20160507\\/572d96ee29eff.jpg\",\"\\/Uploads\\/Images\\/20160507\\/572d96ee4433a.jpg\",\"\\/Uploads\\/Images\\/20160507\\/572de58dafb0e.jpg\"]', '', '1', '', '1', '1', '0', '0', '2016-05-07 20:51:08', '100', '0', '0', '0', '0', '0', '0', '0', '0', '', '-1', '-1', null, null, '<p>\n    <span style=\"margin: 0px; padding: 0px;\"></span>\n</p>\n<p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; line-height: 1.4;\">\n    <img src=\"https://gdp.alicdn.com/imgextra/i4/2675244787/TB2Jv5IhFXXXXcfXXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: none; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: middle; display: inline-block; line-height: 1.5;\"/>\n</p>\n<p>\n    <br/>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;\"></span>\n</p>\n<p>\n    <br/>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;\"></span>\n</p>\n<p>\n    <a class=\"jdb abs aj15f-B1gP mcblack\" href=\"https://yaoxun.tmall.com/p/rd041984.htm?\" target=\"_blank\" data-linkmode=\"ptlink\" data-appid=\"aj15f-B1gP\" style=\"margin: 0px; padding: 0px; text-decoration: none; color: rgb(41, 83, 166); outline: none; border-width: 0px; position: absolute; display: block; width: 790px; height: 232px; top: 0px; left: 0px; z-index: 10;\"></a>\n</p>\n<p>\n    <br/>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;\"></span>\n</p>\n<p>\n    <br/>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;\"></span>\n</p>\n\n<p>\n    <br/>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;\"></span>\n</p>\n<p>\n    &nbsp;\n</p>\n<p>\n    <br/>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;\"></span>\n</p>\n<p>\n    &nbsp;\n</p>\n<p>\n    <br/>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;\"></span>\n</p>\n\n<p>\n    <br/>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;\"></span>\n</p>\n<p style=\"margin-top: 0px; margin-bottom: 0px; padding: 0px; line-height: 1.4;\">\n    <img src=\"https://gdp.alicdn.com/imgextra/i4/2675244787/TB2HqFriFXXXXbZXXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: none; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: middle; display: inline-block;\"/>\n</p>\n<p>\n    <br/>\n</p>\n<p>\n    <span style=\"margin: 0px; padding: 0px;text-decoration:line-through;\"><strong style=\"margin: 0px; padding: 0px;\"></strong></span>\n</p>\n<p style=\"margin-top: 1.12em; margin-bottom: 1.12em; padding: 0px; line-height: 1.4;\">\n    <img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i1/2675244787/TB2EfoKmVXXXXcRXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i4/2675244787/TB22vkmnVXXXXadXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i2/2675244787/TB2QX5llVXXXXcdXXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i3/2675244787/TB29QhZlVXXXXb8XpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i1/2675244787/TB2bNU2mVXXXXX_XpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i1/2675244787/TB2DnILoXXXXXXcXFXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i3/2675244787/TB2zIdXopXXXXcPXXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i1/2675244787/TB2mGM7oXXXXXXRXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i3/2675244787/TB2UeYFXpXXXXcqXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i4/2675244787/TB2BWkYoXXXXXbHXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i4/2675244787/TB2YqsWoXXXXXbNXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i1/2675244787/TB2Jj.4oXXXXXabXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i4/2675244787/TB2yus5mVXXXXXGXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i2/2675244787/TB2u7JnlVXXXXaCXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i1/2675244787/TB2EI0MlVXXXXatXXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i2/2675244787/TB2kolknXXXXXaBXXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i2/2675244787/TB2QODjlVXXXXbNXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i2/2675244787/TB2OUDclVXXXXbQXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i2/2675244787/TB2d_TflVXXXXblXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i4/2675244787/TB2_96XlVXXXXb6XpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i2/2675244787/TB2pETslVXXXXbOXXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i2/2675244787/TB2H4_klVXXXXaLXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i4/2675244787/TB2jUe_lVXXXXcEXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i4/2675244787/TB2VmDVlVXXXXXcXXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i1/2675244787/TB29OQNmVXXXXcBXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i1/2675244787/TB2oCnllVXXXXaCXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i2/2675244787/TB22rvDlVXXXXbZXXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i3/2675244787/TB2Y_LElVXXXXbnXXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i3/2675244787/TB2jiLmlVXXXXaAXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i3/2675244787/TB2Too.lVXXXXbwXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i2/2675244787/TB2P6cWmVXXXXaOXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i3/2675244787/TB2Io8IlVXXXXbfXXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i3/2675244787/TB22PNrlVXXXXazXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i3/2675244787/TB2MQhylVXXXXc_XXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i3/2675244787/TB2dQtAlVXXXXcGXXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i3/2675244787/TB2mz0rlVXXXXX3XpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i3/2675244787/TB28_DFlVXXXXX1XXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i3/2675244787/TB2CEu6lVXXXXa6XpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i3/2675244787/TB23slwlVXXXXXsXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i4/2675244787/TB250tBlVXXXXcbXXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i2/2675244787/TB2QshxlVXXXXXeXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none; line-height: 1.5;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i1/2675244787/TB2SIuomXXXXXcEXXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i2/2675244787/TB2h945mXXXXXbYXpXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/><img align=\"absmiddle\" src=\"https://img.alicdn.com/imgextra/i1/2675244787/TB2aiGymXXXXXbhXXXXXXXXXXXX_!!2675244787.jpg\" class=\"img-ks-lazyload\" style=\"margin: 0px; padding: 0px; border: 0px; animation: ks-fadeIn 350ms linear 0ms 1 normal both; opacity: 1; vertical-align: top; float: none;\"/>\n</p>\n<p>\n    <br/>\n</p>');
 
 -- ----------------------------
--- Table structure for zc_goods_activity
+-- Table structure for `zc_goods_activity`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_goods_activity`;
 CREATE TABLE `zc_goods_activity` (
@@ -834,7 +827,7 @@ INSERT INTO `zc_goods_activity` VALUES ('7', '拍卖活动——索爱C702c(第2
 INSERT INTO `zc_goods_activity` VALUES ('8', 'P806', '团购第2期', '1', '24', '0', 'P806', '1242316800', '1274803200', '0', 'a:4:{s:12:\"price_ladder\";a:2:{i:0;a:2:{s:6:\"amount\";i:5;s:5:\"price\";d:1910;}i:1;a:2:{s:6:\"amount\";i:10;s:5:\"price\";d:1860;}}s:15:\"restrict_amount\";i:0;s:13:\"gift_integral\";i:0;s:7:\"deposit\";d:1000;}');
 
 -- ----------------------------
--- Table structure for zc_goods_attr
+-- Table structure for `zc_goods_attr`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_goods_attr`;
 CREATE TABLE `zc_goods_attr` (
@@ -944,7 +937,7 @@ INSERT INTO `zc_goods_attr` VALUES ('241', '15', '189', '2.2英寸', '0');
 INSERT INTO `zc_goods_attr` VALUES ('243', '15', '189', '2.2英寸', '10');
 
 -- ----------------------------
--- Table structure for zc_goods_attribute
+-- Table structure for `zc_goods_attribute`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_goods_attribute`;
 CREATE TABLE `zc_goods_attribute` (
@@ -1159,7 +1152,7 @@ INSERT INTO `zc_goods_attribute` VALUES ('210', '9', '配件', '1', '2', '线控
 INSERT INTO `zc_goods_attribute` VALUES ('211', '165', '', '1', '1', '美国', '0', '0', '0', '1');
 
 -- ----------------------------
--- Table structure for zc_goods_cat
+-- Table structure for `zc_goods_cat`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_goods_cat`;
 CREATE TABLE `zc_goods_cat` (
@@ -1177,7 +1170,7 @@ INSERT INTO `zc_goods_cat` VALUES ('16', '3');
 INSERT INTO `zc_goods_cat` VALUES ('16', '5');
 
 -- ----------------------------
--- Table structure for zc_goods_type
+-- Table structure for `zc_goods_type`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_goods_type`;
 CREATE TABLE `zc_goods_type` (
@@ -1197,7 +1190,7 @@ INSERT INTO `zc_goods_type` VALUES ('6', '数码相机', '0', '2');
 INSERT INTO `zc_goods_type` VALUES ('7', '数码摄像机', '0', '2');
 
 -- ----------------------------
--- Table structure for zc_member
+-- Table structure for `zc_member`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_member`;
 CREATE TABLE `zc_member` (
@@ -1223,7 +1216,7 @@ CREATE TABLE `zc_member` (
 INSERT INTO `zc_member` VALUES ('1', 'root', '0', '0000-00-00', '', '60', '27', '0', '1459130284', '2130706433', '1462584819', '1');
 
 -- ----------------------------
--- Table structure for zc_menu
+-- Table structure for `zc_menu`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_menu`;
 CREATE TABLE `zc_menu` (
@@ -1359,7 +1352,7 @@ INSERT INTO `zc_menu` VALUES ('124', '广告', '0', '4', 'Banner/index', '0', ''
 INSERT INTO `zc_menu` VALUES ('130', '订单管理', '123', '0', 'Order/index', '0', '', '', '0');
 
 -- ----------------------------
--- Table structure for zc_menus
+-- Table structure for `zc_menus`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_menus`;
 CREATE TABLE `zc_menus` (
@@ -1402,7 +1395,7 @@ INSERT INTO `zc_menus` VALUES ('22', '0', '其他', '1', '', '9', 'cid', '34');
 INSERT INTO `zc_menus` VALUES ('23', '22', '充值卡', '1', '', '1', 'cid', '35');
 
 -- ----------------------------
--- Table structure for zc_model
+-- Table structure for `zc_model`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_model`;
 CREATE TABLE `zc_model` (
@@ -1438,7 +1431,7 @@ INSERT INTO `zc_model` VALUES ('3', 'download', '下载', '1', '', '1', '{\"1\":
 INSERT INTO `zc_model` VALUES ('4', 'goods', '商品', '1', '', '1', '', '1:基础', '', '', '', '', '', '10', '', '', '1459608084', '1459608084', '1', 'InnoDB');
 
 -- ----------------------------
--- Table structure for zc_order_goods
+-- Table structure for `zc_order_goods`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_order_goods`;
 CREATE TABLE `zc_order_goods` (
@@ -1456,7 +1449,7 @@ CREATE TABLE `zc_order_goods` (
   PRIMARY KEY (`rec_id`),
   KEY `order_id` (`order_id`),
   KEY `goods_id` (`goods_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of zc_order_goods
@@ -1492,40 +1485,54 @@ INSERT INTO `zc_order_goods` VALUES ('28', '17', '24', 'P806', '1', '2400.00', '
 INSERT INTO `zc_order_goods` VALUES ('29', '18', '24', 'P806', '5', '2400.00', '100.00', '', '0', '0', '');
 INSERT INTO `zc_order_goods` VALUES ('30', '19', '12', '摩托罗拉A810', '2', '1179.60', '933.85', '', '2', '0', '');
 INSERT INTO `zc_order_goods` VALUES ('31', '19', '24', 'P806', '2', '2400.00', '1850.00', '颜色:灰色 \n', '2', '0', '167');
+INSERT INTO `zc_order_goods` VALUES ('32', '0', '23', '诺基亚N96', '1', '3700.00', '0.00', '', '0', '0', '');
+INSERT INTO `zc_order_goods` VALUES ('33', '0', '32', '诺基亚N85', '1', '3010.00', '2750.00', '', '0', '0', '');
+INSERT INTO `zc_order_goods` VALUES ('34', '0', '35', '诺基亚N85', '2', '602.00', '0.00', '', '0', '0', '');
+INSERT INTO `zc_order_goods` VALUES ('35', '0', '40', '发送到发送到', '1', '4322.00', '0.00', '', '0', '0', '');
+INSERT INTO `zc_order_goods` VALUES ('36', '0', '41', '分文未', '1', '3211.00', '0.00', '', '0', '0', '');
+INSERT INTO `zc_order_goods` VALUES ('37', '0', '42', '改的', '1', '4344.00', '0.00', '', '0', '0', '');
+INSERT INTO `zc_order_goods` VALUES ('38', '0', '48', '徒徒PK 小师傅', '1', '99999999.99', '99999999.99', '', '0', '0', '');
+INSERT INTO `zc_order_goods` VALUES ('39', '0', '36', 'Galxy4', '1', '3200.00', '0.00', '', '0', '0', '');
+INSERT INTO `zc_order_goods` VALUES ('40', '0', '37', '测试商品', '1', '8888.00', '0.00', '', '0', '0', '');
+INSERT INTO `zc_order_goods` VALUES ('41', '0', '41', '分文未', '1', '3211.00', '0.00', '', '0', '0', '');
+INSERT INTO `zc_order_goods` VALUES ('42', '0', '42', '改的', '1', '4344.00', '0.00', '', '0', '0', '');
+INSERT INTO `zc_order_goods` VALUES ('43', '20', '40', '发送到发送到', '1', '4322.00', '0.00', '', '0', '0', '');
+INSERT INTO `zc_order_goods` VALUES ('44', '20', '48', '徒徒PK 小师傅', '2', '99999999.99', '99999999.99', '', '0', '0', '');
+INSERT INTO `zc_order_goods` VALUES ('45', '21', '42', '改的', '1', '4344.00', '0.00', '', '0', '0', '');
 
 -- ----------------------------
--- Table structure for zc_order_info
+-- Table structure for `zc_order_info`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_order_info`;
 CREATE TABLE `zc_order_info` (
   `order_id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `order_status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '订单状态',
-  `shipping_status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '配送状态',
-  `pay_status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '支付状态',
-  `consignee` varchar(60) NOT NULL DEFAULT '' COMMENT '收货人',
-  `country` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `province` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `city` smallint(5) unsigned NOT NULL DEFAULT '0',
-  `district` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT '区',
-  `address` varchar(255) NOT NULL DEFAULT '' COMMENT '详细地址',
-  `zipcode` varchar(60) NOT NULL DEFAULT '' COMMENT '邮政编码',
-  `tel` varchar(60) NOT NULL DEFAULT '',
-  `mobile` varchar(60) NOT NULL DEFAULT '',
-  `email` varchar(60) NOT NULL DEFAULT '',
-  `best_time` varchar(120) NOT NULL DEFAULT '' COMMENT '最佳配送时间',
-  `shipping_id` tinyint(3) NOT NULL DEFAULT '0' COMMENT '运单号',
-  `shipping_name` varchar(120) NOT NULL DEFAULT '',
-  `pay_id` tinyint(3) NOT NULL DEFAULT '0' COMMENT '支付方式',
-  `pay_name` varchar(120) NOT NULL DEFAULT '',
-  `goods_amount` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `shipping_fee` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '运费',
-  `pay_fee` decimal(10,2) NOT NULL DEFAULT '0.00',
-  `order_amount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '订单总计价格',
-  `add_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '添加时间',
-  `confirm_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '确认时间',
-  `pay_time` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '支付时间',
-  `discount` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '折扣',
+  `order_status` tinyint(1) unsigned DEFAULT '0' COMMENT '订单状态',
+  `shipping_status` tinyint(1) unsigned DEFAULT '0' COMMENT '配送状态',
+  `pay_status` tinyint(1) unsigned DEFAULT '0' COMMENT '支付状态',
+  `consignee` varchar(60) DEFAULT '' COMMENT '收货人',
+  `country` smallint(5) unsigned DEFAULT '0',
+  `province` smallint(5) unsigned DEFAULT '0',
+  `city` smallint(5) unsigned DEFAULT '0',
+  `district` smallint(5) unsigned DEFAULT '0' COMMENT '区',
+  `address` varchar(255) DEFAULT '' COMMENT '详细地址',
+  `zipcode` varchar(60) DEFAULT '' COMMENT '邮政编码',
+  `tel` varchar(60) DEFAULT '',
+  `mobile` varchar(60) DEFAULT '',
+  `email` varchar(60) DEFAULT '',
+  `best_time` varchar(120) DEFAULT '' COMMENT '最佳配送时间',
+  `shipping_id` tinyint(3) DEFAULT '0' COMMENT '运单号',
+  `shipping_name` varchar(120) DEFAULT '',
+  `pay_id` tinyint(3) DEFAULT '0' COMMENT '支付方式',
+  `pay_name` varchar(120) DEFAULT '',
+  `goods_amount` decimal(10,2) DEFAULT '0.00',
+  `shipping_fee` decimal(10,2) DEFAULT '0.00' COMMENT '运费',
+  `pay_fee` decimal(10,2) DEFAULT '0.00',
+  `order_amount` decimal(10,2) DEFAULT '0.00' COMMENT '订单总计价格',
+  `add_time` int(10) unsigned DEFAULT '0' COMMENT '添加时间',
+  `confirm_time` int(10) unsigned DEFAULT '0' COMMENT '确认时间',
+  `pay_time` int(10) unsigned DEFAULT '0' COMMENT '支付时间',
+  `discount` decimal(10,2) DEFAULT '0.00' COMMENT '折扣',
   PRIMARY KEY (`order_id`),
   KEY `user_id` (`user_id`),
   KEY `order_status` (`order_status`),
@@ -1533,33 +1540,16 @@ CREATE TABLE `zc_order_info` (
   KEY `pay_status` (`pay_status`),
   KEY `shipping_id` (`shipping_id`),
   KEY `pay_id` (`pay_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of zc_order_info
 -- ----------------------------
-INSERT INTO `zc_order_info` VALUES ('1', '1', '1', '2', '2', '刘先生', '1', '2', '52', '500', '[中国 北京 北京 海淀区] 中关村海兴大厦', '100085', '010-25851234', '13986765412', 'ecshop@ecshop.com', '中午', '5', '申通快递', '1', '余额支付', '385.00', '15.00', '0.00', '0.00', '1242142274', '1242142274', '1242142274', '0.00');
-INSERT INTO `zc_order_info` VALUES ('2', '1', '4', '0', '0', '刘先生', '1', '2', '52', '500', '[中国 北京 北京 海淀区] 中关村海兴大厦', '100085', '010-25851234', '13986765412', 'ecshop@ecshop.com', '中午', '3', '城际快递', '1', '余额支付', '960.00', '10.00', '0.00', '0.00', '1242142324', '1242142324', '1242142324', '0.00');
-INSERT INTO `zc_order_info` VALUES ('3', '1', '4', '0', '0', '刘先生', '1', '2', '52', '500', '[中国 北京 北京 海淀区] 中关村海兴大厦', '100085', '010-25851234', '13986765412', 'ecshop@ecshop.com', '中午', '3', '城际快递', '1', '余额支付', '2300.00', '10.00', '0.00', '0.00', '1242142549', '1242142549', '1242142549', '0.00');
-INSERT INTO `zc_order_info` VALUES ('4', '1', '1', '0', '2', '刘先生', '1', '2', '52', '500', '[中国 北京 北京 海淀区] 中关村海兴大厦', '100085', '010-25851234', '13986765412', 'ecshop@ecshop.com', '中午', '3', '城际快递', '1', '余额支付', '5999.00', '10.00', '0.00', '0.00', '1242142681', '1242142681', '1242142681', '0.00');
-INSERT INTO `zc_order_info` VALUES ('5', '1', '1', '3', '2', '刘先生', '1', '2', '52', '500', '[中国 北京 北京 海淀区] 中关村海兴大厦', '100085', '010-25851234', '13986765412', 'ecshop@ecshop.com', '中午', '3', '城际快递', '1', '余额支付', '8600.00', '10.00', '0.00', '0.00', '1242142808', '1242142808', '1242142808', '0.00');
-INSERT INTO `zc_order_info` VALUES ('6', '3', '3', '0', '0', '叶先生', '1', '2', '52', '510', '通州区旗舰凯旋小区', '', '13588104710', '', 'text@ecshop.com', '', '5', '申通快递', '2', '银行汇款/转帐', '20.00', '15.00', '0.00', '35.00', '1242143292', '0', '0', '0.00');
-INSERT INTO `zc_order_info` VALUES ('7', '3', '1', '0', '0', '叶先生', '1', '2', '52', '510', '通州区旗舰凯旋小区', '', '13588104710', '', 'text@ecshop.com', '', '5', '申通快递', '2', '银行汇款/转帐', '2298.00', '15.00', '0.00', '1198.10', '1242143383', '1242143454', '0', '114.90');
-INSERT INTO `zc_order_info` VALUES ('8', '3', '0', '0', '0', '叶先生', '1', '2', '52', '510', '通州区旗舰凯旋小区', '', '13588104710', '', 'text@ecshop.com', '', '5', '申通快递', '2', '银行汇款/转帐', '623.00', '15.00', '0.00', '638.00', '1242143444', '0', '0', '0.00');
-INSERT INTO `zc_order_info` VALUES ('9', '3', '0', '0', '0', '叶先生', '1', '2', '52', '510', '通州区旗舰凯旋小区', '', '13588104710', '', 'text@ecshop.com', '', '5', '申通快递', '2', '银行汇款/转帐', '2000.00', '15.00', '0.00', '2015.00', '1242143732', '0', '0', '0.00');
-INSERT INTO `zc_order_info` VALUES ('10', '1', '1', '0', '2', '刘先生', '1', '2', '52', '500', '海兴大厦', '', '010-25851234', '13986765412', 'ecshop@ecshop.com', '', '3', '城际快递', '1', '余额支付', '0.00', '10.00', '0.00', '0.00', '1242143920', '1242143920', '1242143920', '0.00');
-INSERT INTO `zc_order_info` VALUES ('11', '1', '1', '0', '0', '林小姐', '1', '2', '52', '500', '中关村海兴大厦', '', '135474510', '', 'linzi@116.com', '', '3', '城际快递', '2', '银行汇款/转帐', '3800.00', '10.00', '0.00', '3810.00', '1242144250', '1242144363', '0', '0.00');
-INSERT INTO `zc_order_info` VALUES ('12', '1', '2', '0', '0', '刘先生', '1', '2', '52', '502', '海兴大厦', '', '010-25851234', '13986765412', 'ecshop@ecshop.com', '', '3', '城际快递', '3', '货到付款', '238.00', '10.00', '5.00', '253.00', '1242576304', '0', '0', '0.00');
-INSERT INTO `zc_order_info` VALUES ('13', '1', '1', '1', '0', '刘先生', '1', '2', '52', '502', '海兴大厦', '', '010-25851234', '13986765412', 'ecshop@ecshop.com', '', '3', '城际快递', '3', '货到付款', '960.00', '10.00', '5.00', '975.00', '1242576341', '1242576445', '0', '0.00');
-INSERT INTO `zc_order_info` VALUES ('14', '1', '1', '1', '2', '刘先生', '1', '2', '52', '502', '海兴大厦', '', '010-25851234', '13986765412', 'ecshop@ecshop.com', '', '3', '城际快递', '1', '余额支付', '14045.00', '10.00', '0.00', '0.00', '1242976699', '1242976699', '1242976699', '243.40');
-INSERT INTO `zc_order_info` VALUES ('15', '1', '4', '0', '0', '刘先生', '1', '2', '52', '502', '海兴大厦', '', '010-25851234', '13986765412', 'ecshop@ecshop.com', '', '3', '城际快递', '2', '银行汇款/转帐', '17044.00', '10.00', '0.00', '17054.00', '1245044533', '1245044587', '1245044644', '0.00');
-INSERT INTO `zc_order_info` VALUES ('16', '1', '1', '4', '2', '刘先生', '1', '2', '52', '502', '海兴大厦', '', '010-25851234', '13986765412', 'ecshop@ecshop.com', '', '3', '城际快递', '1', '余额支付', '3186.30', '10.00', '0.00', '0.00', '1245045672', '1245045672', '1245045672', '0.00');
-INSERT INTO `zc_order_info` VALUES ('17', '1', '4', '0', '0', '刘先生', '1', '2', '52', '502', '海兴大厦', '', '010-25851234', '13986765412', 'ecshop@ecshop.com', '', '3', '城际快递', '1', '余额支付', '1900.00', '10.00', '0.00', '0.00', '1245047978', '1245047978', '1245047978', '0.00');
-INSERT INTO `zc_order_info` VALUES ('18', '1', '1', '0', '2', '刘先生', '1', '2', '52', '502', '海兴大厦', '', '010-25851234', '13986765412', 'ecshop@ecshop.com', '', '3', '城际快递', '1', '余额支付', '500.00', '10.00', '0.00', '0.00', '1245048585', '1245048585', '1245048585', '0.00');
-INSERT INTO `zc_order_info` VALUES ('19', '1', '1', '1', '2', '刘先生', '1', '2', '52', '502', '海兴大厦', '', '010-25851234', '13986765412', 'ecshop@ecshop.com', '', '3', '城际快递', '1', '余额支付', '5567.70', '10.00', '0.00', '0.00', '1245384008', '1245384008', '1245384008', '0.00');
+INSERT INTO `zc_order_info` VALUES ('20', '9', '0', '0', '0', '', '0', '12', '167', '1419', '东北农业大学', '', '', null, 'ming@qq.com', '', '0', '', '0', '', '0.00', '0.00', '0.00', '0.00', '0', '0', '0', '0.00');
+INSERT INTO `zc_order_info` VALUES ('21', '9', '0', '0', '0', '', '0', '12', '167', '1419', '东北农业大学', '', '', null, 'ming@qq.com', '', '0', '', '0', '', '0.00', '0.00', '0.00', '0.00', '0', '0', '0', '0.00');
 
 -- ----------------------------
--- Table structure for zc_picture
+-- Table structure for `zc_picture`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_picture`;
 CREATE TABLE `zc_picture` (
@@ -1614,7 +1604,7 @@ INSERT INTO `zc_picture` VALUES ('72', '/Uploads/Images/20160507/572da791add34.j
 INSERT INTO `zc_picture` VALUES ('73', '/Uploads/Images/20160507/572de58dafb0e.jpg', '', '16dcd0a5af8b2e9ed5af5853268ad32d', 'b1542522287f3199dc5a252759c7fb90ecec67eb', '1', '1462625677');
 
 -- ----------------------------
--- Table structure for zc_region
+-- Table structure for `zc_region`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_region`;
 CREATE TABLE `zc_region` (
@@ -5042,7 +5032,7 @@ INSERT INTO `zc_region` VALUES ('3407', '3401', '肥东县', '3', '0');
 INSERT INTO `zc_region` VALUES ('3408', '3401', '肥西县', '3', '0');
 
 -- ----------------------------
--- Table structure for zc_ucenter_admin
+-- Table structure for `zc_ucenter_admin`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_ucenter_admin`;
 CREATE TABLE `zc_ucenter_admin` (
@@ -5057,7 +5047,7 @@ CREATE TABLE `zc_ucenter_admin` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for zc_ucenter_app
+-- Table structure for `zc_ucenter_app`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_ucenter_app`;
 CREATE TABLE `zc_ucenter_app` (
@@ -5080,7 +5070,7 @@ CREATE TABLE `zc_ucenter_app` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for zc_ucenter_member
+-- Table structure for `zc_ucenter_member`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_ucenter_member`;
 CREATE TABLE `zc_ucenter_member` (
@@ -5107,7 +5097,7 @@ CREATE TABLE `zc_ucenter_member` (
 INSERT INTO `zc_ucenter_member` VALUES ('1', 'root', '735cee945387378938100d46df1eebca', '939259192@qq.com', '', '1460179284', '2130706433', '1462584819', '2130706433', '1460179284', '1');
 
 -- ----------------------------
--- Table structure for zc_ucenter_setting
+-- Table structure for `zc_ucenter_setting`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_ucenter_setting`;
 CREATE TABLE `zc_ucenter_setting` (
@@ -5122,7 +5112,7 @@ CREATE TABLE `zc_ucenter_setting` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for zc_userdata
+-- Table structure for `zc_userdata`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_userdata`;
 CREATE TABLE `zc_userdata` (
@@ -5137,7 +5127,7 @@ CREATE TABLE `zc_userdata` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for zc_users
+-- Table structure for `zc_users`
 -- ----------------------------
 DROP TABLE IF EXISTS `zc_users`;
 CREATE TABLE `zc_users` (
@@ -5183,4 +5173,4 @@ INSERT INTO `zc_users` VALUES ('5', 'users', 'users', '7815696ecbf1c96e6894b7794
 INSERT INTO `zc_users` VALUES ('6', 'yaoming@521.com', 'yaoming', '912ec803b2ce49e4a541068d495ab570', '', '', '2', '0000-00-00', '0.00', '0', '2016-04-23 19:48:20', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0', '0', '0', '18800100830', '0', null, '1', null, null, null, null);
 INSERT INTO `zc_users` VALUES ('7', 'nannantingyu@hotmai.com', 'nannantingyu', 'e99a18c428cb38d5f260853678922e03', '', '', '1', '0000-00-00', '0.00', '0', '2016-04-23 21:59:09', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0', '0', '0', '13270830860', '0', null, '1', null, null, null, null);
 INSERT INTO `zc_users` VALUES ('8', 'hahaha@51.com', 'hahaha', 'e99a18c428cb38d5f260853678922e03', '', '', '1', '0000-00-00', '0.00', '0', '2016-04-23 22:14:32', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0', '0', '0', '123456', '0', null, '1', null, null, null, null);
-INSERT INTO `zc_users` VALUES ('9', 'ming@qq.com', 'ming', 'beda37583bc3f80c8b0368e9d6d58fff', '', '', '0', '0000-00-00', '0.00', '0', '2016-05-04 09:02:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0', '0', '0', '18551652502', '0', null, '1', '2', '52', '512', '回龙观北京人家小区');
+INSERT INTO `zc_users` VALUES ('9', 'ming@qq.com', 'ming', 'beda37583bc3f80c8b0368e9d6d58fff', '', '', '0', '0000-00-00', '0.00', '0', '2016-05-04 09:02:18', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '', '0', '0', '0', '18551652502', '0', null, '1', '12', '167', '1419', '东北农业大学');
