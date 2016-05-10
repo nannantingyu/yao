@@ -7,6 +7,12 @@
 <link rel="stylesheet" href="__CSS__/style.css">
 <script src="__JS__/jquery-2.1.1.js"></script>
 <script src="__JS__/bootstrap.min.js"></script>
+<style>
+    .mytb td img{
+        width: 30px !important;
+        height: 30px !important;
+    }
+</style>
 <!--Top-->
 <nav class="navbar navbar-default" role="navigation">
     <div class="container">
@@ -69,7 +75,7 @@
             </li>
             <li class="list-group-item">商品清单<br>
             <!--<div class="row">-->
-            <table class="table table-striped">
+            <table class="table table-striped mytb">
                 <tr>
                     <th width="15%"></th>
                     <th>商品</th>
@@ -77,16 +83,16 @@
                     <th>促销价</th>
                     <th width="16%">数量</th>
                 </tr>
-                <volist name="cartGoods" id="goods">
+                <volist name="orders" id="goods">
                     <tr>
                         <td align="center"><img src="{:getImgsrc($goods['goods_img'])}" alt="{$goods.goods_name}" width="30"></td>
                         <td>{$goods.goods_name}</td>
-                        <td>{$goods.shop_price}</td>
-                        <td>{$goods.promote_price}</td>
-                        <td>{$goods.count}</td>
+                        <td>{$goods.market_price}</td>
+                        <td>{$goods.goods_price}</td>
+                        <td>{$goods.goods_number}</td>
                     </tr>
                 </volist>
-                <tr><td colspan="4"></td><td>商品总计：{$gsprice}元<br><br><button type="button" class="btn btn-danger">去结算</button></td></tr>
+                <tr><td colspan="4"></td><td>商品总计：{$gsprice}元<br><br><a href="javascript:void(0)" onclick="checkAll()" class="btn btn-danger">去结算</a></td></tr>
             </table>
             </li>
         </ul>
@@ -94,3 +100,18 @@
    </div>
 </div>
 </div>
+
+<script>
+function checkAll(){
+    $.ajax({
+        url: '/home/goods/checkall',
+        type: 'post',
+        dataType: 'json',
+        success: function(data){
+            $.when(alert('结算成功！我们会尽快安排送货。去看看其他的吧！')).done(function(){
+                window.location.href = '/';
+            });
+        }
+    })
+}
+</script>

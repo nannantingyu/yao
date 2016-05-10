@@ -2,6 +2,38 @@
 <!--//////////////////////////////////////////////////-->
 <!--///////////////////Cart Page//////////////////////-->
 <!--//////////////////////////////////////////////////-->
+<style>
+    .mytb td img{
+        width: 30px !important;
+        height: 30px !important;
+    }
+</style>
+<script>
+    function cartall(){
+        var ids = [], cous = [];
+
+        $('input[name="selectGoods"]:checked').each(function(index, obj){
+            var tr = $(obj).parent().parent();
+            var id = tr.children('td:eq(1)').text(),
+                    cou = tr.find('input[name="count"]').val();
+            ids.push(id);
+            cous.push(cou);
+        });
+
+        $.ajax({
+            url: '/home/goods/checkodinfo',
+            data: {'ids[]': ids, 'cous[]': cous},
+            type: 'post',
+            dataType: 'json',
+            success: function(data){
+                if(data.state == 1)
+                {
+                    window.location.href = '/home/goods/checkOrder/order/' + data.order;
+                }
+            }
+        });
+    };
+</script>
 <div id="page-content" class="single-page">
     <div class="container">
         <div class="row">
@@ -14,9 +46,10 @@
         </div>
 
         <div class="row">
-            <table class="table">
+            <table class="table mytb">
                 <tr>
                     <th><input type="checkbox" id="selectAll" checked="checked"></th>
+                    <th style="display: none;">编号</th>
                     <th>图片</th>
                     <th>商品</th>
                     <th>单价（元）</th>
@@ -27,7 +60,8 @@
                 <volist name="cartGoods" id="goods">
                     <tr>
                         <td><input type="checkbox" checked="checked" name="selectGoods"></td>
-                        <td><img src="{:getImgsrc($goods['goods_img'])}" alt="{$goods.goods_name}" width="30"></td>
+                        <td style="display: none;">{$goods.goods_id}</td>
+                        <td><img src="{:getImgsrc($goods['goods_img'])}" alt="{$goods.goods_name}" width="30" height="30"></td>
                         <td>{$goods.goods_name}</td>
                         <td>{$goods.shop_price}</td>
                         <td>{$goods.promote_price}</td>
@@ -66,7 +100,7 @@
                             <td id="all_count">{$allCount}</td>
                         </tr>
                     </table>
-                    <center><a href="/home/goods/checkodinfo" class="btn btn-1">结账</a></center>
+                    <center><a href="javascript:void(0);" onclick="cartall()" class="btn btn-1">结账</a></center>
                 </div>
             </div>
         </div>
@@ -106,8 +140,8 @@
         numbers.val(parseInt(count) + 1);
 
         var tr = $(obj).parent().parent();
-        var shopprice = tr.children('td:eq(3)').text(),
-                promotePrice = tr.children('td:eq(4)').text(),
+        var shopprice = tr.children('td:eq(4)').text(),
+                promotePrice = tr.children('td:eq(5)').text(),
                 goodsNumber = tr.find('input[name="count"]').val();
         var state = $(this).prop('checked');
 
@@ -122,7 +156,6 @@
         $('#goods_yh').text(Number(newyh).toFixed(2));
         $('#all_count').text(Number(newAllCount - newyh).toFixed(2));
     }
-
 
     function updateCount(obj, gid){
         var cou = $(obj).prev('input').val();

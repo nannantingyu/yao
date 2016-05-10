@@ -54,8 +54,12 @@ class GoodsController extends HomeController
         $this->assign('allCount', $data['allCount']);
         $this->display();
     }
-    public function reviewcart(){
-        $cart = session('cart');
+    public function reviewcart($cart = null){
+        if(is_null($cart))
+        {
+            $cart = session('cart');
+        }
+
         if(is_null($cart)){
             $this->error('购物车还没有东西，马上去添加吧！', '/');
         }
@@ -151,19 +155,76 @@ class GoodsController extends HomeController
 
         $this->ajaxReturn(array('state'=>1));
     }
-    
+
+    public function checkall(){
+        $allGoods = M('cart')->where(array('user_id'=>session('uid')))->getField('goods_id, goods_number', true);
+    }
+
     public function checkodinfo(){          //提交订单
 
         if(!home_login()){
             $this->error('你还没有登录，先去登录吧！', '/home/user/account.html');
         }
 
-        $user = M('Users')->where(array('user_id'=>session('uid')))->field('province, city, county, address')->find();
+        $user = M('Users')->where(array('user_id'=>session('uid')))->find();
+
+        $ids = I('post.ids');
+        $cous = I('post.cous');
+        $carts = array();
+
+        $order = array();
+        $order['user_id'] = $user['user_id'];
+        $order['order_status'] = 0;
+        $order['country'] = '中国';
+        $order['province'] = $user['province'];
+        $order['city'] = $user['city'];
+        $order['district'] = $user['county'];
+        $order['address'] = $user['address'];
+        $order['mobile'] = $user['mobile'];
+        $order['email'] = $user['email'];
+
+        $order = M('order_info')->add($order);
+
+        for($i = 0, $max = count($ids); $i < $max; $i ++){
+            $carts[$ids[$i]] = $cous[$i];
+
+            $ordergoods = array();
+            $ordergoods['order_id'] = $order;
+            $ordergoods['goods_id'] = $ids[$i];
+            $goods = M('goods')->where(array('goods_id'=>$ids[$i]))->find();
+            $ordergoods['goods_name'] = $goods['goods_name'];
+            $ordergoods['goods_number'] = $cous[$i];
+            $ordergoods['market_price'] = $cous[$i]*$goods['shop_price'];
+            $ordergoods['goods_price'] = $cous[$i]*$goods['promote_price'];
+
+            M('order_goods')->add($ordergoods);
+
+            //删除购物车
+            M('cart')->where(array('goods_id'=>$ids[$i]))->delete();
+            $allCart = session('cart');
+            if($allCart[$ids[$i]]){
+                unset($allCart[$ids[$i]]);
+            }
+
+            session('cart', $allCart);
+        }
+
+        $this->ajaxReturn(array('state'=>1, 'order'=>$order, 'sql'=>M('order_info')->getLastSql()));
+    }
+
+    public function checkOrder(){
+        $orderid = I('get.order');
+        $carts = M('order_goods')->where(array('order_id'=>$orderid))->getField('goods_id, goods_number', true);
+
+        $user = M('Users')->where(array('user_id'=>session('uid')))->find();
         $addresses = M('region')->where(array('region_id'=>array('in', array($user['province'], $user['city'], $user['county']))))->getField('region_type, region_id, region_name', true);
         $address = $addresses[1]['region_name'].'&nbsp;&gt;&gt;&nbsp;'.$addresses[2]['region_name'].'&nbsp;&gt;&gt;&nbsp;'.$addresses[3]['region_name'].'&nbsp;&gt;&gt;&nbsp;'.$user['address'];
         $this->assign('address', $address);
 
-        $data = $this->reviewcart();
+        $data = $this->reviewcart($carts);
+        $orders = M('order_goods')->where(array('order_id'=>$orderid))->select();
+        $this->assign('orders', $orders);
+
 //        $this->assign('data',$data);
         $this->assign('gsprice', $data['gsprice']);
         $this->assign('gpprice', $data['gpprice']);

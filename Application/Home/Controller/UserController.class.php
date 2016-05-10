@@ -71,44 +71,26 @@ class UserController extends HomeController {
 				//如果数据库存在，与session中的合并
 				$allCart = session('cart');
 
-				if($cartGoods){
-					if($allCart){
-						foreach($allCart as $key=>$val){
-							if($cartGoods[$key]){
-								$cartGoods[$key]['goods_number'] += $val;
-								M('cart')->save($cartGoods[$key]);
-							}
-							else
-							{
-								$cartGoods[$key]['goods_id'] = $key;
-								$cartGoods[$key]['user_id'] = $user['user_id'];
-								$cartGoods[$key]['goods_number'] = $val;
-								$cartGoods[$key]['session_id'] = session_id();
+				//如果seesion中购物车有物品，将session中的物品存入数据库
+				if($allCart){
+					foreach($allCart as $key=>$val){
+						if($cartGoods[$key]){
+							$cartGoods[$key]['goods_number'] = $cartGoods[$key]['goods_number'] + $val;
+							M('cart')->save($cartGoods[$key]);
+						}
+						else
+						{
+							$cartGoods[$key]['goods_id'] = $key;
+							$cartGoods[$key]['user_id'] = $user['user_id'];
+							$cartGoods[$key]['goods_number'] = $val;
+							$cartGoods[$key]['session_id'] = session_id();
 
-								M('cart')->add($cartGoods[$key]);
-							}
+							M('cart')->add($cartGoods[$key]);
 						}
 					}
 				}
-				else
-				{
-					//否则，将session中的商品加入数据库
-					$data = array();
-					foreach($allCart as $key=>$val){
-						$d['user_id'] = $user['user_id'];
-						$d['goods_id'] = $key;
-						$d['goods_number'] = $val;
-						$d['session_id'] = session_id();
 
-						$data[] = $d;
-					}
-
-					if($data && count($data) > 0)
-					{
-						M('cart')->addAll($data);
-					}
-				}
-
+				//将数据库中的购物车中所有物品，加入session中
 				$allCartGoods = M('cart')->where(array('user_id'=>$user['user_id']))->getField('goods_id, goods_number', true);
 				session('cart', $allCartGoods);
 
