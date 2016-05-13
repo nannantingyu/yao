@@ -92,7 +92,7 @@
                         <td>{$goods.goods_number}</td>
                     </tr>
                 </volist>
-                <tr><td colspan="4"></td><td>商品总计：{$gsprice}元<br><br><a href="javascript:void(0)" onclick="checkAll()" class="btn btn-danger">去结算</a></td></tr>
+                <tr><td colspan="4"></td><td>商品总计：{$gsprice}元<br><br><a href="javascript:void(0)" onclick="checkAll()" class="btn btn-danger">付款</a></td></tr>
             </table>
             </li>
         </ul>
@@ -107,6 +107,7 @@ function checkAll(){
         url: '/home/goods/checkall',
         type: 'post',
         dataType: 'json',
+        data: {oid: "{$oid}"},
         success: function(data){
             $.when(alert('结算成功！我们会尽快安排送货。去看看其他的吧！')).done(function(){
                 window.location.href = '/';

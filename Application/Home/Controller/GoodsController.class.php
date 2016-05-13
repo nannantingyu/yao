@@ -157,7 +157,47 @@ class GoodsController extends HomeController
     }
 
     public function checkall(){
-        $allGoods = M('cart')->where(array('user_id'=>session('uid')))->getField('goods_id, goods_number', true);
+        $order_id = I('post.oid');
+        $user = M('users')->where(array('user_id'=>session('uid')))->find();
+
+        //获取当前用户没有关闭的订单
+        $orders = M('order_info')->where(array('user_id'=>$user['user_id'], 'order_status'=>array('neq', 2)))->select();
+        $orderGoods = array();
+        foreach($orders as $key=>$val){
+            $orderGoods[$val['order_id']] = M('order_goods')
+                ->join('zc_goods on zc_goods.goods_id = zc_order_goods.goods_id')
+                ->where(array('order_id'=>$val['order_id']))->select();
+        }
+
+        //将当前订单状态改为已支付
+        M('order_info')->where(array('order_id'=>$order_id))->save(array('order_status'=>1));
+
+        //发送邮件
+        $emailHtml = '';
+        foreach ($orderGoods as $key=>$val) {
+            $html = '<table style="margin-bottom: 30px;"><tr><th width="60px"></th><th width="120px">商品</th><th width="90px">促销价</th><th width="70px">状态</th></tr>';
+
+            foreach($val as $k=>$v){
+                $html .= '<tr><td><img width="60" height="60" alt="'.$v['goods_img'].'" src="http://www.yjshare.cn'.$v['goods_img'].'"/></td><td>'.$v['goods_name'].'</td><td>'.$v['promote_price'].'</td><td>配送中</td></tr>';
+
+                //删除购物车
+                M('cart')->where(array('goods_id'=>$v['goods_id']))->delete();
+                $allCart = session('cart');
+                if($allCart[$v['goods_id']]){
+                    unset($allCart[$v['goods_id']]);
+                }
+
+                session('cart', $allCart);
+            }
+
+            $html .= '</table>';
+
+            $emailHtml .= $html;
+        }
+        $emailHtml .= '您的订单已经在路上了，请耐心等待啊！ 去官网看看吧^_^。http://www.yjshare.cn';
+        sendMail($user['email'], 'ZCStore，您的订单支付成功！', $emailHtml);
+
+        $this->ajaxReturn(array('state'=>1));
     }
 
     public function checkodinfo(){          //提交订单
@@ -198,15 +238,6 @@ class GoodsController extends HomeController
             $ordergoods['goods_price'] = $cous[$i]*$goods['promote_price'];
 
             M('order_goods')->add($ordergoods);
-
-            //删除购物车
-            M('cart')->where(array('goods_id'=>$ids[$i]))->delete();
-            $allCart = session('cart');
-            if($allCart[$ids[$i]]){
-                unset($allCart[$ids[$i]]);
-            }
-
-            session('cart', $allCart);
         }
 
         $this->ajaxReturn(array('state'=>1, 'order'=>$order, 'sql'=>M('order_info')->getLastSql()));
@@ -220,6 +251,8 @@ class GoodsController extends HomeController
         $addresses = M('region')->where(array('region_id'=>array('in', array($user['province'], $user['city'], $user['county']))))->getField('region_type, region_id, region_name', true);
         $address = $addresses[1]['region_name'].'&nbsp;&gt;&gt;&nbsp;'.$addresses[2]['region_name'].'&nbsp;&gt;&gt;&nbsp;'.$addresses[3]['region_name'].'&nbsp;&gt;&gt;&nbsp;'.$user['address'];
         $this->assign('address', $address);
+
+        $this->assign('oid', $orderid);
 
         $data = $this->reviewcart($carts);
         $orders = M('order_goods')->where(array('order_id'=>$orderid))->select();
