@@ -323,4 +323,11 @@ class GoodsController extends HomeController
 
         $this->ajaxReturn(array('state'=>1));
     }
+
+    public function payOrder(){
+        $oid = I('post.oid');
+        M('order_info')->where(array('order_id'=>$oid))->save(array('order_status'=>1));
+
+        $this->ajaxReturn(array('state'=>1));
+    }
 }
