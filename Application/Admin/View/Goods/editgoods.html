@@ -199,8 +199,11 @@
 				data: goods,
 				success: function(data){
 					if(data.state == 1){
-
-						$.when(alert('修改成功!')).done(function(){
+                                                var msg = '修改成功！';
+                                                if(!goods_id){
+                                                    msg = '添加成功';
+                                                }
+						$.when(alert(msg)).done(function(){
 							window.location.href = "{:U('goods/index', array('p'=>I('get.p', 1)))}";
 						});
 					}
