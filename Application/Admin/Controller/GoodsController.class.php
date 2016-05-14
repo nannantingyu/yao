@@ -258,7 +258,7 @@ class GoodsController extends AdminController
                 $this->assign('goods', $goods);
             }
 
-            $goodsTypes = M('category')->field('cat_id, parent_id, cat_name')->select();
+            $goodsTypes = M('category')->field('cat_id, parent_id, cat_name')->order('cat_id asc')->select();
 
             $goods_img = array();
             if($goods['goods_img']){
@@ -277,8 +277,6 @@ class GoodsController extends AdminController
                     $types[$val['parent_id']]['data'][] = $val;
                 }
             }
-
-//            dump($types);
 
             //商品品牌
             $brand = M('brand')->field('brand_id, brand_name')->select();
