@@ -97,17 +97,20 @@
             </li>
         </ul>
     </div>
+        <input type="hidden" id="order_id" value="{:I('get.order')}">
    </div>
 </div>
 </div>
 
 <script>
 function checkAll(){
+
+    var order_id = $('#order_id').val();
     $.ajax({
         url: '/home/goods/checkall',
         type: 'post',
         dataType: 'json',
-        data: {oid: "{$oid}"},
+        data: {oid: order_id},
         success: function(data){
             $.when(alert('结算成功！我们会尽快安排送货。去看看其他的吧！')).done(function(){
                 window.location.href = '/';
