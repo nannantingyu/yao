@@ -220,8 +220,9 @@ class GoodsController extends HomeController
         $order['city'] = $user['city'];
         $order['district'] = $user['county'];
         $order['address'] = $user['address'];
-        $order['mobile'] = $user['mobile'];
+        $order['mobile'] = $user['phone'];
         $order['email'] = $user['email'];
+        $order['add_time'] = time();
 
         $order = M('order_info')->add($order);
 
@@ -314,5 +315,12 @@ class GoodsController extends HomeController
         $this->assign('searchGoods', $searchGoods);
         $this->assign('keywords', $keywords);
         $this->show();
+    }
+
+    public function confirmOrder(){
+        $oid = I('post.oid');
+        M('order_info')->where(array('order_id'=>$oid))->save(array('order_status'=>2));
+
+        $this->ajaxReturn(array('state'=>1));
     }
 }
