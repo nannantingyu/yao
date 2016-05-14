@@ -234,6 +234,9 @@ class UserController extends HomeController {
 	public function myorder(){
 
 		$uid = session('uid');
+		if(!$uid){
+			$this->error('请先登录！', U('user/account'));
+		}
 
 		$allOrders = M('order_info')
 			->join('zc_order_goods on zc_order_info.order_id = zc_order_goods.order_id')

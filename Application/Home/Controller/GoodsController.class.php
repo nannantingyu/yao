@@ -330,4 +330,24 @@ class GoodsController extends HomeController
 
         $this->ajaxReturn(array('state'=>1));
     }
+
+    /**
+     * 评价
+     */
+    public function comment(){
+        $oid = I('post.oid');
+        $gid = I('post.gid');
+        $remark = I('post.remark');
+        $comment = I('post.comment');
+
+        $data['order_id'] = $oid;
+        $data['goods_id'] = $gid;
+        $data['comment_rank'] = $remark;
+        $data['content'] = $comment;
+        $data['user_id'] = session('uid');
+        $data['add_time'] = date('Y-m-d H:i:s');
+        M('comment')->add($data);
+
+        $this->ajaxReturn(array('state'=>1));
+    }
 }

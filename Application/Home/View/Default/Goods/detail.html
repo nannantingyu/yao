@@ -104,8 +104,8 @@
                 <!-- Main component for a primary marketing message or call to action -->
                 <ul class="nav nav-tabs responsive hidden-xs hidden-sm" id="myTab">
                     <li class="test-class active"><a class="deco-none misc-class" href="#how-to"> 更多详情</a></li>
-                    <li class="test-class"><a href="#features">功能</a></li>
-                    <li class="test-class"><a class="deco-none" href="#source">评价 (7)</a></li>
+                    <!--<li class="test-class"><a href="#features">功能</a></li>-->
+                    <li class="test-class"><a class="deco-none" href="#source">评价 {:count($comment)}</a></li>
                 </ul>
 
                 <div class="tab-content responsive hidden-xs hidden-sm">
@@ -118,25 +118,25 @@
                             sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                     </div>
                     <div class="tab-pane" id="source">
-                        <div class="response">
-                            <div class="media response-info">
-                                <div class="media-left response-text-left">
-                                    <a href="#">
-                                        <img class="media-object" src="__IMG__/icon1.png" alt="" />
-                                    </a>
-                                    <h5><a href="#">Username</a></h5>
+                        <volist name="comment" id="vo">
+                            <div class="response">
+                                <div class="media response-info">
+                                    <div class="media-left response-text-left">
+                                        <a href="#">
+                                            <img class="media-object" src="__IMG__/icon1.png" alt="" />
+                                        </a>
+                                        <h5><a href="#">{$vo.user_name}</a></h5>
+                                    </div>
+                                    <div class="media-body response-text-right">
+                                        <p>{$vo.content}</p>
+                                        <ul>
+                                            <li>{$vo.add_time}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="clearfix"> </div>
                                 </div>
-                                <div class="media-body response-text-right">
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,There are many variations of passages of Lorem Ipsum available,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                                    <ul>
-                                        <li>DEC 25, 2014</li>
-                                        <li><a href="single.html">Reply</a></li>
-                                    </ul>
-                                </div>
-                                <div class="clearfix"> </div>
                             </div>
-                        </div>
+                        </volist>
                     </div>
                 </div>
             </div>

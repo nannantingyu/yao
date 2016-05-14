@@ -11,11 +11,14 @@
                             <th width="10%">价格</th>
                             <th width="15%">支付时间</th>
                             <th width="15%">状态</th>
+                            <if condition="$order[0]['order_status'] eq 2">
+                                <th width="20%">评价</th>
+                            </if>
                         </tr>
                         <volist name="order" id="vo">
                             <tr>
                                 <td><img height="30" width="30" src="{:getImgsrc($vo['goods_img'])}" alt="{$vo['goods_name']}"></td>
-                                <td>{$vo['goods_name']}</td>
+                                <td><a href="/home/index/product/id/{$vo['goods_id']}">{$vo['goods_name']}</a></td>
                                 <td>{$vo['promote_price']}</td>
                                 <td>{$vo['add_time']}</td>
                                 <php>
@@ -28,6 +31,9 @@
                                     }
                                 </php>
                                 <td>{$states}</td>
+                                <if condition="$order[0]['order_status'] eq 2">
+                                    <td><button class="btn" onclick="remark({$vo.order_id}, {$vo.goods_id})">评价</button></td>
+                                </if>
                             </tr>
                         </volist>
                     </table>
@@ -50,7 +56,56 @@
         </div>
     </volist>
 </div>
+
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="myModalLabel">
+                    商品评价
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form action="" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="" class="control-label col-md-2">打分</label>
+                        <div class="col-md-9">
+                            <select name="" id="remark" class="form-control">
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label col-md-2">评价</label>
+                        <div class="col-md-9">
+                            <textarea type="text" id="comment" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" onclick="comment()">
+                    提交评价
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
 <script>
+    var oid = 0, gid = 0;
     function confirmState(id){
         $.ajax({
             url: '/home/goods/confirmOrder',
@@ -79,6 +134,33 @@
                 {
                     $.when(alert('支付成功！')).done(function(){
                         window.location.reload();
+                    });
+                }
+            }
+        });
+    }
+
+    function remark(oids, gids){
+        oid = oids;
+        gid = gids;
+        $('#myModal').modal('show');
+    }
+
+    function comment(){
+        var remark = $('#remark').val(),
+                comment = $('#comment').val();
+        $.ajax({
+            url: '/home/goods/comment',
+            data: {oid: oid, gid: gid, remark: remark, comment: comment},
+            type: 'post',
+            dataType: 'json',
+            success: function(data){
+                if(data.state == 1)
+                {
+                    $.when($('#myModal').modal('hide')).done(function(){
+                        alert('评价成功！');
+                        $('#comment').val('');
+                        $('#remark').val(1);
                     });
                 }
             }

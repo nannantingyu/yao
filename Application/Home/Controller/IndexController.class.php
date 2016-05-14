@@ -62,6 +62,14 @@ class IndexController extends HomeController {
         $brands = M('brand')->limit(16)->select();
         $latest = M('goods')->limit(3)->order('add_time desc')->select();
 
+        //评价
+        $comment = M('comment')
+            ->join('zc_users on zc_comment.user_id = zc_users.user_id')
+            ->where(array('zc_comment.goods_id'=>$id))
+            ->select();
+
+        $this->assign('comment', $comment);
+
         //推荐商品
         $featureGoods = M('goods')->where('is_promote = 1')->order('add_time desc')->find();
         $this->assign('feature', $featureGoods);
