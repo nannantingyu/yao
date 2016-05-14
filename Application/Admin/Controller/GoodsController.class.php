@@ -265,15 +265,20 @@ class GoodsController extends AdminController
                 $goods_img = json_decode($goods['goods_img']);
             }
             $this->assign('goods_img', $goods_img);
+
             //商品类型
             $types = array();
             foreach ($goodsTypes as $key => $val) {
-                if (!$types[$val['parent_id']]) {
+                if($val['parent_id'] == 0){
+                    $types[$val['cat_id']] = array();
                     $types[$val['cat_id']]['detail'] = $val;
-                } else {
+                }
+                else if($types[$val['parent_id']]){
                     $types[$val['parent_id']]['data'][] = $val;
                 }
             }
+
+//            dump($types);
 
             //商品品牌
             $brand = M('brand')->field('brand_id, brand_name')->select();

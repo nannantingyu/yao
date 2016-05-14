@@ -14,6 +14,20 @@ class IndexController extends HomeController {
         $latest = M('goods')->field('goods_id, goods_name, shop_price, goods_img')->order('add_time desc, goods_id desc')->limit(4)->select();
         $this->assign('latest', $latest);
 
+        //推荐商品
+        $featureGoods = M('goods')->order('is_promote desc, add_time desc')->field('goods_id, goods_name, shop_price, goods_img')->limit(4)->select();
+        $this->assign('feature', $featureGoods);
+
+        //热门商品
+        $hotIds = M('order_goods')->query('select goods_id, count(*) as cou from zc_order_goods GROUP BY goods_id ORDER BY cou desc limit 4');
+        $hids = array();
+        foreach($hotIds as $key=>$val){
+            $hids[$val['goods_id']] = $val['cou'];
+        }
+
+        $hotGoods = M('goods')->where(array('goods_id'=>array('in', array_keys($hids))))->order('is_promote desc, add_time desc')->field('goods_id, goods_name, shop_price, goods_img')->select();
+        $this->assign('hot', $hotGoods);
+
         //品牌
         $brands = M('brand')->field("brand_id, brand_name, brand_logo")->where(array("is_show"=>1))->order('sort_order asc')->limit(6)->select();
         $this->assign('brands', $brands);
