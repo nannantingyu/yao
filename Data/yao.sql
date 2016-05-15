@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2016-05-15 15:51:00
+Date: 2016-05-15 16:30:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -567,9 +567,6 @@ CREATE TABLE `zc_cart` (
 -- ----------------------------
 INSERT INTO `zc_cart` VALUES ('40', '0', '50267c918cd909d345dc03549b4c2718', '24', 'ECS000024', '0', 'P806', '2400.00', '2000.00', '1', '', '1', '', '0', '0', '0', '0', '0', '0');
 INSERT INTO `zc_cart` VALUES ('42', '1', 'bcbcc1492eca623e624aa93a978ee66d', '24', 'ECS000024', '0', 'P806', '2400.00', '100.00', '5', '', '1', '', '0', '1', '0', '0', '0', '0');
-INSERT INTO `zc_cart` VALUES ('64', '10', 'o3a2asam68hrmddl2s02bl7f07', '80', '', '0', '', '0.00', '0.00', '1', '', '0', '', '0', '0', '0', '0', '0', '');
-INSERT INTO `zc_cart` VALUES ('65', '10', 'o3a2asam68hrmddl2s02bl7f07', '79', '', '0', '', '0.00', '0.00', '1', '', '0', '', '0', '0', '0', '0', '0', '');
-INSERT INTO `zc_cart` VALUES ('66', '10', 'o3a2asam68hrmddl2s02bl7f07', '70', '', '0', '', '0.00', '0.00', '1', '', '0', '', '0', '0', '0', '0', '0', '');
 
 -- ----------------------------
 -- Table structure for zc_category
@@ -624,27 +621,19 @@ INSERT INTO `zc_category` VALUES ('35', '充值卡', '', '', '34', '1', '', '张
 DROP TABLE IF EXISTS `zc_comment`;
 CREATE TABLE `zc_comment` (
   `comment_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `comment_type` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `id_value` mediumint(8) unsigned NOT NULL DEFAULT '0',
-  `email` varchar(60) NOT NULL DEFAULT '',
-  `user_name` varchar(60) NOT NULL DEFAULT '',
-  `content` text NOT NULL,
-  `comment_rank` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `add_time` int(10) unsigned NOT NULL DEFAULT '0',
-  `ip_address` varchar(15) NOT NULL DEFAULT '',
-  `status` tinyint(3) unsigned NOT NULL DEFAULT '0',
-  `parent_id` int(10) unsigned NOT NULL DEFAULT '0',
+  `order_id` int(11) NOT NULL,
+  `goods_id` int(8) unsigned NOT NULL DEFAULT '0',
+  `content` text,
+  `comment_rank` tinyint(1) unsigned DEFAULT '0',
+  `add_time` varchar(10) NOT NULL DEFAULT '0',
   `user_id` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`comment_id`),
-  KEY `parent_id` (`parent_id`),
-  KEY `id_value` (`id_value`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+  KEY `id_value` (`goods_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of zc_comment
 -- ----------------------------
-INSERT INTO `zc_comment` VALUES ('1', '0', '12', 'ecshop@ecshop.com', 'ecshop', '很好，我很喜欢', '5', '1242107120', '0.0.0.0', '1', '0', '1');
-INSERT INTO `zc_comment` VALUES ('2', '0', '22', 'ecshop@ecshop.com', 'ecshop', '这个我不是很适合我', '5', '1242107295', '0.0.0.0', '0', '0', '1');
 
 -- ----------------------------
 -- Table structure for zc_config
@@ -1511,7 +1500,7 @@ CREATE TABLE `zc_order_info` (
 INSERT INTO `zc_order_info` VALUES ('24', '10', '0', '0', '0', '', '0', '12', '167', '1419', '东北农业大学', '', '', null, '994738856@qq.com', '', '0', '', '0', '', '0.00', '0.00', '0.00', '0.00', '0', '0', '0', '0.00');
 INSERT INTO `zc_order_info` VALUES ('25', '10', '0', '0', '0', '', '0', '12', '167', '1419', '东北农业大学', '', '', '18800100830', '994738856@qq.com', '', '0', '', '0', '', '0.00', '0.00', '0.00', '0.00', '1463296091', '0', '0', '0.00');
 INSERT INTO `zc_order_info` VALUES ('26', '10', '0', '0', '0', '', '0', '12', '167', '1419', '东北农业大学', '', '', '18800100830', '994738856@qq.com', '', '0', '', '0', '', '0.00', '0.00', '0.00', '0.00', '1463296106', '0', '0', '0.00');
-INSERT INTO `zc_order_info` VALUES ('27', '10', '0', '0', '0', '', '0', '12', '167', '1419', '东北农业大学', '', '', '18800100830', '994738856@qq.com', '', '0', '', '0', '', '0.00', '0.00', '0.00', '0.00', '1463297494', '0', '0', '0.00');
+INSERT INTO `zc_order_info` VALUES ('27', '10', '2', '0', '0', '', '0', '12', '167', '1419', '东北农业大学', '', '', '18800100830', '994738856@qq.com', '', '0', '', '0', '', '0.00', '0.00', '0.00', '0.00', '1463297494', '0', '0', '0.00');
 
 -- ----------------------------
 -- Table structure for zc_picture
