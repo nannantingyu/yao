@@ -254,6 +254,9 @@ class UserController extends AdminController {
      */
     public function customer(){
 
+        $allUsers = $this->lists('users');
+        $this->assign('users', $allUsers);
+
         $this->display();
     }
 }
