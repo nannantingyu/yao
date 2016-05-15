@@ -256,7 +256,10 @@ class GoodsController extends HomeController
         $this->assign('oid', $orderid);
 
         $data = $this->reviewcart($carts);
-        $orders = M('order_goods')->where(array('order_id'=>$orderid))->select();
+        $orders = M('order_goods')
+            ->join('zc_goods on zc_order_goods.goods_id = zc_goods.goods_id')
+            ->where(array('zc_order_goods.order_id'=>$orderid))
+            ->select();
         $this->assign('orders', $orders);
 
 //        $this->assign('data',$data);
