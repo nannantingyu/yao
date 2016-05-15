@@ -97,7 +97,7 @@
                         </a>
                     </td> 
                     <td><a href="{:U('Goods/editbrand?id='.$vo['brand_id'])}">编辑</a>
-                        <a href="{:U('Goods/delbrand',['id'=>$vo['brand_id']])}">删除</a>
+                        <a href="{:U('Goods/delbrand',array('id'=>$vo['brand_id']))}">删除</a>
                     </td>
                 </tr>
             </volist>
