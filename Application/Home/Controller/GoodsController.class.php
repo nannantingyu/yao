@@ -231,6 +231,7 @@ class GoodsController extends HomeController
 
             $ordergoods = array();
             $ordergoods['order_id'] = $order;
+            $ordergoods['order_status'] = 0;
             $ordergoods['goods_id'] = $ids[$i];
             $goods = M('goods')->where(array('goods_id'=>$ids[$i]))->find();
             $ordergoods['goods_name'] = $goods['goods_name'];
@@ -323,6 +324,7 @@ class GoodsController extends HomeController
     public function confirmOrder(){
         $oid = I('post.oid');
         M('order_info')->where(array('order_id'=>$oid))->save(array('order_status'=>2));
+        M('order_goods')->where(array('order_id'=>$oid))->save(array('order_status'=>2));
 
         $this->ajaxReturn(array('state'=>1));
     }
@@ -330,6 +332,7 @@ class GoodsController extends HomeController
     public function payOrder(){
         $oid = I('post.oid');
         M('order_info')->where(array('order_id'=>$oid))->save(array('order_status'=>1));
+        M('order_goods')->where(array('order_id'=>$oid))->save(array('order_status'=>1));
 
         $this->ajaxReturn(array('state'=>1));
     }
@@ -350,6 +353,9 @@ class GoodsController extends HomeController
         $data['user_id'] = session('uid');
         $data['add_time'] = date('Y-m-d H:i:s');
         M('comment')->add($data);
+
+        //将订单状态改为已评价
+        M('order_goods')->where(array('order_id'=>$oid, 'goods_id'=>$gid))->save(array('order_status'=>3));
 
         $this->ajaxReturn(array('state'=>1));
     }

@@ -244,6 +244,7 @@ class UserController extends HomeController {
 			->join('zc_users on zc_order_info.user_id = zc_users.user_id')
 			->order('zc_order_info.add_time desc, zc_order_info.order_id desc')
 			->where(array('zc_order_info.user_id'=>$uid))
+			->field('zc_goods.goods_name, zc_goods.goods_id, zc_order_info.order_id, zc_goods.goods_img, zc_goods.promote_price, zc_order_goods.order_status, zc_order_info.add_time')
 			->select();
 
 		$order = array();

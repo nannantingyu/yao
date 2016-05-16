@@ -1,7 +1,15 @@
 <include file="Public/header"/>
+
+<style>
+    .order-img{
+        width: 60px;
+        height: 60px;
+    }
+</style>
+
 <div class="container">
-    <volist name="allOrder" id="order">
-        <div style="padding-bottom: 30px;">
+    <volist name="allOrder" id="order" key="k">
+        <div class="tb-div" style="padding-bottom: 30px; <if condition='$k gt 1'>display: none;</if>">
             <div class="row">
                 <div class="col-md-12">
                     <table class="table">
@@ -17,7 +25,7 @@
                         </tr>
                         <volist name="order" id="vo">
                             <tr>
-                                <td><img height="30" width="30" src="{:getImgsrc($vo['goods_img'])}" alt="{$vo['goods_name']}"></td>
+                                <td><img class="order-img" width="30px" height="30px" src="{:getImgsrc($vo['goods_img'])}" alt="{$vo['goods_name']}"></td>
                                 <td><a href="/home/index/product/id/{$vo['goods_id']}">{$vo['goods_name']}</a></td>
                                 <td>{$vo['promote_price']}</td>
                                 <td>{$vo['add_time']}</td>
@@ -29,9 +37,13 @@
                                     else if($vo['order_status'] == 2){
                                         $states = '已确认收货';
                                     }
+                                    else if($vo['order_status'] == 3){
+                                        $states = '已评价';
+                                    }
+
                                 </php>
                                 <td>{$states}</td>
-                                <if condition="$order[0]['order_status'] eq 2">
+                                <if condition="$vo['order_status'] eq 2">
                                     <td><button class="btn" onclick="remark({$vo.order_id}, {$vo.goods_id})">评价</button></td>
                                 </if>
                             </tr>
@@ -55,6 +67,10 @@
             </div>
         </div>
     </volist>
+
+    <p style="text-align: center;">
+        <a href="javascript:void(0);" onclick="showHide(this)" style="color: #dd5555; font-size: 24px; font-weight: bold;">查看全部↓↓</a>
+    </p>
 </div>
 
 <!-- 模态框（Modal） -->
@@ -158,13 +174,23 @@
                 if(data.state == 1)
                 {
                     $.when($('#myModal').modal('hide')).done(function(){
-                        alert('评价成功！');
-                        $('#comment').val('');
-                        $('#remark').val(1);
+                        $.when(alert('评价成功！')).done(function(){
+                            window.location.reload();
+                        })
                     });
                 }
             }
         });
+    }
+
+    function showHide(obj){
+        $('.tb-div:gt(1)').toggle();
+        if($(obj).text() == '查看全部↓↓'){
+            $(obj).text('隐藏部分↓↓');
+        }
+        else if($(obj).text() == '隐藏部分↓↓'){
+            $(obj).text('查看全部↓↓');
+        }
     }
 </script>
 <include file="Public/footer"/>
