@@ -9,16 +9,17 @@ class GoodsController extends HomeController
     public function addCart()
     {
         $goodsid = I('post.gid');
+        $count = I('post.count');
         $allCart = session('cart');
 
         //判断购物车是否已经存在该商品
         if(is_array($allCart) && !is_null($allCart[$goodsid]))
         {
-            $allCart[$goodsid] ++;
+            $allCart[$goodsid] += $count;
         }
         else
         {
-            $allCart[$goodsid] = 1;
+            $allCart[$goodsid] = $count;
         }
 
         session('cart', $allCart);
@@ -161,7 +162,7 @@ class GoodsController extends HomeController
         $user = M('users')->where(array('user_id'=>session('uid')))->find();
 
         //获取当前用户没有关闭的订单
-        $orders = M('order_info')->where(array('user_id'=>$user['user_id'], 'order_status'=>array('neq', 2)))->select();
+        $orders = M('order_info')->where(array('user_id'=>$user['user_id'], 'order_id'=>$order_id))->select();
         $orderGoods = array();
         foreach($orders as $key=>$val){
             $orderGoods[$val['order_id']] = M('order_goods')
@@ -245,8 +246,8 @@ class GoodsController extends HomeController
         $this->ajaxReturn(array('state'=>1, 'order'=>$order, 'sql'=>M('order_info')->getLastSql()));
     }
 
-    public function checkOrder(){
-        $orderid = I('get.order');
+    public function orders($orderid)
+    {
         $carts = M('order_goods')->where(array('order_id'=>$orderid))->getField('goods_id, goods_number', true);
 
         $user = M('Users')->where(array('user_id'=>session('uid')))->find();
@@ -260,6 +261,7 @@ class GoodsController extends HomeController
         $orders = M('order_goods')
             ->join('zc_goods on zc_order_goods.goods_id = zc_goods.goods_id')
             ->where(array('zc_order_goods.order_id'=>$orderid))
+            ->field('zc_goods.goods_id, zc_goods.goods_name, zc_goods.goods_img, zc_order_goods.market_price, zc_order_goods.goods_price, zc_order_goods.goods_number')
             ->select();
         $this->assign('orders', $orders);
 
@@ -271,7 +273,12 @@ class GoodsController extends HomeController
         $adprovince = M('region')->where(array('parent_id'=>1))->order('rand()')->getfield('region_name');
 //        $adcity = M('region')->where()
 //        dump($address);
-        $this->display();
+        $this->display('Goods/checkOrder');
+    }
+
+    public function checkOrder(){
+        $orderid = I('get.order');
+        $this->orders($orderid);
     }
 
     public function search(){
@@ -356,6 +363,70 @@ class GoodsController extends HomeController
 
         //将订单状态改为已评价
         M('order_goods')->where(array('order_id'=>$oid, 'goods_id'=>$gid))->save(array('order_status'=>3));
+
+        $this->ajaxReturn(array('state'=>1));
+    }
+
+    /**
+     * 立即购买
+     */
+    public function buyNow()
+    {
+        if(!home_login()){
+            $this->error('你还没有登录，先去登录吧！', '/home/user/account.html');
+        }
+
+        $user = M('Users')->where(array('user_id'=>session('uid')))->find();
+
+        $gid = I('get.gid');
+        $count = I('get.count');
+
+        //加入到订单表中，状态为未支付
+        $order = array();
+        $order['user_id'] = $user['user_id'];
+        $order['order_status'] = 0;
+        $order['country'] = '中国';
+        $order['province'] = $user['province'];
+        $order['city'] = $user['city'];
+        $order['district'] = $user['county'];
+        $order['address'] = $user['address'];
+        $order['mobile'] = $user['phone'];
+        $order['email'] = $user['email'];
+        $order['add_time'] = time();
+
+        $order = M('order_info')->add($order);
+
+        //加入order_goods
+
+        dump($order);
+        $ordergoods = array();
+        $ordergoods['order_id'] = $order;
+        $ordergoods['order_status'] = 0;
+        $ordergoods['goods_id'] = $gid;
+        $goods = M('goods')->where(array('goods_id'=>$gid))->find();
+        $ordergoods['goods_name'] = $goods['goods_name'];
+        $ordergoods['goods_number'] = $count;
+        $ordergoods['market_price'] = $count*$goods['shop_price'];
+        $ordergoods['goods_price'] = $count*$goods['promote_price'];
+
+        M('order_goods')->add($ordergoods);
+
+        //显示订单页面
+        $this->orders($order);
+    }
+
+    /**
+     * 申请退货
+     */
+    public function tuihuo(){
+        $oid = I('post.oid');
+        $gid = I('post.gid');
+        $reason = I('post.reason');
+
+        M('order_goods')->where(array('order_id'=>$oid, 'goods_id'=>$gid))->save(array('reason'=>$reason, 'order_status'=>4));
+
+        $user = M('users')->where(array('user_id'=>session('uid')))->find();
+        sendMail($user['email'], 'ZCStore，您的退货申请已收到！', '<p style="color: red;">尊敬的顾客，您的退货申请我们已收到！</p><p>我们会尽快处理，请您耐心等候！</p><p>感谢您对ZCStore的支持，更多商品请登录 <a href="http://www.yjshare.cn">ZCStore</a></p>');
 
         $this->ajaxReturn(array('state'=>1));
     }

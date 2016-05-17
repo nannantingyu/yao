@@ -92,7 +92,7 @@
                         <td>{$goods.goods_number}</td>
                     </tr>
                 </volist>
-                <tr><td colspan="4"></td><td>商品总计：{$gsprice}元<br><br><a href="javascript:void(0)" onclick="checkAll()" class="btn btn-danger">付款</a></td></tr>
+                <tr><td colspan="4"></td><td>商品总计：{$gsprice}元<br><br><button onclick="checkAll(this)" class="btn btn-danger">付款</button></td></tr>
             </table>
             </li>
         </ul>
@@ -103,8 +103,8 @@
 </div>
 
 <script>
-function checkAll(){
-
+function checkAll(obj){
+    $(obj).attr('disabled', 'disabled').text('付款中');
     var order_id = $('#order_id').val();
     $.ajax({
         url: '/home/goods/checkall',
@@ -112,9 +112,14 @@ function checkAll(){
         dataType: 'json',
         data: {oid: order_id},
         success: function(data){
-            $.when(alert('结算成功！我们会尽快安排送货。去看看其他的吧！')).done(function(){
-                window.location.href = '/';
-            });
+            if(data.state == 1) {
+                $.when(alert('结算成功！我们会尽快安排送货。去看看其他的吧！')).done(function () {
+                    window.location.href = '/';
+                });
+            }
+            else{
+                $(obj).removeAttr('disabled').text('付款');
+            }
         }
     })
 }

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50617
 File Encoding         : 65001
 
-Date: 2016-05-16 21:41:05
+Date: 2016-05-17 23:08:21
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,7 +32,8 @@ CREATE TABLE `zc_order_goods` (
   `parent_id` mediumint(8) unsigned NOT NULL DEFAULT '0',
   `goods_attr_id` varchar(255) NOT NULL DEFAULT '',
   `order_status` tinyint(4) NOT NULL DEFAULT '0',
+  `reason` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`rec_id`),
   KEY `order_id` (`order_id`),
   KEY `goods_id` (`goods_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
