@@ -172,6 +172,7 @@ class GoodsController extends HomeController
 
         //将当前订单状态改为已支付
         M('order_info')->where(array('order_id'=>$order_id))->save(array('order_status'=>1));
+        M('order_goods')->where(array('order_id'=>$order_id))->save(array('order_status'=>1));
         $sql = M('order_info')->getLastSql();
         //发送邮件
         $emailHtml = '';
@@ -198,7 +199,7 @@ class GoodsController extends HomeController
         $emailHtml .= '您的订单已经在路上了，请耐心等待啊！ 去官网看看吧^_^。http://www.yjshare.cn';
         sendMail($user['email'], 'ZCStore，您的订单支付成功！', $emailHtml);
 
-        $this->ajaxReturn(array('state'=>1, 'sql'=>$sql));
+        $this->ajaxReturn(array('state'=>1, 'sql'=>$sql, 'oid'=>$order_id));
     }
 
     public function checkodinfo(){          //提交订单
@@ -398,7 +399,6 @@ class GoodsController extends HomeController
 
         //加入order_goods
 
-        dump($order);
         $ordergoods = array();
         $ordergoods['order_id'] = $order;
         $ordergoods['order_status'] = 0;
