@@ -33,10 +33,15 @@
     <script src="/Public/Home/js/respond.min.js"></script>
     <![endif]-->
     <script >
-        function addCart(id){
+        function addCart(id, count){
+
+            if(!count){
+                count = 1;
+            }
+
             $.ajax({
                 url: '/home/goods/addCart',
-                data: {gid: id},
+                data: {gid: id, count: count},
                 type: 'post',
                 dataType: 'json',
                 success: function(data){
@@ -204,6 +209,7 @@
                     <span style="vertical-align: middle; line-height: 56px;">¥<?php echo ($goods["promote_price"]); ?></span>
                     <div class="clearfix"></div>
                     <p><?php echo ($goods["goods_desc"]); ?></p>
+                    <input type="hidden" id="gid" value="<?php echo ($goods["goods_id"]); ?>">
                 </div>
                 <?php if(is_array($attrs)): $i = 0; $__LIST__ = $attrs;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="span span1">
                         <p class="left"><?php echo ($vo["attr_name"]); ?></p>
@@ -215,14 +221,15 @@
                         </p>
                         <div class="clearfix"></div>
                     </div><?php endforeach; endif; else: echo "" ;endif; ?>
-                <div class="purchase">
-                    <a href="#">Purchase Now</a>
-                    <div class="social-icons">
-                        <ul>
-                            <li><a class="facebook1" href="#"></a></li>
-                            <li><a class="twitter1" href="#"></a></li>
-                            <li><a class="googleplus1" href="#"></a></li>
-                        </ul>
+                <div class="purchase" style="padding-left: 17px;">
+                    <div class="row">
+                        <button onclick="minuxGoods(this)">-</button>
+                        <input type="text" value="1" id="count" style="width: 30px; text-align: center;">
+                        <button onclick="addGoods(this)">+</button>
+                        <a href="javascript: addIntoCarts();">加入购物车</a>
+                    </div>
+                    <div class="row" style="padding-top: 30px;">
+                        <a href="javascript: buyNow();" class="btn btn-info">立即购买</a>
                     </div>
                     <div class="clearfix"></div>
                 </div>
@@ -264,7 +271,7 @@
                                         <a href="#">
                                             <img class="media-object" src="/Public/Home/images/icon1.png" alt="" />
                                         </a>
-                                        <h5><a href="#"><?php echo ($vo["user_name"]); ?></a></h5>
+                                        <h5><a href="#"><?php echo ($vo["user_name"]); ?></a><span style="padding-left: 20px;"><?php echo ($vo["comment_rank"]); ?>分</span></h5>
                                     </div>
                                     <div class="media-body response-text-right">
                                         <p><?php echo ($vo["content"]); ?></p>
@@ -434,6 +441,32 @@
         fakewaffle.responsiveTabs( [ 'xs', 'sm' ] );
     } )( jQuery );
 
+    function minuxGoods(obj){
+        var count = $('#count').val();
+        if(count <= 1){
+            return;
+        }
+
+        $('#count').val(count-1);
+    }
+
+    function addGoods(obj){
+        var count = $('#count').val();
+        $('#count').val(parseInt(count)+1);
+    }
+
+    function addIntoCarts(){
+        var count = $('#count').val(),
+                gid = $('#gid').val();
+        addCart(gid, count);
+    }
+
+    function buyNow()
+    {
+        var gid = $('#gid').val(),
+                count = $('#count').val();
+        window.location.href = '/home/goods/buyNow/gid/' + gid + '/count/' + count;
+    }
 </script>
 
 </body>

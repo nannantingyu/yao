@@ -33,10 +33,15 @@
     <script src="/Public/Home/js/respond.min.js"></script>
     <![endif]-->
     <script >
-        function addCart(id){
+        function addCart(id, count){
+
+            if(!count){
+                count = 1;
+            }
+
             $.ajax({
                 url: '/home/goods/addCart',
-                data: {gid: id},
+                data: {gid: id, count: count},
                 type: 'post',
                 dataType: 'json',
                 success: function(data){

@@ -33,10 +33,15 @@
     <script src="/Public/Home/js/respond.min.js"></script>
     <![endif]-->
     <script >
-        function addCart(id){
+        function addCart(id, count){
+
+            if(!count){
+                count = 1;
+            }
+
             $.ajax({
                 url: '/home/goods/addCart',
-                data: {gid: id},
+                data: {gid: id, count: count},
                 type: 'post',
                 dataType: 'json',
                 success: function(data){
@@ -147,8 +152,16 @@
         }
     }
 </script>
+
+<style>
+    .order-img{
+        width: 60px;
+        height: 60px;
+    }
+</style>
+
 <div class="container">
-    <?php if(is_array($allOrder)): $i = 0; $__LIST__ = $allOrder;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$order): $mod = ($i % 2 );++$i;?><div style="padding-bottom: 30px;">
+    <?php if(is_array($allOrder)): $k = 0; $__LIST__ = $allOrder;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$order): $mod = ($k % 2 );++$k;?><div class="tb-div" style="padding-bottom: 30px; <?php if($k > 1): ?>display: none;<?php endif; ?>">
             <div class="row">
                 <div class="col-md-12">
                     <table class="table">
@@ -156,18 +169,21 @@
                             <th width="20%"></th>
                             <th width="40%">名称</th>
                             <th width="10%">价格</th>
+                            <th width="5%">数量</th>
                             <th width="15%">支付时间</th>
                             <th width="15%">状态</th>
                             <?php if($order[0]['order_status'] == 2): ?><th width="20%">评价</th><?php endif; ?>
                         </tr>
                         <?php if(is_array($order)): $i = 0; $__LIST__ = $order;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><tr>
-                                <td><img height="30" width="30" src="<?php echo getImgsrc($vo['goods_img']);?>" alt="<?php echo ($vo['goods_name']); ?>"></td>
+                                <td><img class="order-img" width="30px" height="30px" src="<?php echo getImgsrc($vo['goods_img']);?>" alt="<?php echo ($vo['goods_name']); ?>"></td>
                                 <td><a href="/home/index/product/id/<?php echo ($vo['goods_id']); ?>"><?php echo ($vo['goods_name']); ?></a></td>
                                 <td><?php echo ($vo['promote_price']); ?></td>
+                                <td><?php echo ($vo['goods_number']); ?></td>
                                 <td><?php echo ($vo['add_time']); ?></td>
-                                <?php $states = '未支付'; if($vo['order_status'] == 1){ $states = '配送中'; } else if($vo['order_status'] == 2){ $states = '已确认收货'; } ?>
+                                <?php $states = '未支付'; if($vo['order_status'] == 1){ $states = '配送中'; } else if($vo['order_status'] == 2){ $states = '已确认收货'; } else if($vo['order_status'] == 3){ $states = '已评价'; } else if($vo['order_status'] == 4){ $states = '已申请退货'; } ?>
                                 <td><?php echo ($states); ?></td>
-                                <?php if($order[0]['order_status'] == 2): ?><td><button class="btn" onclick="remark(<?php echo ($vo["order_id"]); ?>, <?php echo ($vo["goods_id"]); ?>)">评价</button></td><?php endif; ?>
+                                <?php if($vo['order_status'] == 2): ?><td><button class="btn" onclick="remark(<?php echo ($vo["order_id"]); ?>, <?php echo ($vo["goods_id"]); ?>)">评价</button></td><?php endif; ?>
+                                <?php if($vo['order_status'] == 3): ?><td><button class="btn" onclick="tuihuo(<?php echo ($vo["order_id"]); ?>, <?php echo ($vo["goods_id"]); ?>)">申请退货</button></td><?php endif; ?>
                             </tr><?php endforeach; endif; else: echo "" ;endif; ?>
                     </table>
                 </div>
@@ -183,6 +199,10 @@
                     </div><?php endif; ?>
             </div>
         </div><?php endforeach; endif; else: echo "" ;endif; ?>
+
+    <p style="text-align: center;">
+        <a href="javascript:void(0);" onclick="showHide(this)" style="color: #dd5555; font-size: 24px; font-weight: bold;">查看全部↓↓</a>
+    </p>
 </div>
 
 <!-- 模态框（Modal） -->
@@ -227,6 +247,42 @@
                 </button>
                 <button type="button" class="btn btn-primary" onclick="comment()">
                     提交评价
+                </button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+<!-- 退货 -->
+<div class="modal fade" id="tuihuo" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close"
+                        data-dismiss="modal" aria-hidden="true">
+                    &times;
+                </button>
+                <h4 class="modal-title" id="tuihuoLabel">
+                    商品评价
+                </h4>
+            </div>
+            <div class="modal-body">
+                <form action="" class="form-horizontal">
+                    <div class="form-group">
+                        <label for="" class="control-label col-md-3">退货理由</label>
+                        <div class="col-md-8">
+                            <textarea type="text" id="reason" class="form-control"></textarea>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default"
+                        data-dismiss="modal">关闭
+                </button>
+                <button type="button" class="btn btn-primary" onclick="tui()">
+                    提交申请
                 </button>
             </div>
         </div><!-- /.modal-content -->
@@ -286,9 +342,45 @@
                 if(data.state == 1)
                 {
                     $.when($('#myModal').modal('hide')).done(function(){
-                        alert('评价成功！');
-                        $('#comment').val('');
-                        $('#remark').val(1);
+                        $.when(alert('评价成功！')).done(function(){
+                            window.location.reload();
+                        })
+                    });
+                }
+            }
+        });
+    }
+
+    function showHide(obj){
+        $('.tb-div:gt(1)').toggle();
+        if($(obj).text() == '查看全部↓↓'){
+            $(obj).text('隐藏部分↓↓');
+        }
+        else if($(obj).text() == '隐藏部分↓↓'){
+            $(obj).text('查看全部↓↓');
+        }
+    }
+
+    function tuihuo(od, gd){
+        $('#tuihuo').modal('show');
+        oid = od;
+        gid = gd;
+    }
+
+    function tui(){
+
+        $.ajax({
+            url: '/home/goods/tuihuo',
+            data: {oid: oid, gid: gid, reason: $('#reason').val()},
+            type: 'post',
+            dataType: 'json',
+            success: function(data){
+                if(data.state == 1)
+                {
+                    $.when($('#tuihuo').modal('hide')).done(function(){
+                        $.when(alert('申请退货成功！')).done(function(){
+                            window.location.reload();
+                        })
                     });
                 }
             }

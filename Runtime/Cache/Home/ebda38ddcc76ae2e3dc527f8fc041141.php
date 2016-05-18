@@ -33,10 +33,15 @@
     <script src="/Public/Home/js/respond.min.js"></script>
     <![endif]-->
     <script >
-        function addCart(id){
+        function addCart(id, count){
+
+            if(!count){
+                count = 1;
+            }
+
             $.ajax({
                 url: '/home/goods/addCart',
-                data: {gid: id},
+                data: {gid: id, count: count},
                 type: 'post',
                 dataType: 'json',
                 success: function(data){
@@ -465,8 +470,8 @@
 
         $('input[name="selectGoods"]').change(function(){
             var tr = $(this).parent().parent();
-            var shopprice = tr.children('td:eq(3)').text(),
-                    promotePrice = tr.children('td:eq(4)').text(),
+            var shopprice = tr.children('td:eq(4)').text(),
+                    promotePrice = tr.children('td:eq(5)').text(),
                     goodsNumber = tr.find('input[name="count"]').val();
             var state = $(this).prop('checked');
 
