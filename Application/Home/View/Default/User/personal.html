@@ -119,7 +119,7 @@
             <table class="table"> 
                 <thead>
                     <th width="10%">订单编号</th>
-                    <th width="10%"></th>
+                    <!--<th width="10%"></th>-->
                     <th width="15%">商品名称</th>
                     <th width="10%">收货人</th>
                     <th width="10%">订单状态</th>
@@ -132,7 +132,7 @@
                     <volist name="allOrders" id="vo" offset='0' length='8' mod='2'>
                         <tr <eq name='mod' value='0'> style="background-color:rgb(203,223,159);"</eq>height='50'>
                             <td>{$vo.order_id}</td>
-                            <td><img src="{$vo.goods_img}" height="34" weight="34"/></td>
+                            <!--<td><img src="{$vo.goods_img}" height="34" weight="34"/></td>-->
                             <td>{$vo.goods_name}</td>
                             <td>{$vo.user_name}</td>
                             <td>{$vo.order_status}</td>

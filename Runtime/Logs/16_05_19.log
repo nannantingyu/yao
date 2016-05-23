@@ -1,0 +1,362 @@
+[ 2016-05-19T15:14:16+08:00 ] 127.0.0.1 /home/index
+INFO: [ app_init ] --START--
+INFO: Run Common\Behavior\InitHook [ RunTime:0.004585s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006102s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.001358s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001523s ]
+SQL: SHOW COLUMNS FROM `zc_config` [ RunTime:0.075945s ]
+SQL: SELECT `type`,`name`,`value` FROM `zc_config` WHERE ( `status` = 1 )  [ RunTime:0.019179s ]
+SQL: SHOW COLUMNS FROM `zc_menus` [ RunTime:0.085196s ]
+SQL: SELECT * FROM `zc_menus` ORDER BY pid asc, menu_order asc  [ RunTime:0.015140s ]
+SQL: SHOW COLUMNS FROM `zc_banner` [ RunTime:0.036638s ]
+SQL: SELECT `id`,`link`,`title`,`image` FROM `zc_banner` ORDER BY featured desc, created_time desc LIMIT 4   [ RunTime:0.000431s ]
+SQL: SHOW COLUMNS FROM `zc_goods` [ RunTime:0.008312s ]
+SQL: SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` ORDER BY add_time desc, goods_id desc LIMIT 4   [ RunTime:0.070396s ]
+SQL: SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` ORDER BY is_promote desc, add_time desc LIMIT 4   [ RunTime:0.000417s ]
+SQL: SHOW COLUMNS FROM `zc_order_goods` [ RunTime:0.052591s ]
+SQL: select goods_id, count(*) as cou from zc_order_goods GROUP BY goods_id ORDER BY cou desc limit 4 [ RunTime:0.037855s ]
+SQL: SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` WHERE ( `goods_id` IN () ) ORDER BY is_promote desc, add_time desc  [ RunTime:0.000220s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') ) ORDER BY is_promote desc, add_time desc' at line 1
+ [ SQL语句 ] : SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` WHERE ( `goods_id` IN () ) ORDER BY is_promote desc, add_time desc 
+SQL: SHOW COLUMNS FROM `zc_brand` [ RunTime:0.065486s ]
+SQL: SELECT `brand_id`,`brand_name`,`brand_logo` FROM `zc_brand` WHERE ( `is_show` = 1 ) ORDER BY sort_order asc LIMIT 6   [ RunTime:0.010298s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000237s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000446s ]
+NOTIC: [8] Undefined index: child D:\wamp\www\zczc\Runtime\Cache\Home\769e70f2e46f34ceb60619bbda5e4691.php 第 118 行.
+NOTIC: [8] Undefined index: child D:\wamp\www\zczc\Runtime\Cache\Home\769e70f2e46f34ceb60619bbda5e4691.php 第 118 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.142475s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.142610s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000940s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.001070s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.001231s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001369s ]
+
+[ 2016-05-19T15:14:31+08:00 ] 127.0.0.1 /home/user/account.html
+INFO: [ app_init ] --START--
+INFO: Run Common\Behavior\InitHook [ RunTime:0.003859s ]
+INFO: [ app_init ] --END-- [ RunTime:0.004792s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.001299s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001664s ]
+SQL: SHOW COLUMNS FROM `zc_config` [ RunTime:0.011094s ]
+SQL: SELECT `type`,`name`,`value` FROM `zc_config` WHERE ( `status` = 1 )  [ RunTime:0.002264s ]
+SQL: SHOW COLUMNS FROM `zc_menus` [ RunTime:0.007123s ]
+SQL: SELECT * FROM `zc_menus` ORDER BY pid asc, menu_order asc  [ RunTime:0.001996s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000443s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000906s ]
+NOTIC: [8] Undefined index: child D:\wamp\www\zczc\Runtime\Cache\Home\af9eb353cd1f533c473a1d26cde320b3.php 第 118 行.
+NOTIC: [8] Undefined index: child D:\wamp\www\zczc\Runtime\Cache\Home\af9eb353cd1f533c473a1d26cde320b3.php 第 118 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.111032s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.111390s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.001994s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.002322s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.001926s ]
+INFO: [ app_end ] --END-- [ RunTime:0.002277s ]
+
+[ 2016-05-19T16:06:38+08:00 ] 127.0.0.1 /home/goods/cart.html
+INFO: [ app_init ] --START--
+INFO: Run Common\Behavior\InitHook [ RunTime:0.002782s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003465s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.001084s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001332s ]
+SQL: SHOW COLUMNS FROM `zc_config` [ RunTime:0.012479s ]
+SQL: SELECT `type`,`name`,`value` FROM `zc_config` WHERE ( `status` = 1 )  [ RunTime:0.001065s ]
+SQL: SHOW COLUMNS FROM `zc_menus` [ RunTime:0.010958s ]
+SQL: SELECT * FROM `zc_menus` ORDER BY pid asc, menu_order asc  [ RunTime:0.001561s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000081s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000221s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.025913s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.026095s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000487s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000605s ]
+
+[ 2016-05-19T16:06:42+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Common\Behavior\InitHook [ RunTime:0.001845s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002291s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000723s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000895s ]
+SQL: SHOW COLUMNS FROM `zc_config` [ RunTime:0.016621s ]
+SQL: SELECT `type`,`name`,`value` FROM `zc_config` WHERE ( `status` = 1 )  [ RunTime:0.000424s ]
+SQL: SHOW COLUMNS FROM `zc_menus` [ RunTime:0.005861s ]
+SQL: SELECT * FROM `zc_menus` ORDER BY pid asc, menu_order asc  [ RunTime:0.000651s ]
+SQL: SHOW COLUMNS FROM `zc_banner` [ RunTime:0.005734s ]
+SQL: SELECT `id`,`link`,`title`,`image` FROM `zc_banner` ORDER BY featured desc, created_time desc LIMIT 4   [ RunTime:0.000405s ]
+SQL: SHOW COLUMNS FROM `zc_goods` [ RunTime:0.006263s ]
+SQL: SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` ORDER BY add_time desc, goods_id desc LIMIT 4   [ RunTime:0.000586s ]
+SQL: SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` ORDER BY is_promote desc, add_time desc LIMIT 4   [ RunTime:0.000561s ]
+SQL: SHOW COLUMNS FROM `zc_order_goods` [ RunTime:0.006462s ]
+SQL: select goods_id, count(*) as cou from zc_order_goods GROUP BY goods_id ORDER BY cou desc limit 4 [ RunTime:0.000294s ]
+SQL: SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` WHERE ( `goods_id` IN () ) ORDER BY is_promote desc, add_time desc  [ RunTime:0.000171s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') ) ORDER BY is_promote desc, add_time desc' at line 1
+ [ SQL语句 ] : SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` WHERE ( `goods_id` IN () ) ORDER BY is_promote desc, add_time desc 
+SQL: SHOW COLUMNS FROM `zc_brand` [ RunTime:0.006295s ]
+SQL: SELECT `brand_id`,`brand_name`,`brand_logo` FROM `zc_brand` WHERE ( `is_show` = 1 ) ORDER BY sort_order asc LIMIT 6   [ RunTime:0.000525s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000204s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000332s ]
+NOTIC: [8] Undefined index: child D:\wamp\www\zczc\Runtime\Cache\Home\769e70f2e46f34ceb60619bbda5e4691.php 第 118 行.
+NOTIC: [8] Undefined index: child D:\wamp\www\zczc\Runtime\Cache\Home\769e70f2e46f34ceb60619bbda5e4691.php 第 118 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.061981s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.062125s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000409s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000525s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000824s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000954s ]
+
+[ 2016-05-19T16:06:45+08:00 ] 127.0.0.1 /
+INFO: [ app_init ] --START--
+INFO: Run Common\Behavior\InitHook [ RunTime:0.001867s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002340s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000573s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000711s ]
+SQL: SHOW COLUMNS FROM `zc_config` [ RunTime:0.005204s ]
+SQL: SELECT `type`,`name`,`value` FROM `zc_config` WHERE ( `status` = 1 )  [ RunTime:0.000458s ]
+SQL: SHOW COLUMNS FROM `zc_menus` [ RunTime:0.005230s ]
+SQL: SELECT * FROM `zc_menus` ORDER BY pid asc, menu_order asc  [ RunTime:0.001150s ]
+SQL: SHOW COLUMNS FROM `zc_banner` [ RunTime:0.004884s ]
+SQL: SELECT `id`,`link`,`title`,`image` FROM `zc_banner` ORDER BY featured desc, created_time desc LIMIT 4   [ RunTime:0.000361s ]
+SQL: SHOW COLUMNS FROM `zc_goods` [ RunTime:0.024373s ]
+SQL: SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` ORDER BY add_time desc, goods_id desc LIMIT 4   [ RunTime:0.000508s ]
+SQL: SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` ORDER BY is_promote desc, add_time desc LIMIT 4   [ RunTime:0.000402s ]
+SQL: SHOW COLUMNS FROM `zc_order_goods` [ RunTime:0.006206s ]
+SQL: select goods_id, count(*) as cou from zc_order_goods GROUP BY goods_id ORDER BY cou desc limit 4 [ RunTime:0.000288s ]
+SQL: SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` WHERE ( `goods_id` IN () ) ORDER BY is_promote desc, add_time desc  [ RunTime:0.000170s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') ) ORDER BY is_promote desc, add_time desc' at line 1
+ [ SQL语句 ] : SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` WHERE ( `goods_id` IN () ) ORDER BY is_promote desc, add_time desc 
+SQL: SHOW COLUMNS FROM `zc_brand` [ RunTime:0.005088s ]
+SQL: SELECT `brand_id`,`brand_name`,`brand_logo` FROM `zc_brand` WHERE ( `is_show` = 1 ) ORDER BY sort_order asc LIMIT 6   [ RunTime:0.000828s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000212s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000350s ]
+NOTIC: [8] Undefined index: child D:\wamp\www\zczc\Runtime\Cache\Home\769e70f2e46f34ceb60619bbda5e4691.php 第 118 行.
+NOTIC: [8] Undefined index: child D:\wamp\www\zczc\Runtime\Cache\Home\769e70f2e46f34ceb60619bbda5e4691.php 第 118 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.033595s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.033728s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000384s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000501s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000766s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000888s ]
+
+[ 2016-05-19T23:53:08+08:00 ] 127.0.0.1 /home/index
+INFO: [ app_init ] --START--
+INFO: Run Common\Behavior\InitHook [ RunTime:0.004418s ]
+INFO: [ app_init ] --END-- [ RunTime:0.012382s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000822s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001008s ]
+SQL: SHOW COLUMNS FROM `zc_config` [ RunTime:0.042001s ]
+SQL: SELECT `type`,`name`,`value` FROM `zc_config` WHERE ( `status` = 1 )  [ RunTime:0.029132s ]
+SQL: SHOW COLUMNS FROM `zc_menus` [ RunTime:0.074202s ]
+SQL: SELECT * FROM `zc_menus` ORDER BY pid asc, menu_order asc  [ RunTime:0.002902s ]
+SQL: SHOW COLUMNS FROM `zc_banner` [ RunTime:0.051963s ]
+SQL: SELECT `id`,`link`,`title`,`image` FROM `zc_banner` ORDER BY featured desc, created_time desc LIMIT 4   [ RunTime:0.000414s ]
+SQL: SHOW COLUMNS FROM `zc_goods` [ RunTime:0.007140s ]
+SQL: SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` ORDER BY add_time desc, goods_id desc LIMIT 4   [ RunTime:0.060781s ]
+SQL: SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` ORDER BY is_promote desc, add_time desc LIMIT 4   [ RunTime:0.000460s ]
+SQL: SHOW COLUMNS FROM `zc_order_goods` [ RunTime:0.052184s ]
+SQL: select goods_id, count(*) as cou from zc_order_goods GROUP BY goods_id ORDER BY cou desc limit 4 [ RunTime:0.015471s ]
+SQL: SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` WHERE ( `goods_id` IN () ) ORDER BY is_promote desc, add_time desc  [ RunTime:0.000203s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') ) ORDER BY is_promote desc, add_time desc' at line 1
+ [ SQL语句 ] : SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` WHERE ( `goods_id` IN () ) ORDER BY is_promote desc, add_time desc 
+SQL: SHOW COLUMNS FROM `zc_brand` [ RunTime:0.031397s ]
+SQL: SELECT `brand_id`,`brand_name`,`brand_logo` FROM `zc_brand` WHERE ( `is_show` = 1 ) ORDER BY sort_order asc LIMIT 6   [ RunTime:0.011218s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000236s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000480s ]
+NOTIC: [8] Undefined index: child D:\wamp\www\zczc\Runtime\Cache\Home\769e70f2e46f34ceb60619bbda5e4691.php 第 118 行.
+NOTIC: [8] Undefined index: child D:\wamp\www\zczc\Runtime\Cache\Home\769e70f2e46f34ceb60619bbda5e4691.php 第 118 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.148001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.148199s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000711s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000876s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.001024s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001244s ]
+
+[ 2016-05-19T23:53:18+08:00 ] 127.0.0.1 /home/user/account.html
+INFO: [ app_init ] --START--
+INFO: Run Common\Behavior\InitHook [ RunTime:0.001741s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002192s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000516s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000647s ]
+SQL: SHOW COLUMNS FROM `zc_config` [ RunTime:0.004035s ]
+SQL: SELECT `type`,`name`,`value` FROM `zc_config` WHERE ( `status` = 1 )  [ RunTime:0.000445s ]
+SQL: SHOW COLUMNS FROM `zc_menus` [ RunTime:0.003749s ]
+SQL: SELECT * FROM `zc_menus` ORDER BY pid asc, menu_order asc  [ RunTime:0.000497s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000166s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000295s ]
+NOTIC: [8] Undefined index: child D:\wamp\www\zczc\Runtime\Cache\Home\af9eb353cd1f533c473a1d26cde320b3.php 第 118 行.
+NOTIC: [8] Undefined index: child D:\wamp\www\zczc\Runtime\Cache\Home\af9eb353cd1f533c473a1d26cde320b3.php 第 118 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.104146s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.104293s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000455s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000605s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000825s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000989s ]
+
+[ 2016-05-19T23:53:34+08:00 ] 127.0.0.1 /home/user/login.html
+INFO: [ app_init ] --START--
+INFO: Run Common\Behavior\InitHook [ RunTime:0.001770s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002219s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000762s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000914s ]
+SQL: SHOW COLUMNS FROM `zc_config` [ RunTime:0.004904s ]
+SQL: SELECT `type`,`name`,`value` FROM `zc_config` WHERE ( `status` = 1 )  [ RunTime:0.000440s ]
+SQL: SHOW COLUMNS FROM `zc_menus` [ RunTime:0.005221s ]
+SQL: SELECT * FROM `zc_menus` ORDER BY pid asc, menu_order asc  [ RunTime:0.000513s ]
+SQL: SHOW COLUMNS FROM `zc_users` [ RunTime:0.146689s ]
+SQL: SELECT * FROM `zc_users` WHERE ( `user_name` = 'canyou' ) LIMIT 1   [ RunTime:0.001307s ]
+SQL: SHOW COLUMNS FROM `zc_cart` [ RunTime:0.011170s ]
+SQL: SELECT `goods_id`,`goods_number` FROM `zc_cart` WHERE ( `user_id` = 10 )  [ RunTime:0.000409s ]
+SQL: SELECT `goods_id`,`goods_number` FROM `zc_cart` WHERE ( `user_id` = 10 )  [ RunTime:0.000281s ]
+
+[ 2016-05-19T23:53:34+08:00 ] 127.0.0.1 /home/index.html
+INFO: [ app_init ] --START--
+INFO: Run Common\Behavior\InitHook [ RunTime:0.001796s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002229s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000570s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000703s ]
+SQL: SHOW COLUMNS FROM `zc_config` [ RunTime:0.004258s ]
+SQL: SELECT `type`,`name`,`value` FROM `zc_config` WHERE ( `status` = 1 )  [ RunTime:0.000456s ]
+SQL: SHOW COLUMNS FROM `zc_menus` [ RunTime:0.004171s ]
+SQL: SELECT * FROM `zc_menus` ORDER BY pid asc, menu_order asc  [ RunTime:0.000514s ]
+SQL: SHOW COLUMNS FROM `zc_banner` [ RunTime:0.004182s ]
+SQL: SELECT `id`,`link`,`title`,`image` FROM `zc_banner` ORDER BY featured desc, created_time desc LIMIT 4   [ RunTime:0.000364s ]
+SQL: SHOW COLUMNS FROM `zc_goods` [ RunTime:0.004744s ]
+SQL: SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` ORDER BY add_time desc, goods_id desc LIMIT 4   [ RunTime:0.000508s ]
+SQL: SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` ORDER BY is_promote desc, add_time desc LIMIT 4   [ RunTime:0.000384s ]
+SQL: SHOW COLUMNS FROM `zc_order_goods` [ RunTime:0.004242s ]
+SQL: select goods_id, count(*) as cou from zc_order_goods GROUP BY goods_id ORDER BY cou desc limit 4 [ RunTime:0.000498s ]
+SQL: SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` WHERE ( `goods_id` IN () ) ORDER BY is_promote desc, add_time desc  [ RunTime:0.000460s ]
+ERR: 1064:You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') ) ORDER BY is_promote desc, add_time desc' at line 1
+ [ SQL语句 ] : SELECT `goods_id`,`goods_name`,`shop_price`,`goods_img` FROM `zc_goods` WHERE ( `goods_id` IN () ) ORDER BY is_promote desc, add_time desc 
+SQL: SHOW COLUMNS FROM `zc_brand` [ RunTime:0.004906s ]
+SQL: SELECT `brand_id`,`brand_name`,`brand_logo` FROM `zc_brand` WHERE ( `is_show` = 1 ) ORDER BY sort_order asc LIMIT 6   [ RunTime:0.000475s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000208s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000359s ]
+NOTIC: [8] Undefined index: child D:\wamp\www\zczc\Runtime\Cache\Home\769e70f2e46f34ceb60619bbda5e4691.php 第 118 行.
+NOTIC: [8] Undefined index: child D:\wamp\www\zczc\Runtime\Cache\Home\769e70f2e46f34ceb60619bbda5e4691.php 第 118 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.032208s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.032342s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000383s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000499s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000587s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000699s ]
+
+[ 2016-05-19T23:53:40+08:00 ] 127.0.0.1 /home/goods/cart.html
+INFO: [ app_init ] --START--
+INFO: Run Common\Behavior\InitHook [ RunTime:0.001881s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002365s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000885s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.001084s ]
+SQL: SHOW COLUMNS FROM `zc_config` [ RunTime:0.004039s ]
+SQL: SELECT `type`,`name`,`value` FROM `zc_config` WHERE ( `status` = 1 )  [ RunTime:0.000450s ]
+SQL: SHOW COLUMNS FROM `zc_menus` [ RunTime:0.006587s ]
+SQL: SELECT * FROM `zc_menus` ORDER BY pid asc, menu_order asc  [ RunTime:0.000513s ]
+SQL: SHOW COLUMNS FROM `zc_goods` [ RunTime:0.004667s ]
+SQL: SELECT * FROM `zc_goods` WHERE ( `goods_id` IN (66) )  [ RunTime:0.000718s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000230s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000369s ]
+NOTIC: [8] Undefined index: child D:\wamp\www\zczc\Runtime\Cache\Home\ebda38ddcc76ae2e3dc527f8fc041141.php 第 118 行.
+NOTIC: [8] Undefined index: child D:\wamp\www\zczc\Runtime\Cache\Home\ebda38ddcc76ae2e3dc527f8fc041141.php 第 118 行.
+INFO: Run Behavior\ParseTemplate [ RunTime:0.023731s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.023854s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000821s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000946s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000839s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000987s ]
+
+[ 2016-05-19T23:53:47+08:00 ] 127.0.0.1 /home/goods/checkodinfo
+INFO: [ app_init ] --START--
+INFO: Run Common\Behavior\InitHook [ RunTime:0.001876s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002315s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000566s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000695s ]
+SQL: SHOW COLUMNS FROM `zc_config` [ RunTime:0.005759s ]
+SQL: SELECT `type`,`name`,`value` FROM `zc_config` WHERE ( `status` = 1 )  [ RunTime:0.000490s ]
+SQL: SHOW COLUMNS FROM `zc_menus` [ RunTime:0.004019s ]
+SQL: SELECT * FROM `zc_menus` ORDER BY pid asc, menu_order asc  [ RunTime:0.000541s ]
+SQL: SHOW COLUMNS FROM `zc_users` [ RunTime:0.004590s ]
+SQL: SELECT * FROM `zc_users` WHERE ( `user_id` = 10 ) LIMIT 1   [ RunTime:0.000543s ]
+SQL: SHOW COLUMNS FROM `zc_order_info` [ RunTime:0.086425s ]
+SQL: INSERT INTO `zc_order_info` (`user_id`,`order_status`,`country`,`province`,`city`,`district`,`address`,`mobile`,`email`,`add_time`) VALUES (10,0,0,12,167,1419,'东北农业大学','18800100830','994738856@qq.com',1463673226) [ RunTime:0.045556s ]
+SQL: SHOW COLUMNS FROM `zc_goods` [ RunTime:0.005809s ]
+SQL: SELECT * FROM `zc_goods` WHERE ( `goods_id` = 66 ) LIMIT 1   [ RunTime:0.000837s ]
+SQL: SHOW COLUMNS FROM `zc_order_goods` [ RunTime:0.004108s ]
+SQL: INSERT INTO `zc_order_goods` (`order_id`,`order_status`,`goods_id`,`goods_name`,`goods_number`,`market_price`,`goods_price`) VALUES (34,0,66,'佳能（Canon�\� EOS 700D 单反套机 （EF-S 18-55mm f/3.5-5.6 IS STM 镜头�\�',1,3599,3599) [ RunTime:0.000367s ]
+
+[ 2016-05-19T23:53:47+08:00 ] 127.0.0.1 /home/goods/checkOrder/order/34
+INFO: [ app_init ] --START--
+INFO: Run Common\Behavior\InitHook [ RunTime:0.002135s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002572s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCache [ RunTime:0.000525s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000654s ]
+SQL: SHOW COLUMNS FROM `zc_config` [ RunTime:0.004618s ]
+SQL: SELECT `type`,`name`,`value` FROM `zc_config` WHERE ( `status` = 1 )  [ RunTime:0.000442s ]
+SQL: SHOW COLUMNS FROM `zc_menus` [ RunTime:0.003886s ]
+SQL: SELECT * FROM `zc_menus` ORDER BY pid asc, menu_order asc  [ RunTime:0.000496s ]
+SQL: SHOW COLUMNS FROM `zc_order_goods` [ RunTime:0.004060s ]
+SQL: SELECT `goods_id`,`goods_number` FROM `zc_order_goods` WHERE ( `order_id` = 34 )  [ RunTime:0.000349s ]
+SQL: SHOW COLUMNS FROM `zc_users` [ RunTime:0.004876s ]
+SQL: SELECT * FROM `zc_users` WHERE ( `user_id` = 10 ) LIMIT 1   [ RunTime:0.000504s ]
+SQL: SHOW COLUMNS FROM `zc_region` [ RunTime:0.052212s ]
+SQL: SELECT `region_type`,`region_id`,`region_name` FROM `zc_region` WHERE ( `region_id` IN ('12','167','1419') )  [ RunTime:0.037332s ]
+SQL: SHOW COLUMNS FROM `zc_goods` [ RunTime:0.005722s ]
+SQL: SELECT * FROM `zc_goods` WHERE ( `goods_id` IN (66) )  [ RunTime:0.000726s ]
+SQL: SELECT zc_goods.goods_id,zc_goods.goods_name,zc_goods.goods_img,zc_order_goods.market_price,zc_order_goods.goods_price,zc_order_goods.goods_number FROM `zc_order_goods` INNER JOIN zc_goods on zc_order_goods.goods_id = zc_goods.goods_id  WHERE ( zc_order_goods.order_id = '34' )  [ RunTime:0.028369s ]
+SQL: SELECT `region_name` FROM `zc_region` WHERE ( `parent_id` = 1 ) ORDER BY rand() LIMIT 1   [ RunTime:0.001966s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplace [ RunTime:0.000107s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000235s ]
+INFO: Run Behavior\ParseTemplate [ RunTime:0.022109s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022313s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCache [ RunTime:0.000367s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000481s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTrace [ RunTime:0.000587s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000704s ]
+
