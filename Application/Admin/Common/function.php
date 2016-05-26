@@ -371,3 +371,25 @@ function get_action_type($type, $all = false){
 	}
 	return $list[$type];
 }
+
+function quick_sort(array $array){
+    $length = count($array);
+    $left_array = array();
+    $right_array = array();
+    if($length <= 1){
+        return $array;
+    }
+
+    $key = $array[0];
+    for($i = 1; $i < $length; $i++) {
+        if($array[$i]['goods_number'] < $key['goods_number']){
+            $right_array[]=$array[$i];
+        }else{
+            $left_array[]=$array[$i];
+        }
+    }
+
+    $left_array=quick_sort($left_array);
+    $right_array=quick_sort($right_array);
+    return array_merge($left_array,array($key),$right_array);
+}

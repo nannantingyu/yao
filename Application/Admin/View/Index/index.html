@@ -3,6 +3,8 @@
 <block name="sidebar"></block>
 
 <block name="style">
+    <script src="__JS__/echarts-all.js"></script>
+    <link rel="stylesheet" href="__CSS__/bootstrap.css">
     <style>
         body{padding: 0}
     </style>
@@ -11,8 +13,83 @@
 <block name="body">
     <!-- 主体 -->
     <div id="indexMain" class="index-main">
-       <!-- 插件块 -->
-       <div class="container-span">{:hook('AdminIndex')}</div>
+        <div class="container-fluid" style="padding-top: 20px;">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                周销售排行榜TOP5
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <th>图片</th>
+                                    <th>名称</th>
+                                    <th>价格</th>
+                                </tr>
+                                <volist name="weekTop" id="goods">
+                                    <tr>
+                                        <td><img src="{:getImgsrc($goods['goods_img'])}" alt="" width="50" height="50"></td>
+                                        <td>{$goods.goods_name}</td>
+                                        <td>{$goods.promote_price}</td>
+                                    </tr>
+                                </volist>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                月销售排行榜TOP5
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <th>图片</th>
+                                    <th>名称</th>
+                                    <th>价格</th>
+                                </tr>
+                                <volist name="monthTop" id="goods">
+                                    <tr>
+                                        <td><img src="{:getImgsrc($goods['goods_img'])}" alt="" width="50" height="50"></td>
+                                        <td>{$goods.goods_name}</td>
+                                        <td>{$goods.promote_price}</td>
+                                    </tr>
+                                </volist>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-warning">
+                        <div class="panel-heading">
+                            <h3 class="panel-title">
+                                年统计
+                            </h3>
+                        </div>
+                        <div class="panel-body">
+                            <div class="col-md-6">
+                                <div id="yearNum" style="width:100%; height: 450px;">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div id="yearCount" style="width:100%; height: 450px;">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </block>
 
@@ -25,10 +102,126 @@
             $(this).find("i").toggleClass("mod-up");
         });
     })
+
     $(function(){
         // $('#main').attr({'id': 'indexMain','class': 'index-main'});
+        var yearsNumChart = echarts.init(document.getElementById('yearNum')),
+                yearsCountChart = echarts.init(document.getElementById('yearCount'));
         $('.copyright').html('<div class="copyright"> ©2013 <a href="http://www.topthink.net" target="_blank">topthink.net</a> 上海顶想信息科技有限公司版权所有</div>');
         $('.sidebar').remove();
+
+
+        //统计
+        $.ajax({
+            url: '/Admin/Index/getYearDatas.html',
+            type: 'post',
+            dataType: 'json',
+            success: function(data){
+                console.log(data);
+                var xdata = [],
+                        ydata = [],
+                        y2data = [];
+                for(var o in data)
+                {
+                    xdata.push(data[o][2]);
+                    ydata.push(data[o][0]);
+                    y2data.push(data[o][1]);
+                }
+                console.log(xdata);
+                console.log(ydata);
+                console.log(y2data);
+                initTable(xdata, ydata, y2data);
+
+            }
+        })
+
+        function initTable(xdata, ydata, y2data)
+        {
+            var optionNum = {
+                title : {
+                    text: '本年度月度销量',
+                    x: 'center'
+                },
+                tooltip: {
+                    show: true,
+                    trigger: 'axis',
+                },
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : xdata
+                    }
+                ],
+                yAxis : [
+                    {
+                        type: 'value',
+                    }
+                ],
+                series : [
+                    {
+                        name : '销量',
+                        type : 'line',
+                        data : ydata,
+                        markPoint : {
+                            data : [
+                                {type : 'max', name: '最大值'},
+                                {type : 'min', name: '最小值'}
+                            ]
+                        },
+                        markLine : {
+                            data : [
+                                {type : 'average', name: '平均值'}
+                            ]
+                        }
+                    }
+                ],
+                smooth: true,
+            };
+
+            var optionCount = {
+                title : {
+                    text: '本年度月度销售额',
+                    x: 'center'
+                },
+                tooltip: {
+                    show: true,
+                    trigger: 'axis',
+                },
+                xAxis : [
+                    {
+                        type : 'category',
+                        data : xdata
+                    }
+                ],
+                yAxis : [
+                    {
+                        type: 'value',
+                    }
+                ],
+                series : [
+                    {
+                        name : '销量',
+                        type : 'line',
+                        data : y2data,
+                        markPoint : {
+                            data : [
+                                {type : 'max', name: '最大值'},
+                                {type : 'min', name: '最小值'}
+                            ]
+                        },
+                        markLine : {
+                            data : [
+                                {type : 'average', name: '平均值'}
+                            ]
+                        }
+                    }
+                ],
+                smooth: true,
+            };
+
+            yearsNumChart.setOption(optionNum);
+            yearsCountChart.setOption(optionCount);
+        }
     })
 </script>
 </block>
