@@ -43,8 +43,12 @@ class IndexController extends AdminController {
                 ->where("zc_order_info.add_time >= '" . $firstDayOfMonth . "' and zc_order_info.add_time <= '" . $endDayOfMonth . "'")
                 ->select();
 
-            $this->assign('weekTop',  $this->countTop($weekTop));
-            $this->assign('monthTop',  $this->countTop($monthTop));
+            //点击量排行
+            $clickTop = M('goods')->order('click_count desc')->limit(10)->field('goods_id, goods_name, goods_img, promote_price')->select();
+
+            $this->assign('clickTop', $clickTop);
+            $this->assign('weekTop', $this->countTop($weekTop));
+            $this->assign('monthTop', $this->countTop($monthTop));
             $this->display();
         } else {
             $this->redirect('Public/login');
@@ -70,6 +74,36 @@ class IndexController extends AdminController {
         return array_slice($topGoods, 0, $top);
     }
 
+    /**
+     * 10天的访问量
+     */
+    public function visit()
+    {
+        $date = date('Y-m-d');
+        $start = date('Y-m-d', strtotime($date . '-10 day'));
+        $end = date('Y-m-d 23:59:59');
+        $visit = M('visit')->where("time >= '" .$start. "' and time <= '" .$end. "'")->select();
+
+        $allVisits = array();
+        foreach($visit as $val)
+        {
+            $d = date('Y-m-d', strtotime($val['time']));
+            if($allVisits[$d])
+            {
+                $allVisits[$d] += 1;
+            }
+            else
+            {
+                $allVisits[$d] = 1;
+            }
+        }
+
+        $this->ajaxReturn($allVisits);
+    }
+
+    /**
+     * 一年的销售榜
+     */
     public function getYearDatas(){
 
         $year = date('Y');

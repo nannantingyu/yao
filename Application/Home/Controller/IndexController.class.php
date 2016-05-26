@@ -47,8 +47,23 @@ class IndexController extends HomeController {
         $this->display();
     }
 
+    public function setHits(){
+
+        $ip = I('post.ip');
+        $date = date('Y-m-d H:i:s');
+        $page = I('post.page');
+
+        M('visit')->add([
+            'ip' => $ip,
+            'page' => $page,
+            'time' => $date
+        ]);
+    }
+
     public function product(){
         $id = I('get.id');
+
+        M('goods')->where(array('goods_id'=>$id))->setInc('click_count');
 
         $goods = M('goods')->join('zc_category on zc_goods.cat_id = zc_category.cat_id')->find($id);
 

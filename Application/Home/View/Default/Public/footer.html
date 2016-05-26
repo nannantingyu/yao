@@ -95,5 +95,20 @@
     </div>
 </div> <!-- End footer bottom area -->
 
+<script src="https://pv.sohu.com/cityjson?ie=utf-8"></script>
+<script>
+    $(function(){
+        var cip = returnCitySN['cip'];
+        //访问量加一
+        $.ajax({
+            url: '/home/index/sethits',
+            type: 'post',
+            data: {'ip': cip, 'page': window.location.href},
+            success: function(data){
+
+            }
+        });
+    })
+</script>
 </body>
 </html>
