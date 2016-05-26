@@ -43,8 +43,6 @@ class IndexController extends AdminController {
                 ->where("zc_order_info.add_time >= '" . $firstDayOfMonth . "' and zc_order_info.add_time <= '" . $endDayOfMonth . "'")
                 ->select();
 
-            dump(123);
-            dump($firstDayOfMonth);
             $this->assign('weekTop',  $this->countTop($weekTop));
             $this->assign('monthTop',  $this->countTop($monthTop));
             $this->display();

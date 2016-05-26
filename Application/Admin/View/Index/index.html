@@ -28,12 +28,14 @@
                                     <th>图片</th>
                                     <th>名称</th>
                                     <th>价格</th>
+                                    <th>数量</th>
                                 </tr>
                                 <volist name="weekTop" id="goods">
                                     <tr>
                                         <td><img src="{:getImgsrc($goods['goods_img'])}" alt="" width="50" height="50"></td>
                                         <td>{$goods.goods_name}</td>
                                         <td>{$goods.promote_price}</td>
+                                        <td>{$goods.count}</td>
                                     </tr>
                                 </volist>
                             </table>
@@ -54,12 +56,14 @@
                                     <th>图片</th>
                                     <th>名称</th>
                                     <th>价格</th>
+                                    <th>数量</th>
                                 </tr>
                                 <volist name="monthTop" id="goods">
                                     <tr>
                                         <td><img src="{:getImgsrc($goods['goods_img'])}" alt="" width="50" height="50"></td>
                                         <td>{$goods.goods_name}</td>
                                         <td>{$goods.promote_price}</td>
+                                        <td>{$goods.count}</td>
                                     </tr>
                                 </volist>
                             </table>
