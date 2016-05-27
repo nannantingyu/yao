@@ -107,20 +107,20 @@ class IndexController extends AdminController {
     public function getYearDatas(){
 
         $year = date('Y');
-        $months = [
-            [strtotime($year . '-01-01 00:00:00'), strtotime($year . '-01-31 23:59:59'), '一月'],
-            [strtotime($year . '-02-01 00:00:00'), strtotime($year . '-02-29 23:59:59'), '二月'],
-            [strtotime($year . '-03-01 00:00:00'), strtotime($year . '-03-31 23:59:59'), '三月'],
-            [strtotime($year . '-04-01 00:00:00'), strtotime($year . '-04-30 23:59:59'), '四月'],
-            [strtotime($year . '-05-01 00:00:00'), strtotime($year . '-05-31 23:59:59'), '五月'],
-            [strtotime($year . '-06-01 00:00:00'), strtotime($year . '-06-30 23:59:59'), '六月'],
-            [strtotime($year . '-07-01 00:00:00'), strtotime($year . '-07-31 23:59:59'), '七月'],
-            [strtotime($year . '-08-01 00:00:00'), strtotime($year . '-08-31 23:59:59'), '八月'],
-            [strtotime($year . '-09-01 00:00:00'), strtotime($year . '-09-30 23:59:59'), '九月'],
-            [strtotime($year . '-10-01 00:00:00'), strtotime($year . '-10-31 23:59:59'), '十月'],
-            [strtotime($year . '-11-01 00:00:00'), strtotime($year . '-11-30 23:59:59'), '十一月'],
-            [strtotime($year . '-12-01 00:00:00'), strtotime($year . '-12-31 23:59:59'), '十二月']
-        ];
+        $months = array(
+            array(strtotime($year . '-01-01 00:00:00'), strtotime($year . '-01-31 23:59:59'), '一月'),
+            array(strtotime($year . '-02-01 00:00:00'), strtotime($year . '-02-29 23:59:59'), '二月'),
+            array(strtotime($year . '-03-01 00:00:00'), strtotime($year . '-03-31 23:59:59'), '三月'),
+            array(strtotime($year . '-04-01 00:00:00'), strtotime($year . '-04-30 23:59:59'), '四月'),
+            array(strtotime($year . '-05-01 00:00:00'), strtotime($year . '-05-31 23:59:59'), '五月'),
+            array(strtotime($year . '-06-01 00:00:00'), strtotime($year . '-06-30 23:59:59'), '六月'),
+            array(strtotime($year . '-07-01 00:00:00'), strtotime($year . '-07-31 23:59:59'), '七月'),
+            array(strtotime($year . '-08-01 00:00:00'), strtotime($year . '-08-31 23:59:59'), '八月'),
+            array(strtotime($year . '-09-01 00:00:00'), strtotime($year . '-09-30 23:59:59'), '九月'),
+            array(strtotime($year . '-10-01 00:00:00'), strtotime($year . '-10-31 23:59:59'), '十月'),
+            array(strtotime($year . '-11-01 00:00:00'), strtotime($year . '-11-30 23:59:59'), '十一月'),
+            array(strtotime($year . '-12-01 00:00:00'), strtotime($year . '-12-31 23:59:59'), '十二月')
+        );
 
         //计算每个月的数据
         $monthData = array();
@@ -140,7 +140,7 @@ class IndexController extends AdminController {
                 }
             }
 
-            $monthData[] = [$numCount, $priceCount, $val[2]];
+            $monthData[] = array($numCount, $priceCount, $val[2]);
         }
 
         $this->ajaxReturn($monthData);
