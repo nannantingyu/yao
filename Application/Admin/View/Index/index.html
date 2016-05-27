@@ -124,12 +124,14 @@
                                     <th>图片</th>
                                     <th>名称</th>
                                     <th>价格</th>
+                                    <th width="8%">点击量</th>
                                 </tr>
                                 <volist name="clickTop" id="goods">
                                     <tr>
                                         <td><img src="{:getImgsrc($goods['goods_img'])}" alt="" width="50" height="50"></td>
                                         <td>{$goods.goods_name}</td>
                                         <td>{$goods.promote_price}</td>
+                                        <td style="text-align: center;">{$goods.click_count}</td>
                                     </tr>
                                 </volist>
                             </table>
@@ -223,7 +225,7 @@
                 ],
                 series : [
                     {
-                        name : '销量',
+                        name : '访问量',
                         type : 'line',
                         data : ydata,
                         markPoint : {
@@ -250,7 +252,7 @@
         {
             var optionNum = {
                 title : {
-                    text: '本年度月度销量',
+                    text: '本年度月销量',
                     x: 'center'
                 },
                 tooltip: {
@@ -270,7 +272,7 @@
                 ],
                 series : [
                     {
-                        name : '销量',
+                        name : '月销量',
                         type : 'line',
                         data : ydata,
                         markPoint : {
@@ -311,7 +313,7 @@
                 ],
                 series : [
                     {
-                        name : '销量',
+                        name : '月销售额',
                         type : 'line',
                         data : y2data,
                         markPoint : {

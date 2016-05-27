@@ -30,6 +30,11 @@
                 {
                     window.location.href = '/home/goods/checkOrder/order/' + data.order;
                 }
+                else{
+                    $.when(alert('您还没有登录，先去登录吧！')).done(function(){
+                        window.location.href = '/home/user/account';
+                    });
+                }
             }
         });
     };

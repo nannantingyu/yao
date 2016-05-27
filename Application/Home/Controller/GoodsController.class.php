@@ -205,7 +205,7 @@ class GoodsController extends HomeController
     public function checkodinfo(){          //提交订单
 
         if(!home_login()){
-            $this->error('你还没有登录，先去登录吧！', '/home/user/account.html');
+            $this->ajaxReturn(array('state'=>0));
         }
 
         $user = M('Users')->where(array('user_id'=>session('uid')))->find();

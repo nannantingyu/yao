@@ -44,7 +44,7 @@ class IndexController extends AdminController {
                 ->select();
 
             //点击量排行
-            $clickTop = M('goods')->order('click_count desc')->limit(10)->field('goods_id, goods_name, goods_img, promote_price')->select();
+            $clickTop = M('goods')->order('click_count desc')->limit(10)->field('goods_id, goods_name, goods_img, promote_price, click_count')->select();
 
             $this->assign('clickTop', $clickTop);
             $this->assign('weekTop', $this->countTop($weekTop));
